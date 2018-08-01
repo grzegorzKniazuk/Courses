@@ -1,0 +1,9 @@
+<div class="row mt-1" *ngIf="album">
+  <div class="col-lg">
+    <app-album-card class="card" [album]="album"></app-album-card>
+  </div>
+  <div class="col-lg">
+    <h4 class="display-3 mb-2 float-right">Utwory</h4>
+    <app-tracklist [tracks]="album.tracks.items"></app-tracklist>
+  </div>
+</div>

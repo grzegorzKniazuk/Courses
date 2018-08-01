@@ -1,0 +1,52 @@
+<div *ngIf="playlist">
+  <form #formRef="ngForm" (ngSubmit)="saveNewPlaylist(formRef.valid, playlist)">
+    <div class="form-group">
+      <label for="title">Tytuł: </label>
+      <input type="text" #nameRef [(ngModel)]="playlist.name" class="form-control" name="title" id="title">
+      <div class="alert-danger" *ngIf="nameRef.touched || nameRef.dirty || formRef.submitted">
+        <div *ngIf="nameRef.errors?.required">
+          To pole jest wymagane
+        </div>
+        <div *ngIf="nameRef.errors?.minLength">
+          To pole musi mieć przynajmniej {{ nameRef.errors.minLength.requiredLength }} znaków
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tracks">Liczba utworów: </label>
+      <input type="text" [(ngModel)]="playlist.tracks" class="form-control" name="tracks" id="tracks">
+    </div>
+    <div class="form-group">
+      <label for="description">Opis: </label>
+      <textarea [(ngModel)]="playlist.description" maxlength="200" class="form-control" name="description" id="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Kategoria: </label>
+      <div *ngFor="let category of categories">
+        <label class="form-check-input">
+          <input type="radio" name="radio" [(ngModel)]="playlist.category" [value]="category">
+          {{ category }}
+        </label>
+      </div>
+      <div>
+        <label>Kategoria:
+          <select class="form-control" [(ngModel)]="playlist.category">
+            <option *ngFor="let category of categories" [value]="category"> {{ category }}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="color">Kolor: </label>
+      <input type="color" [(ngModel)]="playlist.color" name="color" id="color">
+    </div>
+    <div class="form-group">
+      <label for="favorite">
+        <input type="checkbox" [(ngModel)]="playlist.favourite" name="favourite" id="favourite"> Ulubiona?</label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success float-xl-right" type="submit">Zapisz</button> <!-- $event obiekt zdarzenia-->
+    </div>
+  </form>
+</div>
+

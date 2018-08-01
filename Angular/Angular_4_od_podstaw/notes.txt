@@ -1,0 +1,97 @@
+Angular CLI - narzędzie, które udostępnia nam zbiór polecen do budowania i testowania aplikacji budowanej we frameworku
+Angular 2+.
+
+Komendy wywołujemy w terminalu.
+
+npm install -g @angular/cli
+
+ng new NAZWA_PROJEKTU
+ng serve - uruchomienie
+htpp://localhost:4200
+
+ng g comoponent NAZWA_KOMPONENTU
+ng g module NAZWA_MODULU
+ng g directive NAZWA_DYREKTYWY
+ng g service NAZWA_SERWISU
+ng g pipe NAZWA_PIPE
+
+
+Z czego zbudowany jest Angular?
+---------------------------------------------------
+ Moduły
+  - odpowiadają za konkretną część aplikacji
+  - każda aplikacja musi miec przynajmniej jeden moduul - Root/App Module
+  - Moduły można zagniezdzac
+  - Modul jest zdefiniowany jako obiekt, kazde pole obiektu odpowiada za cos innego
+  - Obiekt z metadanymi przekazujemy do dekoratora @NgModule
+
+  ng g module SCIEZKA / NAZWA_MODULU
+
+// Z czego sklada sie komponent?
+  - Klasa Komponentu (.ts)
+  - Templatka Komponentu (.html) - Widok
+  - Style Komponentu (.css / .less / .scss)
+
+  ng g component SCIEZKA / NAZWA_KOMPONENTU
+
+  - widok aplikacji budujemy z komponentow
+  - w kazdej aplikacji musi byc przynajmniej jeden komponent, Root/App Component
+  - komponenty mozemy zagniezdzac
+  - nad klasa komponentu definujemy jego metadane
+
+  Serwisy - najczesciej klasa ktora dostaracza dane do komponentu, jednak nie ma konkretnej definicji
+  - wszystko moze byc serwisem
+  - jesli chcemy skorzystac z serwisu to wstrzykujemy go do konstruktora klasy komponentu
+  - dekorator @Injectable pozwala nam wstrzykiwac w serwisie inne serwisy do konstruktora
+
+  ng g service NAZWA_SERWISU
+
+  Dyrektywy
+  - dyrektywy nakladamy na element HTML
+  - dyrektywa modyfikuje zachowanie elementu, np. dodaje klase w zaleznosci od warunku logiczneo
+  - najbardziej popularne wbudowane dyrektywy *ngIf, *ngFor, [ngClass], [ngStyle]
+  - istnieje możliwosc tworzenia wlasnych dyrektyw
+
+  ng g directive highLight
+
+  Data binding
+  - na widoku mozemy wyswietlac tylko dane zadeklarowane jako pola klasy
+  - uzywamy interpolacji {{ ... }}
+  - aby przypiac event do widoku osadzamy nazwe evenu w nawiasach i przypisujemy nazwe funkcji
+
+  Pipes
+  - {{ skill | precent }}
+  - pipe transformuje wartosc na widoku do zadanego formatu (np. dodaje odpowiednia jednostke)
+  - angular posiada wiele wbudowanych pipes ale rowneiz mozna tworzyc wlasne
+
+  ng g pipe SCIEZKA / NAZWA_PIPE
+
+
+DEKORATOR
+
+dane plyna w dol, eventy plyna w gore
+
+@Input() - przekazuje dane od rodzica do zagniezdzonego komponentu
+@Output() - przekazuje dane z komponentu zagniezdzonego do rodzica komponentu
+
+// REST API
+// sposob komunikacji opary o HTTP, architekura wystawiania zasobow - danych
+
+
+// CORE MODULE
+- tutaj trzymamy komponenty ktore pojawiaja sie raz w aplikacji
+
+// SHARED MODULE
+- tutaj trzymamy komponenty reuzywalne
+
+// aplikacja typu SPA - single page application
+// ROUTING - mechanizm przechodzenia miedzy stronami
+
+// FORMULARZE
+- dwie mozliwosci, model driven forms, template driven forms
+
+// TWORZENIE PACZKI PRODUKCYJNEJ
+ng build --prod
+// pliki pojawia sie w katalogu dist
+
+ng serve --prod // uruchomienie wersji produkcyjnej

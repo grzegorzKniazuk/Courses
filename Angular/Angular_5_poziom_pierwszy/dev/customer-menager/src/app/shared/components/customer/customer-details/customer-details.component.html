@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-2 float-left">
+        <button type="button" class="btn btn-primary" (click)="left()">&lt;</button>
+        <button type="button" class="btn btn-primary" (click)="right()">&gt;</button>
+      </div>
+      <h1 class="col-10">{{ customer.name.toUpperCase() }}
+        <ng-container [ngSwitch]="customer.type">
+          <ng-container *ngSwitchCase="customerType.Standard">*</ng-container>
+          <ng-container *ngSwitchCase="customerType.Premium">**</ng-container>
+          <ng-container *ngSwitchCase="customerType.VIP">***</ng-container>
+          <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+        </ng-container>
+      </h1>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-8">
+        <p>{{ customer.description }}</p>
+        <p appHighlight>Wiek: {{ customer.age }}</p>
+        <p>Adres: {{ customer.address.street }} {{ customer.address.houseNumber }} {{ customer.address.city }}</p>
+        <ul *ngFor="let category of customer.categories">
+          <li>{{ category | capitalize }}</li>
+        </ul>
+      </div>
+      <div class="col-4">
+        <img [src]="customer.photoUrl" *ngIf="showPhoto else noPhoto"/>
+        <ng-template #noPhoto>
+          <p>Zdjęcie ukryte</p>
+        </ng-template>
+        <div class="custom-checkbox">
+          <label><input type="checkbox" [(ngModel)]="showPhoto" class="form-control"> Pokaż zdjęcie</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

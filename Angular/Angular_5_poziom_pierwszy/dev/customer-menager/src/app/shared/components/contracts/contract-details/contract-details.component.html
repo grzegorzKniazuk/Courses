@@ -1,0 +1,16 @@
+<div class="card" *ngIf="contract">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4">Nazwa klienta</div>
+      <div class="col-8">{{ contract.customerName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4">Data zawarcia</div>
+      <div class="col-8">{{ contract.date | date: 'dd-MM-yyyy' }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4">Wartość</div>
+      <div class="col-8">{{ contract.value }}</div>
+    </div>
+  </div>
+</div>

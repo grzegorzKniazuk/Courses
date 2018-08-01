@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row mt-4 mb-4">
+    <div class="col">
+      <h1>Witaj w kursie Angular!</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+
+      <input (keyup)=" message = $event.target.value ">
+      <button (click)="open = !open">Toggle</button>
+      {{ (open? 'Ukryte' : 'Widoczne') }}
+      <hr>
+
+      <dynamic-card 
+        [(open)]="open"
+        [text]="message">
+      </dynamic-card>
+
+    </div>
+  </div>
+</div>

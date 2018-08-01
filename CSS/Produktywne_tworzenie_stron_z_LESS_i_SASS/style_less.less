@@ -1,0 +1,170 @@
+
+// deklarowanie i uzywanie zmiennych
+@bg-color: #0B3861;
+@color: #fa8258;
+@header-size: 30px;
+@padding: 20px 30px 30px 25px;
+@border: 1px solid @color;
+@text: 'To jest tekst';
+@width: 100px;
+
+h1 {
+  color: @color;
+  font-size: @header-size;
+}
+
+div {
+  background: @color;
+  padding: @padding;
+}
+
+p:after {
+  content: @text;
+}
+
+// mixins - domieszki, zestawy wlasciwosci
+.headers {
+  font-family: Verdana, sans-serif;
+  color: #0ad;
+  margin-bottom: 50px;
+}
+
+h1 {
+  font-size: 26px;
+  .headers; // dodanie mixina do selektora
+}
+
+h2 {
+  font-size: 20px;
+  .headers; // dodanie mixina do selektora
+}
+
+// zagniezdznaie selektorow
+.content p { // standardowa opcja css
+  color: #4545;
+  font-size: 14px;
+  line-height: 22px;
+
+}
+.content { // zagniezdzenie
+  p {
+    color: #4545;
+    font-size: 14px;
+    line-height: 22px;
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+// zagniezdzanie i pseudoklasy
+@color-a: #555;
+@color-b: #777;
+
+section {
+  a {
+    color: @color-a;
+    text-decoration: none;
+
+    &:hover {
+      color: @color-b;
+    }
+  }
+}
+
+// operacje
+.first {
+  width: @width;
+}
+
+.second {
+  width: 2 * @width;
+  background: #888 / 2;
+}
+
+.third {
+  width: 3 * @width;
+  background: #888 + #F00; // dodawanie kolorów
+}
+
+// funkcje wbudowane
+
+div {
+  margin-left: 50px;
+  width: 500px;
+  height: 100px;
+  background-color: @bg-color;
+}
+
+.first {
+  background-color: desaturate(@bg-color, 30%); // zmniejszenie nasycenia o 30%
+}
+
+.second {
+  background-color: lighten(@bg-color, 10%); // rozjasnienie o 10%
+}
+
+.third {
+  background-color: darken(@bg-color, 20%); // przyciemnienie o 20%
+}
+
+.fourth {
+  background-color: fade(@bg-color, 30%); // zmniejszenie krycia o 30%
+}
+
+// domieszki z parametrami
+
+.border(@width: 1px; @style: solid; @color: #ccc) { // domysla wartosc 1px dla @width
+  border-width: @width;
+  border-style: @style;
+  border-color: @color;
+  border: @arguments; // arguments reprezentuje wszystko to co zostalo dodane w argumentach funkcji
+}
+
+.border(@width: 1px; @style: solid; @color: #ccc) { // domysla wartosc 1px dla @width
+  border: @arguments; // arguments reprezentuje wszystko to co zostalo dodane w argumentach funkcji
+}
+
+header {
+  .border(); // uzycie mixina z wartosciami domyslnymi
+}
+
+section {
+  .border(3px; dashed, #aaa); // uzycie mixina z parametrami
+}
+
+footer {
+  .border(@width: 2px; @color: #aabb); // pominiecie jednego z parametrow
+}
+
+// dopasowanie do wzorca
+
+.button(dark) {
+  padding: 12px 22px;
+  border: none;
+  background-color: #222;
+  color: #ccc;
+}
+
+.button(light) {
+  padding: 12px 22px;
+  border: none;
+  background-color: #222;
+  color: #ccc;
+}
+
+button {
+  .button(dark); // wywolanie z paramerem wzorca
+}
+
+// pseudoklasa extend
+
+.button-rounded { // rozszerzenie mixina button
+  border-radius: 8px;
+  .button(dark);
+}
+
+.button-rounded { // rozszerzenie mixina button za pomoca extend (generuje prostszy kod css)
+  border-radius: 8px;
+  &:extend(.button);
+}

@@ -1,0 +1,11 @@
+<div *ngIf="!playlist">
+  <p class="card-text">Wybierz playlistę</p>
+</div>
+<div *ngIf="playlist">
+    <h4 class="card-title">Wybrana playlista: {{ playlist.name }}</h4>
+    <div class="form-group">
+
+      <!-- $event obiekt zdarzenia-->
+      <button class="btn btn-success float-xl-right" (click)="editPlaylist(playlist)">Edytuj</button>
+    </div>
+</div>

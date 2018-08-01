@@ -1,0 +1,3 @@
+npm install -g ts-node // pakiet pozwalajacy jednoczensnie kompilowac i uruchamiac pliki ts
+npm install -g typings // narzedzia pomocne w zarzadzaniu plikami zawierajace definicje typow
+tsc -v // wersja ts

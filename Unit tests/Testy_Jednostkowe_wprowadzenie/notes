@@ -1,0 +1,102 @@
+TDD - Test Driven Development
+testy piszemy przed napisaniem wlasciwej funkcji aplikacji
+cykl Red Green Refractor
+
+1. piszemy test
+2. uruchamiamy test po raz pierwszy
+3. tworzymy pierwsza implementacje
+4. uruchamiamy test ponownie
+5. refaktoryzacja implementacji funkcji
+
+- niezalezne testy dla kazdej jednoski
+- kolejnosc testow nie moze wplywac na wynik
+
+BDD - Behavior-driven development
+- kombinacja tdd oraz testow akceptacyjnych
+- uzywa sie dsl (domain specific language)
+
+
+co to jest Asercja?
+programista zaklada ze predykat jest w danym miejscu prawdziwy. Jesli jest falszywy asercja powoduje przerwanie
+wykonania programu
+
+JEDNA ASERCJA === JEDEN TEST
+
+nazywanie testow
+1. jaka jednostka
+2. w jakich warunkach
+3. czego sie spodziewamy
+
+Wzorzec AAA - wzorzec testów
+1. Arrange - przygotowanie wartosci wejsciowych
+2. Act - wywołanie funkcji
+3. Assert - sprawdzenie czy wynik jest zgodny z oczekiwaniami
+
+- testy powinny byc powtarzalne, za kazdym uruchomieniem ten sam wynik
+- testy powinny byc determinstyczne, taki sam rezultat niezaleznie od srodowiska, konfiguracji, platformy
+
+SetUp
+- przygotowanie srodowiska testowego
+TearDown
+- powrot do stanu poczatkowego
+
+instalacja Jasmine
+npm install jasmine-node --save-dev
+
+Test doubles
+- symulowanie zaleznosci
+- zaleznosci sa symulowane za pomoca tzw "dublerów/kaskaderów" ('doubles')
+- Double to obiekt naśladujący realną klasę
+
+typy atrap
+- Dummy,
+    - najprostszy typ atrapy
+    - przekazujemy jako argument podczas wywolania testowanej funkcji
+    - nie jest uzywany przez testowana funkcje
+    - uzywamy glownie po to aby funkcja miala wlasciwa ilosc argumentow
+
+    przyklad:
+    let dummy = new Obj();
+
+- Fake,
+    -
+
+- Mock,
+    - pozwala sprawdzic zachowania,
+    - jest to obiekt ktory rejestruje otrzymane wywolania,
+    - uzywany jest aby sprawdzic czy uruchomione zostaly zakladane funkcje
+
+    przykład:
+        it('should call saveApp() when app name is at least 5 chars long', function(){
+            var app = new App();
+            spyOn(app, 'saveApp'); // tworzenie atrapy - szpiega
+            app.createApp('To Do List');
+            expect(app.saveApp).toHaveBeenCalled();
+        });
+
+- Stub,
+    - rozwiniecie Dummy,
+    - zwraca okreslona warosc,
+    - nasladuje realna klase lub zastepuje realne funkcje,
+    - potrzebny gdy zalezonosc musi zwrocic okreslona wartosc,
+
+    przyklad:
+    spyOn(app, "getName").andCallFake(function() {
+        return 'To do list';
+    });
+
+- Spy,
+    - czy metoda zostala wywolana?
+    - z jakimi argumentami zostala wywolana?
+    - ile razy zostala wywolana?
+
+
+Code Coverage - stopien pokrycia kodu testami
+- jaki procent kodu zrodlowego jest wykonywany w trakcie uruchamiania zestawu testow
+- wysoki wspolczynnik pokrycia oznacza ze duza czesc kodu jest wykonywana podczas testow
+
+Istanbul - narzedzie do analizy pokrycia kodu zrodlowego przez testy
+
+inne rodzaje testow, integracyjne, e2e (end to end)
+- integracyjne, integracje pomiedzy jednostkami, frontend <-> backend
+- e2e, testy systemowe testujace funkcjonaln

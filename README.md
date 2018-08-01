@@ -1,2 +1,2 @@
 # Courses
-My notebook from courses
+My notebook from the courses

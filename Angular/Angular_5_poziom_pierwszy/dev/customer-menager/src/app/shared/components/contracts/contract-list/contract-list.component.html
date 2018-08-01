@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header">
+    Umowy
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nazwa klienta</th>
+          <th>Data zawarcia</th>
+          <th>Kwota</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contract of contracts">
+          <td>{{ contract.customerName }}</td>
+          <td>{{ contract.date | date: 'dd-MM-yyyy'}}</td>
+          <td>{{ contract.value }}PLN</td>
+          <td><a [routerLink]="contract.id">Szczegóły</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

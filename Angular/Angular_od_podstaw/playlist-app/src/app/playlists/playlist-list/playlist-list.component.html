@@ -1,0 +1,30 @@
+<table class="table table-striped">
+  <thead>
+  <tr class="playlist-row"> <!-- ustawianie styli -->
+    <th> # </th>
+    <th> Tytuł </th>
+    <th> Liczba utworów </th>
+    <th> Ulubiona? </th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr *ngFor="let playlist of playlists; let i = index"
+      [ngClass]="{'table-active':selected == playlist, 'playlist-row': true}"
+      [ngStyle]="{'borderBottomColor':playlist.color, 'borderBottomWidth': '4px'}"
+      [routerLink]="[playlist.id]">
+    <td> {{ i + 1 }} </td>
+    <td> {{ playlist.name }}</td>
+    <td> {{ playlist.tracks }} </td>
+    <td>
+      <label>
+        <input type="checkbox"
+               [(ngModel)]="playlist.favourite"
+               (click)="$event.stopPropagation()">
+        Ulubiona?
+      </label>
+    </td>
+  </tr>
+
+  </tbody>
+</table>

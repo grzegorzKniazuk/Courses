@@ -1,0 +1,189 @@
+GIT notes
+----------------------------------------------------------------------------------------------------------------
+
+1. Podstawowe komendy
+git <- pomoc
+git --version <- wersja git'a
+git init <- inicjalizacja repozytorium
+
+
+git config --global user.name "Grzegorz Kniazuk" <- ustalenie nazwy uzytkownika
+git config --global user.email "grzegorz.kniazuk@gmail.com" <- ustalenie adresu email uzytkownika
+
+git status <- aktualny status lokalnego repozytorium
+git log <- historia repozytorium
+git log --online <- historia repozytorium online
+git log --oneline <- skrocona historia repozytorium
+git log --oneline --graph --all --decorate
+git diff <- informacje o zmianach w plikach
+git diff HEAD~2 <- sprawdzenie zmian w konkretnym commit
+git show numer_commita <- gdzie nastapila zmiana i jakie nastapily zmiany
+
+DODAWANIE PLIKÓW - POCZEKALNIA/INDEKS
+----------------------------------------------------------------------------------------------------------------
+git add 'nazwa_pliku' <- dodanie pliku do poczekalni
+git add *.html <- dodanie wszystkich plikow html do poczekalni
+git add * <- dodanie wszystkich plikow
+git add -p <- wybiórcze dodawanie modyfikacji
+y - zakceptuj zmiane
+n - odrzuc zmiane
+s - rozbij zmiany na mniejsze
+git --dry-run add * <- symulowanie wykonania wszystkich plikow
+
+WYSYŁANIE PLIKÓW DO INDEKSU
+----------------------------------------------------------------------------------------------------------------
+git commit -m "commit message" <- zatwierdzanie lokalnych zmian
+
+zmiany w commitach
+- nie robimy jesli zmiany poszly juz do zdalnego repozytorium
+git commit --amend
+
+zmiana autora i tresci wiadomosci commitach
+git config --local user.name 'nazwa'
+git config --local user.email 'nazwa'
+git commit --amend --reset-author
+
+COFANIE ZMIAN
+----------------------------------------------------------------------------------------------------------------
+git checkout -- 'nazwa_pliku' <- cofanie zmian w pliku
+git reset HEAD --hard <- cofanie zmian dodanych do indeksu
+
+USUWANIE ZMIAN/PLIKÓW
+----------------------------------------------------------------------------------------------------------------
+git rm --cached 'nazwa_pliku' <- usuniecie pliku wylacznie z repo
+git rm --force 'nazwa_pliku' <- usuniecie pliku z repo i z dysku
+
+PLIK git.ignore
+----------------------------------------------------------------------------------------------------------------
+config.json.dist <- pojedynczy plik
+/cache/* <- wszystko z cache
+!/cache/.gitkeep <- wykluczenie z ignorowania
+.netbeans.xml <- ignorowanie wszystkich plikow o tej nazwie
+.netbeans.* <- ignorowanie wszystkich plikow o tej nazwie i dowolnym rozszerzeniu
+
+PLIK git.keep
+----------------------------------------------------------------------------------------------------------------
+plik ten powinien znajdowac sie w folderze ktory chcemy dodac
+jako pusty folder, jako ze git nie zwraca uwagi na same foldery
+
+ZMIANA KOLEJNOSCI COMMITOW, INTERAKTYWNY REBASE
+----------------------------------------------------------------------------------------------------------------
+
+git rebase -i <- mozliwosc interakcji z naszymi commitami
+git rebase -i HEAD~3 <- edycja trzech ostanich commitow
+
+SCALANIE COMMITOW
+----------------------------------------------------------------------------------------------------------------
+git rebase -i HEAD~3 <- edycja trzech ostanich commitow
+a potem s, <- squash
+
+szybszy sposob
+git reset HEAD~5 <- scalanie 5 ostatnih commitow
+git add .
+git commit -m 'wiadomosc'
+
+ROZBIJANIE COMMITOW NA MNIEJSZE COMMITY
+----------------------------------------------------------------------------------------------------------------
+git rebase -i HEAD~numer_commita_do_podzialu
+zmieniamy tresc z pick na edit
+git reset HEAD^ <- resetowanie elementow wchodzacych w sklad obecnego commitu
+git rebase --continue
+
+PÓŁKA
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+1. proste zarzadzanie projektem
+2. błędy bezpieczenstwa
+3. niewielkie, nowe funkjonalnosci
+
+git add . <- dodanie plikow do poczekalni
+git stash save 'powod odlozenia na polke' <- odlozenie na polke
+git stash list <- jak wyglada nasza polka?
+git stash show <- jakie zmiany sa zapisane na polce?
+git stash apply stash@{1} <- pobranie z polki do aktualnego projektu, bez usuwania z polki
+git stash pop stash@{1} <- pobranie z polki do aktualnego projektu wraz z usunieciem z polki
+
+ODKŁADANIE NA PÓŁKĘ WYBRANYCH ELEMENTÓW
+----------------------------------------------------------------------------------------------------------------
+git stash save -p "komentarz"
+wybieramy zmiany na polke
+git stash save "reszta zmian"
+git stash save -u "komentarz" <- zalacz rowniez niesledzone pliki
+git stash save --keep-index -u "komentarz" <- zapisanie wylacznie plikow nie z poczekalni
+
+WYPROWADZANIE GALEZI Z ELEMENTOW NA POLCE
+----------------------------------------------------------------------------------------------------------------
+git stash branch "nazwa_brancha" stash@{1} <- id brancha lub domyslnie najnowszy
+
+CZYSZCZENIE PÓŁKI
+----------------------------------------------------------------------------------------------------------------
+git stash drop stash@{1}
+git stash clear <- usuwa wszystkie elementy z polki
+
+BRANCH - ROZGAŁĘZIANIE
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+git branch <- jakie mamy galezie lokalne
+git branch --all <- jakie mamy galezie lokalne i zdalne
+git log nazwa_brancha <- historia danego brancha
+git checkout nazwa_brancha <- przejscie na innego brancha
+git checkout -b nazwa_nowego_brancha z_jakiego_brancha_ma_byc_stworzony <- tworzenie brancha na podstawie innego
+
+SCALANIE GAŁĘZI - MERGE
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+git checkout master <- przechodzimy na glowny branch
+git merge nazwa_brancha_do_polaczenia
+
+WYCOFANIE MERGA
+----------------------------------------------------------------------------------------------------------------
+git reset HEAD~1 --hard <- cofniecie sie o jednego commita
+
+ROZWIĄZYWANIE KONFLIKTÓW
+----------------------------------------------------------------------------------------------------------------
+git checkout master <- przechodzimy na glowny branch
+git merge nazwa_brancha_do_polaczenia
+edytujemy pliki
+git commit <- po rozwiazaniu konfliktów
+git rebase --abort <- anulowanie przeksztalcenia
+
+USUWANIE GAŁĘZI
+----------------------------------------------------------------------------------------------------------------
+git branch -d nazwa_brancha <- w przypadku scalonej galezi
+git branch -D nazwa_brancha <- w przypadku niescalonej galezi
+
+TAGOWANIE
+----------------------------------------------------------------------------------------------------------------
+git checkout nazwa_brancha
+git tag 1.0 <- dodanie taga
+
+POBIERANIE I AKTUALIZACJA PROJEKTU ZE ZDALNYCH REPOZYTORIÓW
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+git remote <- lista repozytoriow zdalnych
+git remote fetch <- pobranie zmian z zdalnego repozytorium, lokalny branch bez zmian
+git push origin nazwa_brancha <- wysylanie zmian na zdalne repozytorium
+
+WYSYŁANIE ZMIAN DO ZDALNEGO REPOZYTORIUM
+----------------------------------------------------------------------------------------------------------------
+git remote show origin <- roznica pomiedzy naszym a zdalnym repozytorium
+git push jaki_branch nazwa_brancha
+git push --tags <- wysylanie tagow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

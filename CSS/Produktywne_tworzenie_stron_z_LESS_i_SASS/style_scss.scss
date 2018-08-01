@@ -1,0 +1,227 @@
+
+// deklarowanie i uzywanie zmiennych
+$color: #f00;
+$font-size: 24px;
+$padding: 30px 20px 40px 10px;
+
+h1 {
+  color: $color;
+  font-size: $font-size + 10; // operacje arytmetyczne na zmiennych
+}
+
+.content {
+  background-color: #c1d4c8;
+  padding: $padding;
+}
+
+// mixins - domieszki, zestawy wlasciwosci
+@mixin fonts {
+  font-family: 'Arial', sans-serif;
+}
+
+@mixin headers { // mixin bez parametru
+  font-weight: 400;
+  color: #999;
+  @include fonts; // zagniezdzenie domieszki
+}
+
+h1, h2 {
+  @include headers; // dolaczanie domieszki
+}
+
+// mixins z parametrami
+@mixin border-radius($radius: 10px) { // mixin z parametrem domyslnym
+  border-radius: $radius;
+}
+
+// mixin ze zmienna iloscia parametrow
+@mixin shadow($args...) {
+  box-shadow: $args;
+}
+
+h1 {
+  @include border-radius(7px); // wywolanie mixina z parametrem
+  @include shadow(5px 5px 2px #777, -5px -5px 2px #f00); // uzycie mixina z dowolna iloscia parametrow
+}
+
+h2 {
+  @include border-radius(); // wywolanie mixina z parametrem domyslym
+}
+
+// zagniezdznaie selektorow
+ul {
+  list-style-type: none;
+  li {
+    margin-bottom: 7px;
+    a {
+      color: #444;
+      text-decoration: none;
+      &:hover {
+        color: #888;
+      }
+      &:after {
+        content: " >>";
+      }
+    }
+  }
+}
+
+// funkcje wbudowane
+$color-a: #555;
+$color-b: #777;
+
+.first {
+  background-color: desaturate($color-a, 30%); // zmniejszenie nasycenia o 30%
+}
+
+.second {
+  background-color: lighten($color-a, 10%); // rozjasnienie o 10%
+}
+
+.third {
+  background-color: darken($color-b, 20%); // przyciemnienie o 20%
+}
+
+.fourth {
+  background-color: fade($color-b, 30%); // zmniejszenie krycia o 30%
+}
+
+.five {
+  background-color: mix($color-a, $color-b); // mieszanie kolorów
+}
+
+// wlasne funkcje
+$column-width: 80px;
+
+@function make-columns($numberOfColumns) {
+  @return $numberOfColumns * $column-width;
+}
+
+.main {
+  width: make-columns(6); // uzycie wlasnej funkcji
+}
+
+// listy
+$colors: #f00 #0f0 #00f; // indeksy od 1
+
+p {
+  color: nth($colors, 2); // odwolanie sie do drugiego elementu
+}
+
+// polecenie extend, generuje prostszy kod css
+.message {
+  color: #2e2e2e;
+  background: lighten(#2e2e2e, 70%);
+  width: 40%;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.error {
+  color: #2ff;
+  background: lighten(#2ff, 70%);
+  @extend .message; // dziedziczenie po klasie .message
+}
+
+.success {
+  color: #2ff;
+  background: lighten(#2ff, 70%);
+  @extend .message; // dziedziczenie po klasie .message
+}
+
+// klasa placeholder %
+// klasa z ktorej elementy dziedzicza ale sama nie jest wyswietlana w DOM
+%span-icon {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 30px;
+  border-radius: 25px;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+  font-size: 25px;
+
+}
+
+.camera {
+  background: #0b6138;
+  @extend %span-icon;
+}
+
+.calendar {
+  background: #0b6138;
+  @extend %span-icon;
+}
+
+.circle {
+  background: #0b6138;
+  @extend %span-icon;
+}
+
+// dyrektywa IF
+$color-variant: 'Dark';
+
+@mixin set-color-variant {
+  @if $color-variant == Dark {
+    color: #FFF;
+    background: #000;
+  } @else {
+    color: #000;
+    background: #FFF;
+  }
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  padding: 0 50px;
+  @include set-color-variant;
+}
+
+// pętla EACH
+$icons: facebook googleplus twitter youtube;
+
+@mixin social-icons {
+  @each $icon in $icons { // generowanie background dla klas
+    .social-#{$icon} {
+      background: url('images/#{icon}.png');
+    }
+  }
+}
+
+.social-blok { // wywolujemy poziom wyzej
+  @include social-icons;
+}
+
+// petla FOR
+$bg-color: #0b4c5f;
+
+@mixin create-colors {
+  @for $i from 1 through 10 {
+    .block-#{$i} {
+      background: lighten($bg-color, $i);
+    }
+  }
+}
+
+body {
+  @include create-colors;
+}
+
+// pętla WHILE
+$bg-color: #0b4c5f;
+$i: 10; // iterator pętli
+
+@mixin generate-stripes {
+  @while $i > 0 {
+    .block-#{$i} {
+      background: lighten($bg-color, $i);
+    }
+    $i: $i - 1;
+  }
+}
+
+body {
+  @include generate-stripes;
+}
+

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row mt-4 mb-4">
+    <div class="col">
+      <h1>Witaj w kursie Angular!</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+
+      <input (keyup)=" message = $event.target.value ">
+
+      <button (click)="open = true">Open</button>
+      <button (click)="ref.close()">Close</button>
+      {{ ( open? 'Open' : 'Close' ) }}
+      <hr>
+
+      <popup-message #ref
+        [(open)]="open"
+        [text]="message"
+      ></popup-message>
+
+    </div>
+  </div>
+</div>

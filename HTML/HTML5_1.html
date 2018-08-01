@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML 5.1 - Podstawy tworzenia stron</title>
+</head>
+<body contextmenu="mainmenu">
+    <h1>Lorem Ipsum</h1>
+    <h2>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper tellus ac augue mollis, et volutpat dui consequat. Vivamus eget dui vel dolor vulputate finibus. Integer et fermentum neque, blandit pulvinar nisl. Sed sapien purus, cursus eget scelerisque id, malesuada a felis. Maecenas volutpat vel erat et auctor. Aliquam erat volutpat. Nam eu sem sit amet turpis suscipit varius sed id justo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam neque metus, auctor vel sem a, luctus feugiat lorem. Donec vitae metus semper, aliquet risus non, elementum tellus. Phasellus ut massa ut mauris interdum malesuada. Curabitur et pulvinar orci. Curabitur volutpat nibh vel mi euismod vestibulum.
+    </p>
+    <p><em>wyroznienie/pochylenie tekstu - znacznik em</em></p>
+    <p><strong>pogrubienie tekstu - znacznik strong</strong></p>
+    <blockquote>cytat - znacznik blockquote</blockquote>
+    <hr>
+    <br>tekst preformatowany - pre
+    <pre>
+        function logArr() {
+            if (arr[0] !== undefined && arr[1] !== undefined) console.log(arr);
+        }
+
+        function get3() {
+            addValue(3);
+            logArr();
+        }
+
+        function get5() {
+            addValue(5);
+            logArr();
+        }
+    </pre>
+    <hr>
+    <br>lista nieupożądkowana - znacznik ul i li
+    <ul>
+        <li>Jeden</li>
+        <li>Dwa</li>
+        <li>Trzy</li>
+        <li>Cztery</li>
+        <li>Pięć</li>
+    </ul>
+    <hr>
+    <br>lista upożądkowana ol i li, z atrybutem start dla ol
+    <ol start="4">
+        <li>Jeden</li>
+        <li>Dwa</li>
+        <li>Trzy</li>
+        <li>Cztery</li>
+        <li>Pięć</li>
+    </ol>
+    <hr>
+    <br>lista definicji, dl, dt, dd
+    <dl>
+        <dt>HTML</dt>
+        <dd>Opis czym jest HTML</dd>
+        <dt>CSS</dt>
+        <dd>Opis czym jest CSS</dd>
+        <dt>JavaScript</dt>
+        <dd>Opis czym jest JavaScript</dd>
+    </dl>
+<hr>
+<br>Tabele, table, thead, tbody, tfoot, tr, td, th, caption
+    <table>
+        <caption>Lista klientów</caption>
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Jan</td>
+                <td>Nowak</td>
+                <td>jnowak@strefakursów.pl</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Tadeusz</td>
+                <td>Kowalski</td>
+                <td>tkowalski@przyklad.pl</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Paweł</td>
+                <td>Ważny</td>
+                <td>pwazny@przyklad.pl</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Stopka tabeli</td>
+            </tr>
+        </tfoot>
+    </table>
+<hr>
+<br>Formularze, form, fieldset, legend, input, button, textarea, select, label for,
+<form action="" method="">
+
+    <label for="search">Szukaj:</label><br>
+    <input type="search" id="search" placeholder="Wyszukaj" autofocus><br>
+
+    <label for="pass">Hasło:</label><br>
+    <input type="password" id="pass" required><br>
+
+    <label for="name">Imie:</label><br>
+    <input type="text" id="name"><br>
+
+    <label for="age">Wiek:</label><br>
+    <input type="number" id="age" min="0" max="100" value="18" readonly><br>
+
+    <label for="email">Adres e-mail:</label><br>
+    <input type="email" id="email"><br>
+
+    <label for="file">Wysyłanie pliku</label><br>
+    <input type="file" id="file"><br>
+
+    <label for="files">Wysyłanie wielu plików</label><br>
+    <input type="file" multiple id="files"><br>
+
+    <label for="options">Lista opcji</label><br>
+    <select id="options">
+        <option value="1">Opcja 1</option>
+        <option value="2">Opcja 2</option>
+        <option value="3">Opcja 3</option>
+    </select><br>
+
+    <label for="time">Czas:</label><br>
+    <input type="time" id="time"><br>
+
+    <label for="date">Data:</label><br>
+    <input type="date" id="date"><br>
+
+    <fieldset>
+        <legend>Pole wyboru:</legend>
+        <input type="radio" value="opcja 1" name="radio">Wybór 1<br>
+        <input type="radio" value="opcja 2" name="radio">Wybór 2<br>
+        <input type="radio" value="opcja 3" name="radio">Wybór 3<br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Pole opcji:</legend>
+        <input type="checkbox" value="opcja 1" name="checkbox">Opcja 1<br>
+        <input type="checkbox" value="opcja 2" name="checkbox">Opcja 2<br>
+        <input type="checkbox" value="opcja 3" name="checkbox">Opcja 3<br>
+    </fieldset>
+
+    <label for="message">Wiadomość:</label><br>
+    <textarea id="message"></textarea><br>
+
+    <button type="submit">Wyślij wiadomość</button>
+    <button type="reset">Wyczyść</button>
+    <hr>
+    <br>section, article, nav, aside - tresc luzno powiazana
+    <header>
+        <nav>
+            <ul>
+                <li><a href="">Start</a></li>
+                <li><a href="">Oferta</a></li>
+                <li><a href="">Portfolio</a></li>
+                <li><a href="">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>sekcja 1, SECTION</h1>
+    <section>
+        <h2>Nagłówek h2 - nagłówek sekcji</h2>
+        <article>
+            <h3>Nagłówek h3 - nagłówek artykułu, ARTICLE</h3>
+            <aside>znacznik aside, dodatkowa zawartosc dotyczaca artykulu</aside>
+        </article>
+        <article>
+            <h3>Nagłówek h3 - nagłówek artykułu</h3>
+        </article>
+    </section>
+    <section>
+        <h2>Nagłówek h2 - nagłówek sekcji</h2>
+        <article>
+            <h3>Nagłówek h3 - nagłówek artykułu</h3>
+        </article>
+        <article>
+            <h3>Nagłówek h3 - nagłówek artykułu</h3>
+        </article>
+    </section>
+    <hr>
+    <h1>responsywne obrazu, wiele zrodel, PICTURE</h1>
+    <picture>
+        <source media="(min-width: 970px)" srcset="">
+        <source media="(min-width: 700px)" srcset="">
+        <source media="(min-width: 200px)" srcset="">
+    </picture>
+    <hr>
+    <h1>wideo, wiele zrodel, VIDEO, controls</h1>
+    <video controls>
+        <source src="" type="video/mp4">
+        <source src="" type="video/webm">
+    </video>
+    <hr>
+    <h1>audio, wiele zrodel, AUDIO, controls</h1>
+    <audio controls>
+        <source src="" type="audio/mpeg">
+        <source src="" type="audio/ogg">
+    </audio>
+    <hr>
+    <h1>zagniezdzanie plikow PDF, EMBED</h1>
+    <embed src="" type="application/pdf">
+    <hr>
+    <h1>zagniezdzanie obiektów, IFRAME</h1>
+    <iframe src="http://mathcalc.cba.pl" width="400px" height="400px">
+        <p>Ten komunikat zostanie wyswietlony w momencie braku obslugi IFRAME poprzez przeglądarke</p>
+    </iframe>
+    <hr>
+    <h1>obiekt CANVAS</h1>
+    <canvas width="400px" height="400px" id="canvas">
+        <p>Ten komunikat zostanie wyswietlony w momencie braku obslugi CANVAS poprzez przeglądarke</p>
+    </canvas>
+    <hr>
+    <h1>DETAILS oraz SUMMARY, szczegóły oraz podsumowanie</h1>
+    <details open>
+        <summary>Nielimitowany dostęp</summary>
+        <p>Oglądasz kursy gdzie chcesz i jak chcesz.</p>
+    </details>
+    <hr>
+    <h1>własne pozycje w menu kontekstowym pod prawym klikiem, MENU</h1>
+    <menu type="context" id="mainmenu">
+        <menuitem icon="">It's Alive!</menuitem>
+    </menu>
+    <hr>
+    <h1>oznaczanie czasu, TIME</h1>
+    <p>to jest przykladowy artykul napisany <time datetime="2018-06-17">17.06.2018</time></p>
+</form>
+</body>
+<script>
+    // rysowanie w canvas
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'red';
+    ctx.fillRect(0,0,200,200);
+    ctx.fillStyle = 'green';
+    ctx.fillRect(0,120,100,100);
+</script>
+</html>

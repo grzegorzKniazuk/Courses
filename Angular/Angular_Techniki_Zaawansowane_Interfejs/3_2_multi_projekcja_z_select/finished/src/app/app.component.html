@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col">
+      <h1>Witaj w kursie Angular!</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <hr>
+      
+      <panel>
+          <h4 ngProjectAs="panel-header">Lista Testowa <small>5 testow</small></h4>
+
+          <div ngProjectAs="panel-footer">Stopka</div> 
+
+          <ul>
+            <li *ngFor="let i of [1,2,3,4,5]">Test {{i}}</li>
+          </ul>                     
+
+      </panel>
+      
+      <hr>
+      
+      <panel title="Komunikaty">
+          <p class="alert bg-warning">
+            Powiadomienie w panelu!
+          </p>
+      </panel>
+
+    </div>
+  </div>
+</div>

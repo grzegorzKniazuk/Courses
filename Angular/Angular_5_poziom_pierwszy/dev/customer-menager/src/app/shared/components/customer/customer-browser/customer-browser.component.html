@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body col-2">
+      <select [(ngModel)]="customer" title="customer" class="form-control">
+        <option [ngValue]="null">Brak klienta</option>
+        <option  *ngFor="let customer of customers" [ngValue]="customer">{{ customer.name }}</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="customer">
+    <app-customer-details #details [customer]="customer" (onShift)="shiftCustomer($event)"></app-customer-details>
+    <button type="button" class="btn btn-danger float-right" (click)="deleteCustomer()">Usuń klienta</button>
+  </div>
+</div>

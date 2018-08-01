@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+  <div class="card col-6">
+    <div class="card-header">
+      Dodaj klienta
+    </div>
+    <div class="card-body">
+      <form #customerForm="ngForm" (submit)="addCustomer(customerForm)">
+        <div class="form-group">
+          <label for="name">Nazwa klienta</label>
+          <input required type="text" class="form-control" id="name" minlength="5" maxlength="20" [(ngModel)]="name" name="name" #nameInput="ngModel">
+          <div class="alert alert-danger" *ngIf="nameInput.invalid && (nameInput.touched || nameInput.dirty)">
+            <div *ngIf="nameInput.errors.required">
+              Nazwa jest wymagana.
+            </div>
+            <div *ngIf="nameInput.errors.minlength">
+              Nazwa musi mieć conajmniej 5 znaków.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="age">Wiek</label>
+          <input required type="number" class="form-control" id="age" [(ngModel)]="age" name="age" #ageInput ="ngModel">
+          <div class="alert alert-danger" *ngIf="ageInput.invalid && ageInput.touched">
+            Wiek jest wymagany.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="type">Typ</label>
+          <select required class="form-control" id="type" [(ngModel)]="type" name="type">
+            <option [value]="CustomerType.Standard">Standard</option>
+            <option [value]="CustomerType.Premium">Premium</option>
+            <option [value]="CustomerType.VIP">VIP</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!customerForm.form.valid">Dodaj</button>
+        <button class="btn btn-danger" type="reset">Resetuj</button>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,127 @@
+<!-- ----------------------------------------------------
+INTERPOLACJA
+interpolacja zawsze wyswietla string -->
+{{name}}
+
+<!-- ----------------------------------------------------
+PROPERTY BINDING -->
+
+<!-- przypisanie atrybutowi src wartosci zmiennej photoUrl -->
+<img [src]="customer.photoUrl" width="100px" height="100px">
+
+<!-- przypisanie wartosci zmiennej nameColor do stylu color  -->
+<h1 [style.color]="nameColor">{{customer.name}}</h1>
+
+<!-- przypisanie klasy isActive w przypadku gdy zmienna isActive jest true -->
+<h1 [class.isActive]="isActive">{{customer.name}}</h1>
+
+<!-- ----------------------------------------------------
+EVENT BINDING
+w nawiasach () nazwa zdarzena do ktorego chcemy wiazac
+-->
+
+<button type="button" (click)="toggleUnderline()">Przełącz podkreślenie</button>
+<button type="button" (click)="isActive = !isActive">Przełącz podkreślenie</button>
+<button type="button" (click)="changeColor()">Przełącz kolor</button>
+
+<!-- ----------------------------------------------------
+WIĄZANIE DWUSTRONNE - ngModel
+
+wymagany modul FormsModule
+
+wiązanie dwustronne wykorzystujemy aby zmiany wartosci pola w komponencie byly odzwierciedlane w widoku i jednoczesnie
+zmiany wartosci w widoku byly aktualizowane w komponencie
+
+$event - obiekt opisujacy wydarzenie do ktorego dowiazujemy,
+pole target - element na ktorym zaszlo wydarzenie
+-->
+
+<input type="text" [value]="customer.name" (input)="customer.name = $event.target.value">
+
+<!-- lepszy sposob - wiazanie dwustronne - ngModel -->
+<input type="text" [(ngModel)]="customer.name">
+
+<!-- kontrola ngModel
+property binding na pole ngModelOptions, przekazujemy obiekt z opcjami, np z momentem przeladowania widku
+-->
+<input type="text" [(ngModel)]="customer.name" [ngModelOptions]="{updateOn: 'blur'}">
+
+<!-- wyswietnie wartosci interfejsu Customer -->
+<p>name: {{ customer.name }}</p>
+<p>description: {{ customer.description }}</p>
+<p>age: {{ customer.age }}</p>
+<p>address: {{ customer.address.street }} {{ customer.address.houseNumber }} {{ customer.address.city }}</p>
+
+<!--  ----------------------------------------------------
+ZMIENNE SZABLONOWE
+umozliwiaja odwolywanie sie w wyrazeniach szablonowych do elementow html lub dyrektyw znajdujacych sie w innym miejscu
+szablonu
+
+#nazwaZmiennejSzablonowej - po dodaniu jej do elementu html znajduje sie pod nia caly element html
+
+zmienne szablonowe maja zasieg w obrebie calego szablonu
+-->
+
+<input #nameInput type="text" [value]="customer.name" (input)="customer.name = nameInput.value">
+<p>{{nameInput}}</p>
+
+<!-- -----------------------------------------------------
+strukturalna dyrektywa *ngIf
+-->
+
+<!-- checkbox sterujacy widocznoscia zdjecia -->
+<label><input type="checkbox" [(ngModel)]="showPhoto">Pokaż zdjęcie</label>
+<img *ngIf="showPhoto" [src]="customer.photoUrl" width="100px" height="100px">
+
+<!-- checkbox sterujacy widocznoscia zdjecia, jesli checkbox jest oznaczony to wyswietl napis przy pomocy zmiennej
+szablonowej -->
+<label><input type="checkbox" [(ngModel)]="showPhoto">Pokaż zdjęcie</label>
+<img *ngIf="showPhoto else noPhoto" [src]="customer.photoUrl" width="100px" height="100px">
+
+<!-- ng-template - opakowanie, dyrektywa ta sprawia ze elementy w jej wnetrzu nie zostaja doczepione przy starcie
+do drzewa dom -->
+
+<ng-template #noPhoto>
+  <p>Zdjęcie ukryte</p>
+</ng-template>
+
+<!-- -----------------------------------------------------
+strukturalna dyrektywa *ngSwitch
+
+ng-container - pozwala na wyswietlanie warunkowe elementu html bez wprowadzania opakowujacego elementu html
+-->
+
+<h1 [class.isActive]="isActive">
+  {{customer.name}}
+
+  <ng-container [ngSwitch]="customer.type">
+    <ng-container *ngSwitchCase="CustomerType.Standard">*</ng-container>
+    <ng-container *ngSwitchCase="CustomerType.Premium">**</ng-container>
+    <ng-container *ngSwitchCase="CustomerType.VIP">***</ng-container>
+    <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+  </ng-container>
+</h1>
+
+<!-- -----------------------------------------------------
+strukturalna dyrektywa *ngFor
+
+wewnatrz ngFor dostepnych jest kilka zmiennych
+odd - czy dany element listy jest parzysty czy nieparzysty
+-->
+
+<ul *ngFor="let category of customer.categories; let oddCategory = odd" [class.oddCategory]="oddCategory">
+  <li>{{ category }}</li>
+</ul>
+
+<!-- bardziej zlozony przyklad dla *ngFor
+
+ngValue - dyrektywa sluzaca do przypisania wartosci do opcji
+-->
+
+<select [(ngModel)]="customer">
+  <option [ngValue]="null">brak klienta</option> <!-- opcja pusta -->
+  <option *ngFor="let customer of customers" [ngValue]="customer">{{ customer.name }}</option>
+</select>
+
+<!-- wlasna dyrektywa -->
+<p appHighlight>najedz myszka na ten element</p>

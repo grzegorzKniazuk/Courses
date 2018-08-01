@@ -1,0 +1,22 @@
+dekoratory wykonują się bez potrzeby tworzenia nowej instancji, w przeciwienstwie do klasy
+
+property binding - wiązania pól
+event binding - wiazania zdarzen
+
+SZABLON
+ustala wyglad komponentu
+
+KOMPONENT
+klasa ts obslugujaca interakcje zachodzace na danym obszarze ekranu
+
+USŁUGA
+klasa która implementuje funkcjonalnosc ktora moze byc spojna dla wielu komponentow
+- np pobieranie danych serwera
+- uwierzytelnianie uzytkownika
+
+DYREKTYWY / FILTRY
+operuja w szablonach
+
+dyrektywy i usługi łączymy w osobne moduły
+
+

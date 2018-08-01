@@ -1,0 +1,141 @@
+/* selektory atrybutu */
+[data-status] {
+
+}
+
+/*selektory pseudoklasy */
+img:last-of-type {
+
+}
+
+p:empty {
+
+}
+
+p:first-child {
+
+}
+
+a:hover {
+
+}
+
+li:nth-of-type(2n) { /* co drugi element typu li */
+
+}
+
+/* pseudoelementy */
+
+p::first-letter { /* pierwsza litera w akapicie */
+
+}
+
+a::after { /* wstawienie >> po kazdym elemencie a */
+    content: ' >>';
+}
+
+/* selektory kombinowane */
+
+#top p {
+
+}
+
+.intro p + p { /* akapity następujące po sobie i znajdujące się w klasie intro */
+
+}
+
+p { /* wysokosc linii wyzsza 2x niz wysokosc teksu */
+    line-height: 2; /* wysokosc linii 40px */
+    font-size: 20px;
+    letter-spacing: 20px; /* odstępy pomiędzy znakami */
+    word-spacing: 5px; /*odstępy pomiędzy słowami */
+    font-style: italic; /* tekst pochylony */
+    text-transform: uppercase; /* duze litery */
+    text-transform: capitalize; /* kazde slowo od duzej litery */
+    text-decoration: underline overline line-through; /* podkreslenie, linia nad tekstem, przekreslenie */
+}
+
+/* style listy */
+ul {
+    list-style-type: circle; /* zmiana punktora listy */
+}
+
+article {
+    box-sizing: border-box; /* dodanie paddingu i bordera do szerokosci i wysokosci pudelka */
+    clear : both; /* uniemozliwia plywanie elementow wokol tego elementu (z dwoch stron) */
+}
+
+div {
+    display: flex; /* wlaczenie flexboxa */
+}
+
+div article {
+    flex: 1; /* kazda kolumna w div ma identyczną szerokosc */
+}
+
+nav { /* manipulowanie tlem */
+    background-color: #FF5733;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow : 10px 10px 10px #FF5733; /* cien pudelka */
+}
+
+img {
+    filter: motionBlur(15%); /* filtry dla img */
+}
+
+/* stylowanie tabel */
+table {
+    width : 50%;
+    table-layout: fixed; /* szerokosc poszczegolnych kolumn jest wyznaczana poprzez zawartosc naglowka */
+    border-collapse: collapse; /* polaczenie wewnetrznych obramowan */
+}
+
+td {
+    border: 1px black;
+}
+
+thead {
+    background: grey;
+    color: black;
+}
+
+th:first-child(1) {
+    width: 15%;
+}
+
+/* naprzemienne tla */
+tr:nth-child(odd) { /* wiersze nieparzyste */
+    background-color: #A7A79B;
+}
+
+/* transformacje 2d*/
+#box {
+    /* przesuniecie w poziomie, obrot, skalowanie w pionie i poziomie */
+    transform: translateX(140px) rotate(40deg) scale(1.4, 1.2);
+}
+
+/* transformacje 3d */
+img {
+    transform: perspective(200px); /* perspektywa 3d, odleglosc img od ekranu */
+    transform: rotate(30deg);
+}
+
+/* animacje */
+#box {
+    background: #A7A79B;
+}
+
+#box:hover {
+    background: #556622;
+    transition: color, 2s ease-in; /* jakie wlasciwosci maja byc animowane, ile ma trwac animacja, typ animacji */
+    
+}
+
+/* zapytania o media */
+@media (min-width: 800px) {
+    /* style dla urzadzenia z minimum 800px */
+}
+
+

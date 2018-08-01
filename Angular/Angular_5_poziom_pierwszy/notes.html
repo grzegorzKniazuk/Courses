@@ -1,0 +1,47 @@
+<!-- ----------------------------------------------------
+INTERPOLACJA
+interpolacja zawsze wyswietla string -->
+{{name}}
+
+<!-- ----------------------------------------------------
+PROPERTY BINDING -->
+
+<!-- przypisanie atrybutowi src wartosci zmiennej photoUrl -->
+<img [src]="photoUrl" width="50px" height="50px">
+
+<!-- przypisanie wartosci zmiennej nameColor do stylu color  -->
+<h1 [style.color]="nameColor">{{name}}</h1>
+
+<!-- przypisanie klasy isActive w przypadku gdy zmienna isActive jest true -->
+<h1 [class.isActive]="isActive">{{name}}</h1>
+
+<!-- ----------------------------------------------------
+EVENT BINDING
+w nawiasach () nazwa zdarzena do ktorego chcemy wiazac
+-->
+
+<button type="button" (click)="toggleUnderline()">Przełącz podkreślenie</button>
+<button type="button" (click)="isActive = !isActive">Przełącz podkreślenie</button>
+<button type="button" (click)="changeColor()">Przełącz kolor</button>
+
+<!-- ----------------------------------------------------
+WIĄZANIE DWUSTRONNE - ngModel
+
+wymagany modul FormsModule
+
+wiązanie dwustronne wykorzystujemy aby zmiany wartosci pola w komponencie byly odzwierciedlane w widoku i jednoczesnie
+zmiany wartosci w widoku byly aktualizowane w komponencie
+
+$event - obiekt opisujacy wydarzenie do ktorego dowiazujemy,
+pole target - element na ktorym zaszlo wydarzenie
+-->
+
+<input type="text" [value]="name" (input)="name = $event.target.value">
+
+<!-- lepszy sposob - wiazanie dwustronne - ngModel -->
+<input type="text" [(ngModel)]="name">
+
+<!-- kontrola ngModel
+property binding na pole ngModelOptions, przekazujemy obiekt z opcjami, np z momentem przeladowania widku
+-->
+<input type="text" [(ngModel)]="name" [ngModelOptions]="{updateOn: 'blur'}">

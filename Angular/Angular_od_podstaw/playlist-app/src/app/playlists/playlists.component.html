@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-12">
+    <h4 class="display-4 float-xl-right mb-2">Twoje playlisty</h4>
+  </div>
+</div>
+
+<div class="row mt-1">
+  <div class="col-lg-4">
+    <app-content-card>
+      <router-outlet></router-outlet>
+    </app-content-card>
+  </div>
+
+  <div class="col-lg-8">
+    <h5>Playlisty</h5>
+    <app-playlist-list [selected]="selected" [playlists]="playlists" (selectPlaylist)="select($event)"></app-playlist-list>
+    <div class="form-group">
+      <button class="btn btn-success float-xl-right" routerLink="new">Nowa playlista</button>
+    </div>
+  </div>
+
+</div>
