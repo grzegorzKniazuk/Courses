@@ -1,0 +1,9 @@
+node -v <- wersja node
+
+node <- interaktywna konsola js
+
+node nazwa_pliku <- uruchomienie skryptu
+
+node -e "console.log('ok');" <- skrypy srodliniowe
+
+
