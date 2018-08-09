@@ -254,14 +254,14 @@ http.createServer((request, response) => {
     fs.createReadStream('./index.html').pipe(response);
 }).listen(3000);
 console.log('Serwer uruchomiony...');
-*/
+
 
 // framework Expressjs
 let app = express();
 app.listen(3000);
 
 // definicja sciezek - routing
-/*
+
 app.get('/', (request, response) => {
    response.render('index', { header: 'Witaj na template Jade' }); // uzycie jade
 });
