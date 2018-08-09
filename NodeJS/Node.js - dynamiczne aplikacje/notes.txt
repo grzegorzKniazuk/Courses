@@ -6,4 +6,14 @@ node nazwa_pliku <- uruchomienie skryptu
 
 node -e "console.log('ok');" <- skrypy srodliniowe
 
+npm init <- tworzenie nowego package.json
 
+npm uninstall -g nazwa_pakietu <- usuwanie pakietu
+
+npm install jade <- templatki jade
+
+npm install express-generator -g <- generator aplikacji express
+
+po instalacji mongoDB sciezke do mongoDB trzeba dodac do zmiennych srodowiskowych w systemie
+
+npm install mongodb <- sterownik mongoDB dla node
