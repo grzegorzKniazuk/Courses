@@ -101,7 +101,7 @@ fs.readFile('./notes.txt', 'utf-8', (error, fileContent) => {
 
 // tworzenie nowych plikow
 let content = 'To jest zawartosc';
-fs.writeFile('plik.txt', content, (error) => {
+fs.writeFile('file.txt', content, (error) => {
     if (error) {
         console.log(error);
     }
@@ -133,7 +133,7 @@ fs.unlink('index.html', (error) => {
 });
 
 // zmiana nazwy pliku
-fs.rename('plik.txt, plik2.txt', (error) => {
+fs.rename('file.txt, plik2.txt', (error) => {
     if (error) {
         console.log(error);
     }
