@@ -2,6 +2,8 @@ const utils = require('util'); // pomocne funkcje
 const EventEmitter = require('events'); // modul events
 const readline = require('readline'); // modul readline
 const fs = require('fs'); // modul filesystem
+const gzip = require('zlib').createGzip(); // modul do kompresji strumieni do *.gz
+const Console = require('console').Console; // modul do logow
 const path = require('path'); // modul path
 const net = require('net'); // modul net
 const http = require('http'); // modul http
@@ -24,14 +26,20 @@ emitter.emit('message', 'To jest wiadomość');
 let buff = Buffer.from('To jest tekst do bin');
 console.log(buff); // <Buffer 54 6f 20 6a 65 73 74 20 74 65 6b 73 74 20 64 6f 20 62 69 6e>
 
-
 // modul Stream
 // obsluga binarna plikow
-
-let stream = fs.createReadStream('./text.txt');
-stream.on('data', (chunk) => {
-
+let stream = fs.createReadStream('./text.txt', {
+    highWaterMark: 32 * 1024 // wielkosc odczytywanych partii danych w bajtach
 });
+stream.on('data', (chunk) => {
+    console.log(chunk.toString());
+});
+stream.pipe(process.stdout);
+
+let logs = fs.createWriteStream("./logs.txt");
+let errors = fs.createWriteStream("./errors.txt");
+const myConsole = new Console();
+myConsole.log('to dziala');
 
 // modul process
 console.log(process.pid); // id procesu
@@ -179,7 +187,7 @@ const server = http.createServer((request, response) => { // request i response 
     response.write('<b>Hello World!</b>');
     response.end();
 }).listen(3000);
-*/
+
 // expressjs
 const express = require('express');
 const app = express();
@@ -254,7 +262,37 @@ function listUsers() {
 
     });
 }
-
+*/
 // websockets
+// obsluga stanow w http
+// ws - popularny modul do obslugi websockets
+// socket.io - popularna biblioteka
+
+// wykorzystanie Promises
+function readFile(file, cb) {
+    let p = new Promise((resolve, reject) => {
+        fs.readFile(path.join(__dirname, "files", file), (error, data) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(data.toString());
+            }
+        })
+    });
+    return p;
+}
+
+readFile('plik.txt').then(data => {
+   console.log(data);
+}).catch(error => {
+    console.log(error);
+});
+
+
+
+
+
+
+
 
 
