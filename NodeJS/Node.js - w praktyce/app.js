@@ -9,6 +9,7 @@ const net = require('net'); // modul net
 const http = require('http'); // modul http
 const https = require('https'); // modul https
 const mongoose = require('mongoose'); // modul mongoose
+const cluster = require('cluster'); // modul cluster
 
 /*
 // modul Events
@@ -288,7 +289,20 @@ readFile('plik.txt').then(data => {
     console.log(error);
 });
 
+// klasterowanie
+// uruchomienie tylu klastrow ile jest rdzeni procesora
+// sa dodatki w npm
+if (cluster.isMaster) {
+    let cpus = require('os').cpus().length;
 
+    for (let i = 0; i < cpus; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', () => {
+        cluster.fork();
+    })
+}
 
 
 
