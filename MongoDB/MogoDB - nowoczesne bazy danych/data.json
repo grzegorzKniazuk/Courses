@@ -1,0 +1,97 @@
+{
+	"name": "Sancom X10",
+	"category": "phones",
+	"price": 449,
+	"stock": 10,
+	"attributes" : {
+		"os": "android",
+		"memory": 8
+	}
+}
+{
+	"name": "Yearlam 2",
+	"category": "phones",
+	"price": 399,
+	"stock": 23,
+	"attributes" : {
+		"os": "Android",
+		"memory": 4
+	}
+}
+{
+	"name": "Warmsoft Express",
+	"category": "software",
+	"price": 199,
+	"stock": 151,
+	"attributes" : {
+		"os": "windows",
+		"licence": "enterprise"
+	}
+}
+{
+	"name": "Intech Professional",
+	"category": "software",
+	"price": 1200,
+	"stock": 4,
+	"attributes" : {
+		"os": "windows",
+		"licence": "enterprise"
+	}
+}
+{
+	"name": "Quofan 2016",
+	"category": "software",
+	"price": 59,
+	"stock": 56,
+	"attributes" : {
+		"os": "osx",
+		"licence": "home"
+	}
+}
+{
+	"name": "Lamfix Home Edition",
+	"category": "software",
+	"price": 120,
+	"stock": 78,
+	"attributes" : {
+		"os": "windows",
+		"licence": "home"
+	}
+}
+{
+	"name": "Tech Tamdex USB",
+	"category": "accessories",
+	"price": 60,
+	"stock": 120,
+	"attributes" : {
+		"type": "keyboard"
+	}
+}
+{
+	"name": "Silverwarm PC Case",
+	"category": "accessories",
+	"price": 120,
+	"stock": 30,
+	"attributes" : {
+		"type": "pc-case"
+	}
+}
+{
+	"name": "Freeplus Mouse",
+	"category": "accessories",
+	"price": 49,
+	"stock": 167,
+	"attributes" : {
+		"type": "mouse"
+	}
+}
+{
+	"name": "Scotfresh Vision",
+	"category": "displays",
+	"price": 799,
+	"stock": 4,
+	"attributes" : {
+		"size": 24,
+		"interface": "hdmi"
+	}
+}

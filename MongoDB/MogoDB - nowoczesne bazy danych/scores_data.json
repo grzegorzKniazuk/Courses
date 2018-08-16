@@ -1,0 +1,24 @@
+{
+	"firstname": "Jan",
+	"lastname": "Kowalski",
+	"scores": 
+		[
+			5,6,4,5,5
+		]
+}
+{
+	"firstname": "Krzysztof",
+	"lastname": "Nowak",
+	"scores": 
+		[
+			4,3,4,5,4
+		]
+}
+{
+	"firstname": "Paweł",
+	"lastname": "Nowak",
+	"scores": 
+		[
+			5,2,4,3,2
+		]
+}

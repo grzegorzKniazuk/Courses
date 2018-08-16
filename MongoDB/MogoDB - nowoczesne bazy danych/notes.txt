@@ -1,0 +1,192 @@
+po instalacji dodajemy zmienna srodowiskowa
+
+mongod <- start bazy
+mongo <- cli
+
+use nazwa_bazy <- utworzenie nowej bazy/przelaczenie sie
+mongoimport --db nazwa_bazy --collection nazwa_kolekcji --file nazwa_pliku_json.json <- import jsona do bazy
+
+find
+-----------------------------------------------------------------------------------------------------------------------
+nazwa_bazy.nazwa_kolekcji.find({warunki}) <- wyszukiwanie dokumentow
+nazwa_bazy.nazwa_kolekcji.find({category: "Phones"}) <- wyszukiwanie dokumentow
+db.products.find({ "attributes.os" : "windows"}) <- zagniezdzone wyszukiwanie
+db.products.find({ $text: { $search: "usb" } }) <- tutaj wymagany indeks tekstowy
+
+sort
+-----------------------------------------------------------------------------------------------------------------------
+db.products.find().sort( { category: 1 } )
+
+operatory wyszukiwania
+-----------------------------------------------------------------------------------------------------------------------
+db.products.find({price: {$eq: 49}}) <- rowny 49
+db.products.find({price: {$gt: 49}}) <- wiekszy niz 49
+db.products.find({price: {$lt: 49}}) <- mniejszy niz 49
+db.products.find({price: {$ne: 49}}) <- nie rowna sie 49
+
+operatory logiczne
+-----------------------------------------------------------------------------------------------------------------------
+db.products.find({ category: "accessories", stock: { "type": "mouse" }}) <- and
+db.products.find({$or: [{ category: "accessories"}, {category: "phones"}]}) <- or
+db.products.find({$nor: [{ category: "accessories"}, {category: "phones"}]}) <- not
+
+kursory
+-----------------------------------------------------------------------------------------------------------------------
+kursor domyslnie przetwarza 20 wynikow w kolekcji
+let cursor = db.products.find();
+while (cursor.hasNext()) { print(tojson(cursor.next())) }
+
+insert
+-----------------------------------------------------------------------------------------------------------------------
+db.customers.insert({ <- wstawianie dokumentow
+firstname: "Jan",
+lastname: "Kowalski",
+adress: [ { city: "Chelm", zipcode: "22-304" } ]
+} )
+
+update
+-----------------------------------------------------------------------------------------------------------------------
+db.customers.update({ <- aktualizacja dokumentow
+lastname: "Kowalski"
+},
+{ $set: { email: "email@gmail.com" }
+})
+
+db.customers.update({}, { $set: { group: "Customer" }}, { multi: true }) <- aktualizacja wieku dokumentow
+db.customers.update({}, { $unset: { group: "" }}, { multi: true }) <- usuwanie pola na wielu dokumentach
+
+remove, drop
+-----------------------------------------------------------------------------------------------------------------------
+db.customers.remove( { lastname: "Kowalski" } ) <- usuwanie dokumentow na podstawie kryterium
+db.customers.drop() <- usuwanie calej kolekcji
+
+operator $exists
+-----------------------------------------------------------------------------------------------------------------------
+db.products.find({name: { $exists: true }}) <- uzycie $exists, czy pole istnieje
+
+dokumenty zawierajace tablice
+-----------------------------------------------------------------------------------------------------------------------
+db.scores.find({ scores: 5})
+
+operator $elemMatch
+-----------------------------------------------------------------------------------------------------------------------
+db.scores.find({ scores: { $elemMatch: { $lt: 4 }} }) <- dopasowanie do kryterium
+db.scores.find({ "scores.4": 5 }) <- 5 na 4 miejscu w tablicy
+
+wybieranie okreslonych pol
+-----------------------------------------------------------------------------------------------------------------------
+db.products.find({}, { _id: 0, name: 1}) <- {} ktore dokumenty, {} ktore pola, 0 ukryj, 1 pokaz
+
+ograniczanie liczby wynikow - limit, aggregate
+-----------------------------------------------------------------------------------------------------------------------
+db.products.find().limit(3) <- 3 pierwsze elementy
+db.products.aggregate({ $limit: 5 }) <- metoda aggregate i 5 pierwszych elementow
+
+sortowanie wynikow - aggregate
+-----------------------------------------------------------------------------------------------------------------------
+db.products.aggregate( [ { $sort: { price: 1 } } ]) <- sortowanie rosnaco, -1 malejaco
+db.products.aggregate( [ { $sort: { price: 1 } }, { $project: { _id: 0, name: 1, price: 1 } } ]) <- sortowanie z projekcja
+db.products.aggregate( [ { $sort: { price: 1, category: 1 } }, { $project: { _id: 0, name: 1, price: 1 } } ]) <- sortowanie dwupoziomowe
+
+grupowanie - aggregate
+-----------------------------------------------------------------------------------------------------------------------
+db.products.aggregate( [ { $group: { _id: "$category" } } ])
+db.products.aggregate( [ { $group: { _id: "$category", numOfProducts: { $sum: 1 }  } } ]) <- zliczanie przy pomocy $sum
+db.products.aggregate( [ { $group: { _id: "$category", avgPrice: { $avg: "$price" }  } } ]) <- srednia cena w grupie
+
+indeksy - warto dodawac do pol na ktorych wykonujemy wyszukiwania, sa odpowiednikiem "spisu tresci"
+-----------------------------------------------------------------------------------------------------------------------
+db.products.getIndexes() <- listowanie indeksow
+db.products.dropIndex({ "price": 1 }) <- usuwanie indeksow
+db.products.createIndex( { price: 1 } ) <- indeks prosty dla pola price, sortowanie rosnace
+db.products.createIndex( { category: 1, price: 1 } ) <- indeks zlozony
+db.products.createIndex( { name: 1 }, { unique: true } ) <- indeks unikalny dla name, pole name musi miec wartosci unikalne
+db. products.createIndex( { name: "text" } ) <- indeks tekstowy dla pol z wartosciami tekstowymi
+
+model 1-1, czesto najlepszy wybor to zagniezdzenie dokumentow
+-----------------------------------------------------------------------------------------------------------------------
+db.clients.insert({ name: "Jan", address: { telefon: 669459064 }})
+
+model 1-wiele, np komentarze do artykulu, jako zagniezdzona tablica
+-----------------------------------------------------------------------------------------------------------------------
+db.articles.insert({
+title: "title",
+body: "body",
+author: "author"
+},
+comments: [ { user : "123", content: "content1"}, { user: "124", content: "content2"} ])
+}
+
+model wiele-wiele
+-----------------------------------------------------------------------------------------------------------------------
+db.clients.insert({ name: "Jan", address: { telefon: 669459064 }})
+db.items.insert({ name: "USB cable", sku: "usbc", producer_id: "xyz" }) <- powiazanie po _id z kolekcji clients
+
+struktury drzewiaste
+-----------------------------------------------------------------------------------------------------------------------
+db.categories.insert({ _id: "Mobilne", parent: null })
+db.categories.insert({ _id: "Telefony", parent: "Mobilne" })
+db.categories.insert({ _id: "Tablety", parent: "Mobilne" })
+db.categories.find({ parent: "Mobilne" })
+db.categories.findOne( { _id: "Telefony" } ).parent <- Mobilne
+
+walidacja dokumentow
+-----------------------------------------------------------------------------------------------------------------------
+db.createCollection("people", { validator: { username: { $exists: true }}}) <- pole username wymagane w kolekcji
+
+capped collection, kolekcja ograniczona, np rozmiarem, iloscia dokumentow
+-----------------------------------------------------------------------------------------------------------------------
+db.createCollection( "logs", { capped: true, size: 4096, max: 3 }) <- size - rozmiar w bajtach, max - ilosc dokumentow
+db.logs.isCapped() <- true/false
+
+TTL - time to live, kolekcja ograniczona czasem (sekundy)
+-----------------------------------------------------------------------------------------------------------------------
+db.logs.insert({ name: "log1", created_at: new Date() })
+db.logs.createIndex({ "created_at": 1 }, { expireAfterSeconds: 70 }) <- drop dokumentu po 70 sekundach
+
+analiza wydajnosci zapytan
+-----------------------------------------------------------------------------------------------------------------------
+db.products.find( { price: { $gt: 200 } } ).explain("executionStats")
+
+wybieranie losowych dokumentow
+-----------------------------------------------------------------------------------------------------------------------
+db.products.aggregate([ { $sample: { size: 2 } } ]) <- 2 losowe dokumenty
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
