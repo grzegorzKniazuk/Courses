@@ -152,41 +152,7 @@ wybieranie losowych dokumentow
 -----------------------------------------------------------------------------------------------------------------------
 db.products.aggregate([ { $sample: { size: 2 } } ]) <- 2 losowe dokumenty
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+backup bazy danych
+-----------------------------------------------------------------------------------------------------------------------
+mongodump --db nazwa_bazy <- zrzut bazy do pliku
+mongorestore --db nazwa_bazy_docelowej sciezka_kopii_zapasowej
