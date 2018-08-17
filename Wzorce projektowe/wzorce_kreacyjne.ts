@@ -1,4 +1,3 @@
-/*
 class Vehicle {
     constructor(protected name: string) {}
     public getName(): string {
@@ -196,4 +195,3 @@ class DbConnection {
 }
 
 let db = DbConnection.getInstance();
-*/

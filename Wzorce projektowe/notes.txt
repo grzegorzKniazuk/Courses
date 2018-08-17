@@ -33,7 +33,10 @@ singleton
 
 wzorce strukturalne
 -------------------------------------------------------------------------------------------------
+opisuja proste sposoby rozwiazania relacji pomiedzy projektami
 
+adapter
+- obsluga wspolpracy niekompatybilnych klas, wrapper
 
 
 
