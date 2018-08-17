@@ -1,0 +1,62 @@
+podział
+- wzorce kreacyjne (konstrukcyjne)
+- wzorce strukturalne
+- wzorce czynnosciowe
+
+wzorce kreacyjne
+-------------------------------------------------------------------------------------------------
+
+simple factory - prosta fabryka
+- fabryka do produkcji obiektow
+- prosta fabryka generuje obiekt dla klienta bez eksponowania logiki tworzenia obiektu klientowi
+
+factory method - metoda wytworcza
+- definiuje interfejs do tworzenia obiektow zawierajacy metode do tworzenai obiektow
+- implementacja interfejsu odpowiada za tworzenie obiektow konkretnej klasy
+
+abstract factory - fabryka abstrakcyjna
+- definiuje interfejs do tworzenia obiektow
+- fabryka grupujaca fabryki powiazanych obiektow
+
+builder - budowniczy
+- pozwala uniknac konstruktora z duza iloscia parametrow - anty-wzorca
+- pozwala tworzyc obiekt etapami
+- pozwala latwo tworzyc rozne warianty obiektu
+
+prototype - prototyp
+- tworzenie obiektu poprzez klonowanie obiektu istniejacego
+- nowy obiekt to klon prototypu
+
+singleton
+- ograniczenie mozliwosci tworzenia obiektow klasy tylko do jednej instancji
+- przydatny gdy potrzebny jest jeden obiekt koordynujacy dzialania w calym systemie
+
+wzorce strukturalne
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
