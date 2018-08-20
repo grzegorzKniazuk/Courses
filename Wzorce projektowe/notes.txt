@@ -38,28 +38,80 @@ opisuja proste sposoby rozwiazania relacji pomiedzy projektami
 adapter
 - obsluga wspolpracy niekompatybilnych klas, wrapper
 
+bridge - most
+- oddziela abstrakcje obiektu od jego implementacji
 
+composite - kompozyt
+- grupa obiektow traktowana jako jeden obiekt
+- hierachia w formie struktury drzewiastej
+- struktura plikow lub katalogow, plik to obiekt, katalog to obiekt
 
+dekorator
+- dynamiczna zmiana zachowania obiektu pakujac go w inny obiekt
+- umozliwia dodawanie nowych zachowan do wskazanego obiektu nie modyikujac jednoczesnie innych obiektow
 
+fasada
+ - ukrywa przed klientem zlozonosc systemow
+ - opakowuje zlozony system w prosty interfejs
 
+flyweight - pyłek
+- nastawiony na wydajnosc
+- wspoldzielenie wlasciwosci z podobnymi obiektami
 
+proxy
+- posrednik, pelnomocnik
+- klasa reprezentujaca funkcjonalnosc innej klasy
+- klasa bedaca interfejsem do czegos zewnetrznego
+- klient korzysta z proxy a nie bezposrednio z zewnetrznego elementu
 
+wzorce czynnosciowe
+- opisuja sposob komunikacji pomiedzy obiektami, skupiaja sie na procesie komunikacji
+-------------------------------------------------------------------------------------------------
+lancuch odpowiedzialnosci
+- lancuch obiektow
+- klient wysyla zadanie -> handler obsluguje zadanie -> zadanie przechodzi przez lancuch poki nie trafi na wlasciwy handler
 
+command - polecenie
+- unikamy scislego wiazania klienta z odbiornikiem
+- zadanie klienta traktowane jako obiekt
+- zapewnia mozliwosc parametryzacji zadania
+- umozliwia kolejkowanie i zapamietywanie zadan
 
+iterator
+- przetwarzanie kolekcji
 
+mediator
+- posrednik w komunikacji pomiedzy obiektami
+- zapewnia jednolity interfejs dla roznych elementow w danym podsystemie
+- mediator to jedyna klasa ktora zna wszystkie metody innych klas
 
+pamiątka - memento
+- zapamietuje biezacy stan obiektu
+- latwosc przywrocenia poprzedniego stanu
+- cofanie zmian
 
+obserwator - observer
+- jesli zmienia sie stan obiektu to obiekty zalezne zostana o tym powiadomione
+- obiekt obserwowany przechowuje liste obserwatorow
+- obiekt obserwowany powiadamia swoich obserwatorow w momencie gdy zmieni sie jego stan
+- obserwator moze ale nie musi zareagowac na otrzymane powiadomienie
 
+stan - state
+- zmiana zachowania obiektu w zaleznosci od jego wewnetrznego stanu
+- obiektowa implementacja tzw "automatu skonczonego"
+- stany oraz przejscia
+- bardziej przejrzysty sposob na zmiane zachowania obiektu bez uzywania instrukcji if/switch
 
+strategia - strategy
+- wybor odpowiedniej strategii w zaleznosci od sytuacji
+- zestaw klas, w ktorym kazda klasa reprezentuje okreslone zachowanie
+- wybor jakiejs klasy zmienia zachowanie programu
 
+metoda szablonowa - template method
+- szkielet algorytmu okresla glowne etapy/kroki
+- implementacja poszczegolnych etapow jest realizowana w dziedziczacych klasach
+- szablon operacji, ktorej szczegoly implementujemy w klasach dziedziczacych
 
-
-
-
-
-
-
-
-
-
-
+odwiedzajacy - visitor
+- sposob na odseparowanie algorytmu od obiektu na ktorym ten algorytm operuje
+- mozliwosc latwego dodawania nowej operacji do obiektu bez koniecznosci modyfikowania jego struktury
