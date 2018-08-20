@@ -1,6 +1,6 @@
 import { IFactory } from "./interfaceIFactory";
 import { IWorker } from "./interfaceIWorker";
-/*
+
 class Factory<T extends IWorker> implements IFactory<T> { // klasa musi byc rowniez oznaczona jako typ generyczny jesli implementujemy interfejs generyczny
     container : Array<T> = [];
     push(newElement : T) : Array<T> {
@@ -17,5 +17,5 @@ class Factory<T extends IWorker> implements IFactory<T> { // klasa musi byc rown
         return this.container.shift();
     };
 }
-*/
-//export { Factory }
+
+export { Factory }
