@@ -204,5 +204,7 @@ class Person {
     }
 }
 */
-
+// dziedziczenie
+class Human {}
+class Person extends Human {}
 
