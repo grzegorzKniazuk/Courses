@@ -203,8 +203,12 @@ class Person {
         return `Witaj, ${this.firstname} ${this.lastname}`;
     }
 }
-*/
+
 // dziedziczenie
 class Human {}
 class Person extends Human {}
+*/
+// dziedziczenie z wbudowanych typow
+class Collection extends Array {}
 
+let col = new Collection(10, 20, 30); // [10, 20, 30]
