@@ -207,8 +207,61 @@ class Person {
 // dziedziczenie
 class Human {}
 class Person extends Human {}
-*/
+
 // dziedziczenie z wbudowanych typow
 class Collection extends Array {}
-
 let col = new Collection(10, 20, 30); // [10, 20, 30]
+
+// Symbole
+// typ prymitywny
+// jakas wartosc, niewiemy jaka ale unikalna
+// w pewnym stopniu emuluje prywatny modyfikator dostepu
+// well-known symbols - symbole wbudowane w js
+
+const hidden = Symbol('secret'); // string pozwala na debugowanie
+
+let person = {
+    [hidden]: '123444424',
+};
+console.log(person[hidden]); // secret
+
+const FORMAT = Symbol('format()');
+
+class Person {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    sayHello() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+    [FORMAT](text) { // symulacja metody prywatnej
+        return text.toUpperCase();
+    }
+}
+
+// metody symboli
+// const hidden = new Symbol('hidden');
+const hidden = Symbol.for('hidden'); // dziala jak wyzej ale sprawia ze symbol jest przechowywany w "globalnym rejestrze"
+
+let person = {
+    [hidden]: 'hidden-password',
+    getSecret() {
+        return this[hidden];
+    }
+};
+console.log(Symbol.keyFor(hidden)); // hidden
+
+// symbole wbudowane
+Symbol.hasInstance;
+Symbol.toPrimitive;
+Symbol.toStringTag;
+Symbol.isConcatSpreadable;
+Symbol.species;
+Symbol.match;
+Symbol.replace;
+Symbol.search;
+Symbol.split;
+Symbol.unscopables;
+Symbol.iterator;
+*/
