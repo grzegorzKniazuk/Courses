@@ -414,4 +414,16 @@ class Person {
         this.firstname = firstname;
     }
 }
+
+// obiekt Proxy API, wspolpracuje z Reflect API
+let person = { name: 'Grzegorz', surname: 'Kniazuk' };
+let proxy = new Proxy(person, {
+   get(target, property, receiver) {
+       return Reflect.get(target, property, receiver);
+   }
+});
+
+// moduły
+// moduly nie tworza globalnych zmiennych, kazdy z nich ma swoja przestrzen nazw
+import Employee from './Employee.js'
 */
