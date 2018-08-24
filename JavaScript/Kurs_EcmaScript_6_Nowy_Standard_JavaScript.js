@@ -264,4 +264,154 @@ Symbol.search;
 Symbol.split;
 Symbol.unscopables;
 Symbol.iterator;
+
+// Iteratory
+let it = {
+    [Symbol.iterator]() {
+        let numbers = [1,2,3,4,5];
+        let index = 0;
+
+        return {
+            next: function () {
+                return {
+                    done: index === numbers.length,
+                    value: numbers[index++],
+                }
+            }
+        }
+    }
+};
+// for-of
+// iterowanie po obiektach zawierajacych iterator, np po nodeList elementow html
+for (let value of it) {
+    console.log(value);
+}
+
+// Generatory, funkcje ktore zwracaja Iteratory
+// funkcje generatorow sa pauzowane pomiedzy wywolaniami next, pauzowane sa od yield do kolejnego yield
+function *it() {
+    for (let i = 1; i <= 50; i++) { // jedno i++ to jedno wywolanie next()
+        yield i;
+    }
+}
+
+let iterator = it();
+iterator.next();
+
+// dodanie iteratora do wlasnego obiektu
+let it = {
+    *[Symbol.iterator]() { // iterator bedacy funkcja generatora, posiada next()
+
+    }
+};
+
+function *range(from, to) {
+    let i = from;
+    while (i <= to) {
+        yield i++;
+    }
+}
+for (let value of range(2,14)) {
+    console.log(value); // 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+}
+
+// przekazywanie wartosci do generatorow
+function *it(number) {
+    yield result = yield + number * 2;
+}
+let iterator = it(5);
+iterator.next(); // 10
+iterator.next(2); // 12
+
+// Promises
+let p = new Promise( ((resolve, reject) => {
+    // wywolanie resolve dla ok
+    // wywolanie reject dla bledu
+}));
+p.then(
+    () => {
+        // funkcja dla resolve
+    },
+    () => {
+        // funcja dla reject
+    }
+);
+
+// łączenie łancuchowe
+let p = new Promise( ((resolve, reject) => {}));
+p.then( () => {
+
+}).catch( () => { // catch obsluguje funkcje dla reject
+
+});
+
+// statyczne metody Promises
+Promise.resolve(); // zwraca Promise w stanie resolve
+Promise.reject(); // zwraca Promise w stanie reject
+
+// praca na wielu Promises
+Promise.all(new Promise(), new Promise()).then( () => {
+    // then wywola sie w momencie gdy wszystkie Promise z argumentow beda mialy status resolve
+});
+Promise.race(new Promise(), new Promise()).then( () => {
+    // then wywola sie w momencie gdy jakikolwiek Promise z argumentow otrzyma status resolve lub reject
+});
+
+// Set
+// ma w sobie iterator
+// dane w Set musza byc/beda unikalne
+let person1 = { name: 'Grzegorz', surname: 'Kniazuk' };
+let person2 = { name: 'Agata', surname: 'Glen' };
+
+let s = new Set(); // metody add set length clear
+s.add('text'); // ['text']
+s.delete('text');
+s.has('text'); // true
+s.clear(); // []
+
+let p = new Set(person1, person2);
+p.delete(person2);
+
+// WeakSet
+// nie posiada iteratora
+// do WeakSet nie mozna dodawac wartosci prymitywnych
+let person1 = { name: 'Grzegorz', surname: 'Kniazuk' };
+let person2 = { name: 'Agata', surname: 'Glen' };
+
+let ws = new WeakSet(person1, person2); // metody add delete has
+ws.has(person2); // true
+
+// Map
+// zawiera unikalne pary klucz - wartosc
+// posiada iterator
+let m = new Map(); // metody set get clear has delete length
+m.set('name', 'Grzegorz');
+m.get('name'); // Grzegorz
+
+let person1 = { name: 'Grzegorz', surname: 'Kniazuk' };
+let person2 = { name: 'Agata', surname: 'Glen' };
+
+let persons = new Map();
+persons.add(person1, '32'); // obiekt jako klucz
+persons.get(person1); // 32
+
+// WeakMap
+// nie zawiera iteratora
+let person1 = { name: 'Grzegorz', surname: 'Kniazuk' };
+let person2 = { name: 'Agata', surname: 'Glen' };
+let w = new WeakMap([person1, 27, person2, 25]);  // metody set get has delete
+
+// gettery i settery
+class Person {
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    get getFirstlName() {
+        return this.firstname;
+    }
+    set setFirstName(firstname) {
+        this.firstname = firstname;
+    }
+}
 */
