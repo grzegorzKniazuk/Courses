@@ -407,10 +407,10 @@ class Person {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-    get getFirstlName() {
+    get firstlName() {
         return this.firstname;
     }
-    set setFirstName(firstname) {
+    set firstName(firstname) {
         this.firstname = firstname;
     }
 }
