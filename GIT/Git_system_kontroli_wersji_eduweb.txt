@@ -1,0 +1,22 @@
+
+git init <- inicjalizacja repozytorium git
+git config <- wyswietlenie wszystkich opcji konfiguracyjnych
+git config --list <- aktualna konfiguracja git'a
+git help nazwa_polecenia <- help dla danego polecenia
+
+// jak dziala GIT?
+git hash-object Git_system_kontroli_wersji_eduweb.txt <- hash, unikalne id kazdego pliku
+
+git add nazwa_pliku <- dodawanie plikow do git
+git log <- historia zmian
+git status <- aktualny status
+
+git commit --amend <- poprawka do ostatniego commita, nadpisanie
+git commit --amend --author "Grzegorz Kniazuk" <- poprawka do ostatniego commita, wraz z nadpisaniem autora
+
+git checkout nazwa_pliku <- przywracanie wczesniejszej wersji pliku
+
+git reset HEAD nazwa_plikus <- usuwanie z indeksu (indeks zmian)
+
+git commit -a -m "msg" <- automatyczne commit z dodaniem wszystkich plikow z indeksu i wiadomoscia
+
