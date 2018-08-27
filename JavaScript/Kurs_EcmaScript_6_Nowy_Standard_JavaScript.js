@@ -427,3 +427,4 @@ let proxy = new Proxy(person, {
 // moduly nie tworza globalnych zmiennych, kazdy z nich ma swoja przestrzen nazw
 import Employee from './Employee.js'
 */
+// nowosci w tablicach
