@@ -426,5 +426,56 @@ let proxy = new Proxy(person, {
 // moduły
 // moduly nie tworza globalnych zmiennych, kazdy z nich ma swoja przestrzen nazw
 import Employee from './Employee.js'
+
+// nowosci Array
+let list = Array.from(document.querySelectorAll('.edu'));
+let numbers = [1,2,3,4,5];
+numbers.fill(1,3,5);
+numbers.find((value) => value === 3); // pierwszy element
+numbers.findIndex((value) => value === 3); // index elementu
+numbers.copyWithin(0, 1, 3); // kopiowanie, co, gdzie, do kiedy
+
+// nowosci Number
+Number.parseFloat(2);
+Number.parseInt(5.2);
+Number.isNaN(undefined); // false
+Number.isNaN(0 / 0); // true
+Number.isFinite(20); // true, czy liczba jest skonczona
+Number.isInteger(20); // true, czy liczba jest liczba calkowita
+Number.isInteger(20.00); // true, czy liczba jest liczba calkowita
+Number.isInteger(20.01); // false, czy liczba jest liczba calkowita
+Number.isSafeInteger(30); // czy jest bezpieczna liczba calkowita
+Number.MAX_SAFE_INTEGER;
+Number.MIN_SAFE_INTEGER;
+Number.EPSILON;
+
+// nowosci Math
+Math.sign(-10); // -1, znak minusa, czy liczba jest ujemna czy dodatnia
+Math.trunc(10.234); // 10, przytnij
+console.log(0b111); // 7, binarnie
+console.log(0o12); // 10, octal
+console.log(0xfff); // 4095, hexa
+(7).toString(2); // 7 do binarnego => 111
+(10).toString(8); // 7 do binarnego => 12
+(4095).toString(16); // 7 do binarnego => fff
+
+// operator potegowania
+let p = 2 ** 2; // 4
+
+// metoda includes dla tablic
+let numbers = [1, 2, 3, 4, 5];
+numbers.includes(3); // true
+NaN === NaN // false
+
+// nowosci dl string
+"Grzegorz".padStart(9); // dodaje puste znaki na poczatku aby laczna dlugosc byla 9
+"Grzegorz".padStart('a'); // dodaje 'a' aby laczna dlugosc byla 9
+"Grzegorz".padEnd(9); // dodaje puste znaku na koncu stringu
+
+// funkcje asynchroniczne
+async function f() {
+    let json = await getJSON(url);
+}
 */
-// nowosci w tablicach
+// npm
+// babel, transpilator es6 => es5
