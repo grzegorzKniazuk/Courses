@@ -91,7 +91,7 @@ let asyncFileList = fs.readdir('./a', (error, fileList) => {
 });
 
 // odczyt zawartosci plikow
-fs.readFile('./notes.txt', 'utf-8', (error, fileContent) => {
+fs.readFile('./Git_system_kontroli_wersji_Strefa_Kursow.txt', 'utf-8', (error, fileContent) => {
     if (!error) {
         console.log(fileContent);
     } else {
@@ -170,7 +170,7 @@ console.log(buffer[0]); // 112
 
 // uzycie strumieni
 // kopiowanie za pomoca strumienia
-let readable = fs.createReadStream('./notes.txt','utf-8');
+let readable = fs.createReadStream('./Git_system_kontroli_wersji_Strefa_Kursow.txt','utf-8');
 readable.on('data', (chunk) => {
     console.log(chunk);
 });
@@ -181,7 +181,7 @@ writable.on('data', (chunk) => {
 });
 
 // potoki
-let readable = fs.createReadStream('./notes.txt');
+let readable = fs.createReadStream('./Git_system_kontroli_wersji_Strefa_Kursow.txt');
 let writable = fs.createWriteStream('./notes_COPY.txt');
 
 // tworzenie potoku - łączenie strumieni, zapis z pliku do pliku
