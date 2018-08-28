@@ -15,8 +15,47 @@ git commit --amend <- poprawka do ostatniego commita, nadpisanie
 git commit --amend --author "Grzegorz Kniazuk" <- poprawka do ostatniego commita, wraz z nadpisaniem autora
 
 git checkout nazwa_pliku <- przywracanie wczesniejszej wersji pliku
+git checkout numer_wersji nazwa_pliku <- przywrocenie konkretnej wersji pliku
+git checkout HEAD~3 nazwa_katalogu <- przywrocenie 3 commity do tylu
 
-git reset HEAD nazwa_plikus <- usuwanie z indeksu (indeks zmian)
+git reset HEAD nazwa_pliku <- usuwanie z aktualnego indeksu (indeks zmian)
 
 git commit -a -m "msg" <- automatyczne commit z dodaniem wszystkich plikow z indeksu i wiadomoscia
+
+git rm nazwa_pliku <- usuwanie plikow z gita (mozna cofnac np przez git reset HEAD + git checkout)
+git rm --cached nazwa_pliku <- usuwanie plikow ale z zostawieniem pliku w cache gita
+git mv stary_plik nowy_plik <- zmiana nazwy, roznica pomiedzy prawym klikiem jest taka ze zmiana jest rejestrowana w git
+
+// ignorowanie plikow
+.gitignore i tam dajemy nazwy plikow lub katalogow np *.txt (ignorowanie plikow txt) !a.txt - zaprzeczenie wzorcowi dla pliku a.txt
+
+// utrzymanie pustych katalogow
+.gitkeep
+
+// git log - przegladanie historii zmian
+git log --online <- mniej szczegolowa wersja historii
+git log --after="1 week ago" <- commity sprzed tygodnia
+git log --author=Grzegorz <- szukanie po autorze
+git log -- logs/ <- commity dotyczace katalogu logs
+git log --grep "Witaj" <- szukanie w commitach ciagu znakow
+
+// wyswietlanie zmian - git diff
+git diff  <- zmiany wzgledem ostatniej wersji
+git diff nazwa_pliku <- zmiany w konkretnym pliku
+git diff --no-index plik1.txt plik2.txt <- bezposrednie porownanie dwoch plikow
+git diff --stat <- krotkie statystyki
+git diff plik.txt > plik.patch <- utworzenie patch'a
+git apply plik.patch <- przy wrocenie zmian z patch'a
+
+// cofanie zmian w commit - Revert, zmiana poprzez dodanie nowej zmiany - odwrotnej do podanej
+git revert numer_commita <- aplikowanie zmiany, ale w odwrotnym kierunku, cofniecie
+
+// modyfikowanie historii
+// edycja historii zmian - Reset
+git reset numer_commita/HEAD~ile_wczesniej plik.txt <- przywrocenie z konkretnego commita lub z konkretnej wczesniejszej wersji
+
+// modyfikowanie commitu przy pomocy git reset
+git reset HEAD~1 --soft <- usuniecie commita, z cofnieciem zmian i przywroceniem ich w lokalnych plikach
+git reset HEAD~1 --hard <- usuniecie commita wraz ze zmianami
+git reset numer_commita <- przesuniecie sie do konkretnego commita
 
