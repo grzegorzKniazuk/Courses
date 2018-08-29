@@ -70,3 +70,8 @@ git rebase -interactive HEAD~3
 git rebase --abort
 git rebase --continue
 
+// etykiety - Tag
+// zapamietanie danego commita pod konkretnym tagiem, referencja
+git tag testowy_tag HEAD/numer_commita
+git tag -l <- wyswietlenie tagow
+
