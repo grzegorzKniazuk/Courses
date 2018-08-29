@@ -59,3 +59,14 @@ git reset HEAD~1 --soft <- usuniecie commita, z cofnieciem zmian i przywroceniem
 git reset HEAD~1 --hard <- usuniecie commita wraz ze zmianami
 git reset numer_commita <- przesuniecie sie do konkretnego commita
 
+// zagubione zmiany - Reflog
+// reflog domyslnie zawiera zmiany z 90 dni
+git reflog <- historia zmian w historii
+git reset HEAD@{23} <- wstecz do 23 commita na danych z reflog
+
+// interaktywna edycja historii - Rebase
+// laczenie wielu commitow, edycja kilku commitow jednoczesnie
+git rebase -interactive HEAD~3
+git rebase --abort
+git rebase --continue
+
