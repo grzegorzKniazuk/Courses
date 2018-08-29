@@ -75,3 +75,28 @@ git rebase --continue
 git tag testowy_tag HEAD/numer_commita
 git tag -l <- wyswietlenie tagow
 
+// galezie - Branch
+git branch <- wyswietlenie wszystkich branchy
+git branch --list <- branche jako lista
+git branch nazwa_brancha zrodlowy_branch <- tworzenie nowego brancha
+git checkout nazwa_brancha <- przelaczenie sie na brancha
+git checkout --branch nazwa_brancha <- tworzenie brancha z biezacego commita i natychmiastowe przelaczenie sie
+git branch --move branch nowy_branch <- przenoszenie brancha
+git branch --delete nazwa_brancha <- usuniecie brancha
+
+// Detached HEAD - galaz odcieta/tymczasowa
+git checkout numer_commita <- przelaczenie sie na commita tworzy detached head
+
+// przechowalnia - stash
+git stash <- wszystkie pliki w indeksie na polke
+git stash list <- lista zmian na polce
+git stash pop <- zdejmuje z polki ostatnia zmiane i przywraca ja
+git stash apply <- nie zdejmuje z polki ale przywraca ostatnia zmiane z polki
+git stash save --untracked <- dodanie do polki razem z plikami niesledzonymi
+git stash clear <- czyszczenie polki
+
+// wybieranie zmian - cherry-pick
+git cherry-pick nazwa_commita/brancha <- wybranie brancha/commita i umieszczenie w aktualnym commit/branch
+
+// Łączenie historii - Merge
+git merge nazwa_commita/hash/nazwa galezi <- polaczenie z obecnie aktywnym commitem/branchem
