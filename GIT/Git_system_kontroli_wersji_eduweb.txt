@@ -100,3 +100,8 @@ git cherry-pick nazwa_commita/brancha <- wybranie brancha/commita i umieszczenie
 
 // Łączenie historii - Merge
 git merge nazwa_commita/hash/nazwa galezi <- polaczenie z obecnie aktywnym commitem/branchem
+
+// zdalne repozytoria
+git fetch <- pobranie zmian ze zdalnego repozytorium
+git fetch origin skad:dokad <- pobranie zmian, ale bez merga, trzeba zmergowac FETCH_HEAD
+git pull zdalne_repo skad:dokad <- pobranie do konkretnego brancha, wykonuje dwa polecenia, fetch + merge
