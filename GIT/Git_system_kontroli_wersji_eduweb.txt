@@ -45,7 +45,7 @@ git diff nazwa_pliku <- zmiany w konkretnym pliku
 git diff --no-index plik1.txt plik2.txt <- bezposrednie porownanie dwoch plikow
 git diff --stat <- krotkie statystyki
 git diff plik.txt > plik.patch <- utworzenie patch'a
-git apply plik.patch <- przy wrocenie zmian z patch'a
+git apply plik.patch <- pobranie zmian z patch'a
 
 // cofanie zmian w commit - Revert, zmiana poprzez dodanie nowej zmiany - odwrotnej do podanej
 git revert numer_commita <- aplikowanie zmiany, ale w odwrotnym kierunku, cofniecie
@@ -66,7 +66,7 @@ git reset HEAD@{23} <- wstecz do 23 commita na danych z reflog
 
 // interaktywna edycja historii - Rebase
 // laczenie wielu commitow, edycja kilku commitow jednoczesnie
-git rebase -interactive HEAD~3
+git rebase --interactive HEAD~3
 git rebase --abort
 git rebase --continue
 
