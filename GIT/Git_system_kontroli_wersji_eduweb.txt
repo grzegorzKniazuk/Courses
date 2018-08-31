@@ -105,3 +105,11 @@ git merge nazwa_commita/hash/nazwa galezi <- polaczenie z obecnie aktywnym commi
 git fetch <- pobranie zmian ze zdalnego repozytorium
 git fetch origin skad:dokad <- pobranie zmian, ale bez merga, trzeba zmergowac FETCH_HEAD
 git pull zdalne_repo skad:dokad <- pobranie do konkretnego brancha, wykonuje dwa polecenia, fetch + merge
+
+// pull + rebase
+// nigdy nie robimy rebase plikow juz wyslanych
+git pull --rebase origin master
+
+
+
+
