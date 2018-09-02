@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 zaawansowany</title>
+</head>
+<body>
+
+<p>Formularze</p>
+<ul>atrybuty dla input
+    <li>autofocus</li>
+    <li>autocomplete="on"</li>
+    <li>placeholder</li>
+    <li>required</li>
+    <li>pattern</li>
+    <li>formnovalidate</li>
+</ul>
+<ul>atrybuty dla form
+    <li>novalidate</li>
+</ul>
+
+<form action="#" method="get">
+    <p><label for="name">Imię</label><input name="name" type="text" id="name" autofocus autocomplete="on" placeholder="Imię" required></p>
+    <p><label for="surname">Nazwisko</label><input name="surname" type="text" id="surname" pattern="[a-zA-Z0-9]+"></p>
+    <p><label for="age">Wiek</label><input name="age" type="number" id="age"></p>
+    <p><label for="country">Kraj</label><input name="country" type="text" id="country" formnovalidate></p>
+    <p><button type="submit">Wyślij</button></p>
+</form>
+
+<p>API dla zaznaczania tekstu</p>
+<form action="#" method="get">
+    <p><label for="text">Tekst</label><input name="text" type="text" id="text"></p>
+    <p><button onclick="selectText()">Zaznacz</button></p>
+    <p><label for="start">Początek</label><input name="country" type="text" id="start"></p>
+    <p><label for="end">Koniec</label><input name="country" type="text" id="end"></p>
+</form>
+
+<p>Paski postępu</p>
+<progress value="45" max="100"></progress>
+
+<p>element Meter</p>
+<meter value="50" max="100" low="20" high="70" optimum="50"></meter>
+
+<p>element Output</p>
+<input type="number" id="nr1">
+<input type="number" id="nr2">
+<button onclick="calc()">Oblicz</button>
+<output id="result">Wynik</output>
+
+<p>Biblioteka WebForms</p>
+<p>biblioteka pozwala implementowac funkcje html5 w starszych przegladarkach</p>
+
+<p>Biblioteka Modernizr</p>
+<p>Pozwala sprawdzic czy dana przegladarka obsluguje konkretna funkcjonalnosc, jesli nie mozemy dopisac alternatywny skrypt</p>
+<script>
+    function selectText(event) {
+        event.preventDefault();
+        let inputValue = document.getElementById('text');
+        inputValue.selectionStart = parseInt(document.getElementById('start').value);
+        inputValue.selectionEnd = parseInt(document.getElementById('end').value);
+    }
+    function calc() {
+        let sum = document.getElementById('nr1').value + document.getElementById('nr2').value;
+        let result = document.getElementById('result');
+        result.value = sum;
+
+    }
+</script>
+</body>
+</html>
