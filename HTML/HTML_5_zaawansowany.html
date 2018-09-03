@@ -52,6 +52,35 @@
 
 <p>Biblioteka Modernizr</p>
 <p>Pozwala sprawdzic czy dana przegladarka obsluguje konkretna funkcjonalnosc, jesli nie mozemy dopisac alternatywny skrypt</p>
+
+<p>dokument edytowalny</p>
+<div contenteditable="true">
+    to jest edytowalny div
+</div>
+<button onclick="deleteContent()">Usuń</button>
+<button onclick="boldContent()">Pogrubienie</button>
+<button onclick="italicContent()">Pochylenie</button>
+
+<p>Ładowanie plików do formularzy</p>
+<input type="file" id="fileInput">
+<div id="imageResult"></div>
+
+<p>obsluga podstawowych zdarzen</p>
+<ul>zdarzenia draggable
+    <li>dragstart</li>
+    <li>dragend</li>
+</ul>
+<img src="IMG_7179.jpg" alt="" id="draggable-image" draggable="true">
+<div id="target" style="width: 300px; height: 300px; background: #0b4c5f;"></div>
+<div id="drop-here" style="width: 300px; height: 300px; background: #ff4332;">strefa zrzutu z pulpitu</div>
+
+<p>web storage</p>
+<p>local storage i session storage</p>
+<button id="set" onclick="_set()">set</button>
+<button id="get" onclick="_get()">get</button>
+<output id="get-result"></output>
+<button id="delete" onclick="_del()">delete</button>
+
 <script>
     function selectText(event) {
         event.preventDefault();
@@ -63,8 +92,97 @@
         let sum = document.getElementById('nr1').value + document.getElementById('nr2').value;
         let result = document.getElementById('result');
         result.value = sum;
-
     }
+    function deleteContent() {
+        document.execCommand('delete', false, null); // uzycie api dla contenteditable
+    }
+    function boldContent() {
+        document.execCommand('bold', false, null); // uzycie api dla contenteditable
+    }
+    function italicContent() {
+        document.execCommand('italic', false, null); // uzycie api dla contenteditable
+    }
+    /*
+    window.addEventListener('load', () => { // obsluga plikow
+            document.getElementById('fileInput').addEventListener('change', (file) => {
+            console.log(file.target.files[0].name); // wyprowadza nazwe pliku
+            console.log(file.target.files[0].type); // wyprowadza typ pliku
+            console.log(file.target.files[0].size); // wyprowadza rozmiar
+
+            // odczytywanie tekstowej zawartosci pliku
+            let reader = new FileReader();
+            reader.onload = (event) => {
+                let content = event.target.result;
+                console.log(content);
+            };
+
+            reader.readAsText(file.target.files[0]);
+
+            // odczytywanie grafiki z pliku
+            let reader = new FileReader();
+            reader.onload = (event) => {
+                let content = event.target.result;
+                let image = new Image();
+                image.src = event.target.result;
+                document.getElementById('imageResult').appendChild(image);
+            };
+            reader.readAsDataURL(file.target.files[0]);
+
+            // odczytywanie/wycinanie fragmentow plikow za pomoca bajtow
+            let reader = new FileReader();
+            let start = 10;
+            let end = 20;
+            reader.onload = (event) => {
+                let content = event.target.result;
+                console.log(content);
+            };
+
+            reader.readAsText(file.target.files[0].slice(start, end));
+        })
+    });
+    window.onload = () => { // draggable elements
+        document.getElementById('draggable-image').addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('image', event.target.id); // zapisanie obrazka do event
+        }, false);
+        document.getElementById('draggable-image').addEventListener('dragend', () => {
+
+        }, false);
+        document.getElementById('target').addEventListener('dragover', (event) => {
+            event.preventDefault();
+            return false;
+        }, false);
+        document.getElementById('target').addEventListener('drop', (event) => {
+            let source = event.dataTransfer.getData('image');
+            event.target.appendChild(document.getElementById(source));
+            event.preventDefault();
+            return false;
+        }, false);
+    };
+    window.onload = () => { // przeciaganie plikow do formularza
+        document.getElementById('drop-here').addEventListener('dragover', (event) => {
+            event.preventDefault();
+            return false;
+        }, false);
+        document.getElementById('drop-here').addEventListener('drop', (event) => {
+            event.preventDefault();
+            let file = event.dataTransfer.files[0];
+            console.log(file.name);
+            return false;
+        }, false);
+    };
+    */
+    function _set() {
+        localStorage.setItem('token', 'token_value');
+        sessionStorage.setItem('token', 'token_value');
+    }
+    function _get() {
+        document.querySelector('#get-result').value = `${localStorage.getItem('token')} ${sessionStorage.getItem('token')}`;
+    }
+    function _del() {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+    }
+    
 </script>
 </body>
 </html>
