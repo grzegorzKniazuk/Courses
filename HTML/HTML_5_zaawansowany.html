@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>HTML5 zaawansowany</title>
+
+    <style>
+        canvas {
+            width: 1500px;
+            height: 1500px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 
@@ -81,6 +89,32 @@
 <output id="get-result"></output>
 <button id="delete" onclick="_del()">delete</button>
 
+<p>element video</p>
+<video controls autoplay preload="none" poster="IMG_7179.jpg" onended="" >
+    <source src="" type="video/mp4"/>
+    <source src="" type="video/ogg"/>
+    <source src="" type="video/webm"/>
+    <p>Twoja przegladarka nie obsluguje znacznika video</p>
+</video>
+
+<p>geolokalizacja</p>
+<button onclick="getLocation()">get location</button>
+
+<p>messaning api - przesylanie danych pomiedzy roznymi dokumentami</p>
+
+<p>Web workers</p>
+<p>pomocne przy tworzeniu wielowatkowych skryptow</p>
+<p>obliczenia sa wykonywane w tle, nie blokuja glownego watku aplikacji</p>
+<p>biezaca wartosc: <output id="worker-result"></output></p>
+<button id="start-work" onclick="startWork()">start</button>
+<button id="stop-work" onclick="stopWork()">stop</button>
+
+<p>history api</p>
+<button onclick="goBack()">back</button>
+
+<p>Canvas</p>
+<canvas>Canvas not supported</canvas>
+
 <script>
     function selectText(event) {
         event.preventDefault();
@@ -88,21 +122,25 @@
         inputValue.selectionStart = parseInt(document.getElementById('start').value);
         inputValue.selectionEnd = parseInt(document.getElementById('end').value);
     }
+
     function calc() {
         let sum = document.getElementById('nr1').value + document.getElementById('nr2').value;
         let result = document.getElementById('result');
         result.value = sum;
     }
+
     function deleteContent() {
         document.execCommand('delete', false, null); // uzycie api dla contenteditable
     }
+
     function boldContent() {
         document.execCommand('bold', false, null); // uzycie api dla contenteditable
     }
+
     function italicContent() {
         document.execCommand('italic', false, null); // uzycie api dla contenteditable
     }
-    /*
+
     window.addEventListener('load', () => { // obsluga plikow
             document.getElementById('fileInput').addEventListener('change', (file) => {
             console.log(file.target.files[0].name); // wyprowadza nazwe pliku
@@ -140,6 +178,7 @@
             reader.readAsText(file.target.files[0].slice(start, end));
         })
     });
+
     window.onload = () => { // draggable elements
         document.getElementById('draggable-image').addEventListener('dragstart', (event) => {
             event.dataTransfer.setData('image', event.target.id); // zapisanie obrazka do event
@@ -158,6 +197,7 @@
             return false;
         }, false);
     };
+
     window.onload = () => { // przeciaganie plikow do formularza
         document.getElementById('drop-here').addEventListener('dragover', (event) => {
             event.preventDefault();
@@ -170,19 +210,127 @@
             return false;
         }, false);
     };
-    */
+
     function _set() {
         localStorage.setItem('token', 'token_value');
         sessionStorage.setItem('token', 'token_value');
     }
+
     function _get() {
         document.querySelector('#get-result').value = `${localStorage.getItem('token')} ${sessionStorage.getItem('token')}`;
     }
+
     function _del() {
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
     }
+
+    function getLocation() { // api geolokalizacji
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((location) => {
+                console.log(`lat: ${location.coords.latitude} lon: ${location.coords.longitude}`)
+            });
+        } else {
+            console.log('geolocalization not supported by Your browser');
+        }
+    }
+
+    let worker = new Worker('calcHard.js');
+    function startWork() { // web workers
+        worker.onmessage = (event) => {
+            document.querySelector('#worker-result').innerHTML = event.data;
+        }
+    }
     
+    function stopWork() {
+        worker.terminate();
+    }
+
+    function goBack() {
+        window.history.go(-1);
+    }
+
+    window.onload = () => { // canvas
+        let canvas = document.getElementsByTagName('canvas')[0];
+        let context = canvas.getContext('2d');
+
+        // prostokat
+        context.shadowColor = '#777'; // kolor cienia
+        context.shadowOffsetX = 10; // przesuniecie cienia w x
+        context.shadowOffsetY = 10; // przesuniecie cienia w y
+        context.shadowBlur = 2; // blur
+        context.fillStyle =  'black'; // wypelnienie kolorem
+
+        // gradient
+        let g = context.createLinearGradient(0, 0, 200, 0);
+        g.addColorStop(0, '#FF8520');
+        g.addColorStop(200, '#FF4432');
+        context.fillStyle = g;
+
+        // wypelnianie wzorkiem
+        let image = new Image();
+        image.onload = () => {
+          context.fillStyle = context.createPattern(image, 'repeat');
+          context.fillRect(0, 0, context.canvas.width, context.canvas.height); // z dynamicznym pobraniem rozmiarow plotna
+        };
+
+        context.fillRect(0, 0, 50, 25); // prostokat, wspolrzedne od lewego gornego rogu
+
+        // rysowanie pojedynczej linii
+        context.beginPath();
+        context.moveTo(75, 75);
+        context.lineWidth = '5'; // szerokosc linii
+        context.lineTo(125, 125);
+        context.stroke();
+
+        // ksztalty zlozone
+        // zamknieta sciezka wypelniona kolorem
+        context.beginPath();
+        context.moveTo(125,125);
+        context.lineTo(100, 50);
+        context.fill(); // wypelnij
+        context.closePath(); // zamknij ksztalt
+        context.stroke();
+
+        // tworzenie luku
+        context.beginPath();
+        context.arc(250, 250, 150, 0, 2 * Math.PI);
+        context.stroke();
+
+        // tworzenie tekstu na canvas
+        context.font = '25px Verdana';
+        context.fillText('text', 300, 300);
+        context.strokeText('text', 310, 310); // obrys tekstu
+
+        // video oraz obrazki w elemencie Canvas
+        // image
+        let image = document.getElementById('image');
+        context.drawImage(image, 0, 0, 140, 135);
+
+        // video
+        let video = document.getElementById('video');
+        video.play(); // rozpoczecie odtwarzania
+        setInterval(() => { // otwarzanie po klatce, kazda klatka generowana jako nowy obraz
+            let video = document.getElementById('video');
+            context.drawImage(video, 0,0);
+        }, 33);
+
+        // transformacje
+        context.translate(0, 0); // przeniesienie punktu odniesienia plotna canvas
+        context.save(); // zapisanie stanu contextu, np gdy chcemy modyfikowac w rozny sposob dwa elementy na plotnie
+        context.scale(10, 10); // zmiana skali
+        context.rotate(45); // zmiana kata obrotu
+
+        // tworzenie maski
+        let img = document.getElementById('image');
+        context.arc(300, 250, 100, 0, 0, 2 * Math.PI);
+        context.clip(); // maska z okregu wyzej
+        context.drawImage(image, 115, 160);
+
+        // zmiana krycia i mieszanie
+        context.globalAlpha(0.5); // zmiana krycia
+        context.globalCompositeOperation = 'xor'; // mieszanie
+    }
 </script>
 </body>
 </html>
