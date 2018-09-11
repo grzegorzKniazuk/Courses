@@ -87,3 +87,12 @@ button:hover {
         transform: translateX(800px)rotate(90deg);
     }
 }
+
+/* pseudoselektor target */
+div {
+
+}
+
+div:target {
+
+}
