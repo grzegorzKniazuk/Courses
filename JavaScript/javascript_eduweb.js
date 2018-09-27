@@ -78,3 +78,61 @@ try {
 }
 
 throw new Error('error msg');
+
+// obiekt window - glowny obiekt przegladarki
+// obiekt navigator (window.navigator)
+
+navigator.userAgent;
+navigator.getGamepads(); // etc
+
+// obiekt screen (window.screen)
+screen.lockOrientation(); // etc
+
+// obiekt location (window.location) - odwolanie do adresu w przegladarce
+location.host; // etc
+
+let timeout = setTimeout(() => { // opoznienie
+
+});
+clearTimeout(timeout);
+
+let interval = setInterval(() => { // opoznienie + zapetlenie
+
+});
+clearInterval(interval);
+
+// przeszukiwanie dom
+document.getElementsByName('name'); // zwraca array-like z elementami
+document.querySelector('#id'); // zwraca zawsze pierwszy napotkany
+document.querySelectorAll('.class'); // zwraca zawsze wszystkie wystapienia
+
+document.all; // wszystkie elementy na stronie
+document.forms; // wszystkie formularze
+document.images; // wszystkie grafiki
+document.links; // wszystkie linki
+
+// tworzenie elementow
+let div = document.createElement('div'); // nowy element div - NIGDZIE nie podpiety-wyswietlony
+let li = document.createElement('li');
+let text = document.createTextNode('tresc'); // nowy wezel tekstowy
+
+// wstawianie i usuwanie elementow ze strony
+div.appendChild(text);
+div.insertBefore(text); // wstawianie 'przed' element
+div.removeChild(text); // usuwanie 'dziecka' elementu
+div.replaceChild(text, text); // zamiana elementow
+
+// tworzenie fragmentow dokumentow
+let documentFragment = document.createDocumentFragment(); // przydatne przy dodawaniu elementow w petli, dodajemy napierw do fragmentu a na koniec w dom
+div.appendChild(documentFragment);
+
+// relacje miedzy elementami
+div.childNodes(); // lista wezlow - dzieci
+div.children(); // wszystkie dzieci ktore sa ELEMENTAMI
+div.firstChild(); // pierwsze dziecko
+div.lastChild(); // ostatnie dziecko
+div.firstElementChild(); // pierwszy element
+div.lastElementChild(); // ostatni element
+div.nextSibling(); // nastepny sasiad
+div.nextElementSibling(); // nastepny ELEMENT sasiad
+div.parentNode; // odwolanie do rodzica
