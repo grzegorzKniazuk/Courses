@@ -136,3 +136,39 @@ div.lastElementChild(); // ostatni element
 div.nextSibling(); // nastepny sasiad
 div.nextElementSibling(); // nastepny ELEMENT sasiad
 div.parentNode; // odwolanie do rodzica
+
+// praca z atrybutami
+div.getAttribute('name'); // pobranie atrybutu, nieistniejacy atrybut = null
+div.setAttribute('name', 'div-name'); // ustawianie atrybutu
+div.removeAttribute('name'); // usuwanie atrybutu
+div.attributes; // obiekt array-like, lista atrybutow elementu
+
+// praca z klasami css
+div.className = 'class'; // przypisanie klasy - nadpisuje CALY atrybut
+div.classList.add('class'); // dodanie klasy
+div.classList.remove('class'); // usuniecie klasy
+div.classList.replace('class', 'class2'); // zamiana klas
+div.classList.toggle('class'); // jesli klasy nie ma - dodaj, jesli jest - usun
+div.classList.contains('class'); // czy element zawiera klase
+
+// inne wlasciwosci elementow
+div.nodeType; // 1 element, 3 text, 8 comment, 9 document, 11 fragment
+div.nodeName; // zwraca nazwe tagu
+
+// innerHTML, outerHTML, textContent
+div.innerHTML('<b></b>'); // zwraca lub ustawia kod html (string) wewnatrz elementu
+div.textContent = 'agata'; // zwraca lub ustawia test wewnatrz elementu
+div.outerHTML; // zwraca element lub ustawia kod html wewnatrz rodzica
+div.outerText; // zwraca element lub ustawia tekst wewnatrz rodzica
+
+// wartosci pol formularza
+let form = document.querySelector('#myForm');
+form.firstName.value; // wartosc pola - jest ZAWSZE stringiem
+
+// manipulacja stylami css elementow
+div.style.color = '#ff000000';
+div.style.display = 'flex';
+div.style.display = ''; // resetowanie stylu
+div.style.display; // pobranie wartosci
+div.cssText = "width: 600px; margin: 0 auto;"; // wiele styli jednoczesnie
+window.getComputedStyle(div).display; // wszystkie style elementu wyliczone przez uzytkownika i przegladarke
