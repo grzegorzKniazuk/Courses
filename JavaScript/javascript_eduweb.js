@@ -172,3 +172,24 @@ div.style.display = ''; // resetowanie stylu
 div.style.display; // pobranie wartosci
 div.cssText = "width: 600px; margin: 0 auto;"; // wiele styli jednoczesnie
 window.getComputedStyle(div).display; // wszystkie style elementu wyliczone przez uzytkownika i przegladarke
+
+// wspolrzedne polozenia elementu
+div.offsetTop; // odleglosc od body do elementu lub rodzica z position innym niz static
+div.getBoundingClientRect(); // umiejscowienie elementu wzgledem document
+document.elementFromPoint(400, 200); // element znajdujacy sie w tym miejscu
+
+// wymiary elementu
+div.offsetHeight; // wysokosc elementu - z paddingiem i borderem
+div.offsetWidth; // szerokosc elemenu - paddingiem i borderem
+div.clientHeight; // wysokosc + padding ale bez borderu
+div.clientWidth; // szerokosc + padding ale bez borderu
+div.scrollHeight; // wysokosc wraz z scrollem
+div.scrollWidth; // szerokosc wraz ze scrollem
+window.innerHeight; // wysokosc okna przegladarki
+window.innerWidth; // szerokosc okna przegladarki
+
+// pozycje suwakow
+box.scrollTop; // ile od gory przesuniecia
+box.scrollTop = 200; // wartosc mozna przypisywac
+window.scrollTo(10,50); // x poziomy, y pionowy - scroll absolutny - wg okna przeglarki
+window.scrollBy(10, 50); // scroll relatywny - wedlug aktualnej pozycji
