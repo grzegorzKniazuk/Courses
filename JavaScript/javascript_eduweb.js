@@ -193,3 +193,18 @@ box.scrollTop; // ile od gory przesuniecia
 box.scrollTop = 200; // wartosc mozna przypisywac
 window.scrollTo(10,50); // x poziomy, y pionowy - scroll absolutny - wg okna przeglarki
 window.scrollBy(10, 50); // scroll relatywny - wedlug aktualnej pozycji
+
+// bubbling
+// nie kazde zdarzenia babelkuja - change na formularzu nie
+// emitowanie zdarzen w gore - do rodzicow
+e.stopPropagation(); // nie emituj zdarzen w gore
+e.stopImmediatePropagation(); // nie emituj innych zdarzen tego typu na tym samym elemencie (np 2x clicki z dwoma funkcjami)
+
+// capturing
+// capturing idzie w dol a potem do gory, najpierw sprawdzani sa rodzice elementu na ktorym zostalo wywolane zdarzenie
+
+// event phase
+// phase 1 - capturing
+// phase 2 - on target
+// phase 3 - bubbling
+e.eventPhase;
