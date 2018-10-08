@@ -1,0 +1,17 @@
+a:link {
+    color: #5da2c7;
+}
+
+a:visited {
+    color: #5da2c7;
+}
+
+a:hover, a:active, a:focus {
+    text-decoration: none;
+}
+
+body {
+    width: 1133px;
+    margin: 0 auto;
+    font-size: 10px;
+}
