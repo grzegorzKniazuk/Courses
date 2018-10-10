@@ -1,0 +1,43 @@
+
+// import arkusza stylow
+@import "css3_zaawansowany.css";
+
+@text-color: #FF0000;
+@background: #faa222;
+@width: 300px;
+@height: 300px;
+
+h1, h2 {
+  color: @text-color;
+  background: @background;
+}
+
+div {
+  width: (@width + 200px); // dzialania na zmiennych
+  height: (@height * 2); // dzialania na zmiennych
+
+  p { // zagniezdzanie elementow
+    strong { // zagniezdzanie elementow
+
+    }
+  }
+}
+
+.base-text(@font-size: 20px) { // klasa z parametrem
+  color: @text-color;
+  background: @background;
+  font-size: @font-size; // uzycie argumentu
+}
+
+// zagniezdzanie klas
+h3 {
+  .base-text(30px); // zagniezdzenie klasy z parametrem
+}
+
+// funkcje
+div {
+  background-color: desaturate(@background, 30%); // zmiana nasycenia
+  background-color: lighten(@background, 30%); // rozjasnienie
+  background-color: darken(@background, 30%); // przyciemnienie
+}
+
