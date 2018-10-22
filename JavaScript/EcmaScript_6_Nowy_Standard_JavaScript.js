@@ -1,4 +1,3 @@
-/*
 // temporal dead zone
 
 let firstName = 'Jan';
@@ -476,6 +475,6 @@ NaN === NaN // false
 async function f() {
     let json = await getJSON(url);
 }
-*/
+
 // npm
 // babel, transpilator es6 => es5

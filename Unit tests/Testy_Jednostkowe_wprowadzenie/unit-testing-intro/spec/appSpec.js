@@ -35,7 +35,7 @@ describe('DialarCodeFinder', function () { // tutaj opis testowanej jednostki
 
         // definicja testu, schemat, asercja
         expect(app.findPrefixCode('Poland')).toEqual(48); // czy dla parametru Poland funkcja zwroci 48?
-    })
+    });
 
     it('should return Unknown country when Unknown is given', function () {
 
@@ -74,7 +74,7 @@ describe('Value checker', function() {
     it('should not return undefined', function () {
         expect(app.isBetween0and1000(100)).not.toBeUndefined(); // zaprzeczenie, nie powinno byc undefined
     })
-})
+});
 
 // testy wyrzucania wyjatkow
 describe('String Checker', function() {
@@ -86,7 +86,7 @@ describe('String Checker', function() {
     it('should throw Error when invalid string is given', function() { // sprawdzenie wyrzucenia bledu
         expect(function(){app.checkString({name: 'kursy'});}).toThrow();
     });
-})
+});
 
 /// Wzorzec AAA
 describe('Array length', function() {
@@ -95,7 +95,7 @@ describe('Array length', function() {
         expect(app.getArrLength(arr)) // Act
             .toEqual(3); // Assert
     });
-})
+});
 
 describe('App', function(){
 
