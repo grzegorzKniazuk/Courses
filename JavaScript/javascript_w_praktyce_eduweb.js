@@ -142,3 +142,60 @@ var person2 = (function () {
     }
 })();
 person2.getName(); //  Jan Kowalski
+
+// JSON
+// JavaScript Object Notation
+// lekki, tekstowy format wymiany danych
+// w json nie mozna wpisac undefined, NaN, Infinity, Function, RegExp, Error
+
+// obiekt JSON
+let personJSON = JSON.stringify(person); // zapisanie do jsona
+let personAgain = JSON.parse(personJSON); // odczytuje dane z jsona
+
+// AJAX
+// HTTP - Hypertext Transfer Protocol, protokol przesylania dokumentow hipertekstowych
+// Asynchronous JavaScript and XML
+// Status Codes
+// 200 - OK
+// 201 - CREATED
+// 203 - ACCEPTED
+// 400 - BAD REQUEST
+// 401 - UNAUTHORIZED
+// 403 - FORBIDDEN
+// 404 - NOT FOUND
+// 500 - INTERNAL SERVER ERROR
+// 502 - BAD GATEWAY
+// 503 - SERVICE UNAVAILABLE
+
+/*
+Same-origin policy
+ - regula "tego samego pochodzenia"
+ - mechanizm w przegladarce internetowej, blokuje dostep do zasobow przeznaczonych dla witryn "innego pochodzenia".
+ - nie ma znaczenia pochodzenie skryptu ale pochodzenie dokumentu w ktorym ten skrypt zostal zaladowany
+ - blokuje dostep do ciasteczek czy danych localStorage zapisanych po inna domena
+ - nie pozwala wysylac zapytan AJAX do innych domen
+
+
+CORS
+Cross-origin resource sharing
+CORS to technika, ktora pozwala obejsc mechanizm Same-origin policy, dzieki czrmu mozemy wysylac zapytania AJAX do innych domen
+
+Access-Control-Allow-Origin: domena
+Access-Control-Allow-Origin: *, zezwolenie na wysylanie zadan z dowolnego adresu
+*/
+
+// XHR
+let xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'adres');
+
+xhr.onreadystatechange = function() {
+    console.log(this.readyState);
+};
+xhr.setRequestHeader('');
+
+xhr.onprogress = function (e) {
+    e.lengthComputable = true; // czy mozemy obliczac wartosc
+    e.loaded; // ile danych poszlo
+    e.total; // wszystkie dane
+};
