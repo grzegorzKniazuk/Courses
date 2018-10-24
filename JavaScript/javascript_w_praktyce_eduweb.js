@@ -199,3 +199,28 @@ xhr.onprogress = function (e) {
     e.loaded; // ile danych poszlo
     e.total; // wszystkie dane
 };
+
+// JSONP - with padding
+function JSONP(url, callbackName) {
+    let script = document.createElement('script');
+
+    script.type = "text/javascript";
+    script.async = true;
+    script.src = url + '?callback=' + callbackName;
+}
+
+// Cookies
+/*
+male pliki tekstowe przechowywane po stronie klienta i wysylane do serwera za kazdym zadaniem HTTP
+http jest bezstanowy, ciasteczka pozwalaja to zmienic
+
+ciasteczka z poziomu js mozna obslugiwac jedynie w przypadku gdy spelnione sa kryteria bezpieczenstwa - cos jak same-origin policy
+
+skladnia
+
+Set-Cookie: value; max-age?; domain?; path?; secure?; HttpOnly;
+ */
+document.cookie; // pozwala ustawiac i pobierac ciasteczka
+
+// wyrazenia regularne
+
