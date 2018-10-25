@@ -11,7 +11,6 @@ const https = require('https'); // modul https
 const mongoose = require('mongoose'); // modul mongoose
 const cluster = require('cluster'); // modul cluster
 
-/*
 // modul Events
 let emitter = new EventEmitter();
 emitter.on('message', (msg) => {
@@ -263,7 +262,7 @@ function listUsers() {
 
     });
 }
-*/
+
 // websockets
 // obsluga stanow w http
 // ws - popularny modul do obslugi websockets
