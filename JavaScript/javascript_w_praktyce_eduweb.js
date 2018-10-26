@@ -222,5 +222,14 @@ Set-Cookie: value; max-age?; domain?; path?; secure?; HttpOnly;
  */
 document.cookie; // pozwala ustawiac i pobierac ciasteczka
 
-// wyrazenia regularne
+// kopiowanie obiektow
+// "plytka" kopia, bez metod
+function copyObj(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
+// kodowanie base64
+// np po #
+window.btoa('grzegorz');
+window.atob();
 
