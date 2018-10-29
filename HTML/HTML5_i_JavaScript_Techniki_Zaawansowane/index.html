@@ -2,9 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>HTML5 i JavaScript - Techniki Zaawansowane</title>
+    <style>
+
+    </style>
 </head>
 <body>
-$END$
+<ul data-link="link">
+    <li>Selectors API</li>
+    <li>Objekt classList</li>
+    <li>Dataset</li>
+    <li>Geolokalizacja</li>
+</ul>
+
+<h1>Nowe pola formularzy</h1>
+<p>
+    <input type="date">
+    <input type="datetime-local">
+    <input type="month">
+    <input type="week">
+    <input type="time">
+    <input type="number" min="0" max="100" step="1">
+    <input type="range">
+    <input id="email" type="email">
+    <input type="tel" required>
+    <input type="url" placeholder="url">
+    <input type="color">
+    <input type="search" autocomplete autofocus list="cities">
+    <datalist id="cities">
+        <option value="Warszawa">
+        <option value="Lublin">
+        <option value="Kraków">
+        <option value="Poznań">
+    </datalist>
+    <input type="submit" formnovalidate>
+    <keygen></keygen> <!-- Element ktory moze sluzyc do uwierzytelniania uzytkownikow -->
+    <progress value="50" max="100"></progress>
+    <output></output>
+    <datalist></datalist>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+</p>
+
+
 </body>
+<script>
+
+(function () {
+    // Selectors API - nowe selektory
+    // wartosci pobierane przez te metody sa statyczne, to znaczy ze pobrana lista nie odswieza sie podczas usuwania elementow z DOM
+    const ul = document.querySelector('ul');
+    const li = document.querySelectorAll('li');
+    const email = document.getElementById('email');
+
+    // Obiekt classList
+    ul.classList.add('className', 'danger');
+    ul.classList.remove('className');
+    ul.classList.toggle('className');
+    ul.classList.contains('className');
+
+    // data-* i dataset, czyli wlasne atrybuty
+    ul.dataset.link; // odczyt
+    ul.dataset.link = 'link'; // zapis
+
+    // Validation API
+    email.willValidate; // true lub false, czy pole bedzie walidowane
+    email.validationMessage; // tresc widomosci walidacji
+    email.checkValidity(); // true lub false, zglasza zdarzenie invalid
+    email.setCustomValidity();
+    email.validity.valid; // true lub false
+
+    // Geolocalization API
+    // wifi, ip, triangulacja btsow, gps
+    navigator.geolocation.getCurrentPosition((success) => {
+        success.coords.longitude;
+        success.coords.latitude;
+        success.coords.altitude;
+        success.coords.altitudeAccuracy;
+        success.coords.heading;
+        success.coords.speed;
+    }, (error) => {
+        error.code;
+        error.message;
+        error.PERMISSION_DENIED; // jesli user nie wyrazil zgody
+        error.TIMEOUT; // przekroczono czas oczekiwania
+    }, { // obiekt options
+        enableHighAccuracy: true, // true lub false, dokladnosc wynikow
+        timeout: 5000, // oczekiwanie na dane w ms
+        maximumAge: 0, // jak bardzo "swieze" wyniki
+    });
+
+    let watchUser = navigator.geolocation.watchPosition((success) => {
+
+    }, (error) => {
+
+    });
+
+    navigator.geolocation.clearWatch(watchUser);
+
+    // Web Storage
+    // local storage, do momentu usuniecia
+    // session storage, do momentu trwania sesji przegladarki - do zamkniecia przegladarki
+    window.localStorage.setItem('name', 'Grzegorz');
+    window.localStorage.surname = 'Kowalski'; // drugi sposob dostepu
+    window.localStorage['surname'] = 'Kowalski'; // trzeci sposob dostepu
+    window.localStorage.getItem('name');
+    window.localStorage.removeItem('name');
+    window.localStorage.clear(); // czyszczenie localStorage dla calej domeny
+    window.onstorage = (e) => { // zdarzenie
+        e.key;
+        e.newValue;
+        e.oldValue;
+        e.url;
+    };
+
+    // Canvas API
+    // standardowo rysowane jest od left top
+    let myCanvas = document.getElementById('myCanvas');
+    let ctx = myCanvas.getContext('2d');
+
+})();
+
+</script>
 </html>
