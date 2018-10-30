@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title>HTML5 i JavaScript - Techniki Zaawansowane</title>
     <style>
-
+        #myCanvas {
+            margin: 0 auto;
+            display: block;
+            border: 2px dotted gray;
+        }
     </style>
 </head>
 <body>
@@ -13,6 +17,8 @@
     <li>Objekt classList</li>
     <li>Dataset</li>
     <li>Geolokalizacja</li>
+    <li>Canvas</li>
+    <li>Audio i video</li>
 </ul>
 
 <h1>Nowe pola formularzy</h1>
@@ -40,8 +46,22 @@
     <progress value="50" max="100"></progress>
     <output></output>
     <datalist></datalist>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <canvas id="myCanvas" width="1600" height="700"></canvas>
 </p>
+<audio controls autoplay loop muted preload="auto">
+    <source src="" type="audio/mpeg">
+    <source src="" type="audio/webm">
+    <source src="" type="audio/ogg">
+    <p>Brak wsparcia HTML5</p>
+</audio>
+<video controls autoplay loop muted poster="" preload="metadata" width="" height="" id="video-id">
+    <source src="" type="video/webm">
+    <source src="" type="video/mp4">
+    <source src="" type="video/ogg">
+    <track src="" srclang="pl" label="polskie napisy" kind="subtitles">
+    <p>Brak wsparcia HTML5</p>
+    <p>Kolejnosc wstawiania formatow ma znaczenie</p>
+</video>
 
 
 </body>
@@ -50,6 +70,7 @@
 (function () {
     // Selectors API - nowe selektory
     // wartosci pobierane przez te metody sa statyczne, to znaczy ze pobrana lista nie odswieza sie podczas usuwania elementow z DOM
+
     const ul = document.querySelector('ul');
     const li = document.querySelectorAll('li');
     const email = document.getElementById('email');
@@ -114,12 +135,168 @@
         e.oldValue;
         e.url;
     };
-
+*/
     // Canvas API
     // standardowo rysowane jest od left top
     let myCanvas = document.getElementById('myCanvas');
     let ctx = myCanvas.getContext('2d');
 
+    ctx.fillStyle = '#448af3';
+    ctx.strokeStyle = '#f344f1';
+    ctx.clientWidth = 30;
+
+    ctx.lineJoin = 'round'; // laczenie linie
+    ctx.lineCap = 'round'; // zakonczenie linii
+
+    // rysowanie linii
+    ctx.beginPath(); // tworzenie nowej sciezki
+
+    ctx.moveTo(50, 50); // przesuniecie sie
+    ctx.lineTo(50, 150); // oznacz linie
+    ctx.stroke(); //rysuj
+
+    ctx.lineTo(150, 150); // oznacz linie
+    ctx.stroke(); //rysuj
+
+    // rysowanie prostokatow
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = 'green';
+    ctx.lineJoin = 'round';
+
+    ctx.beginPath();
+    ctx.rect(200, 200, 100, 100); // defincja prostokata
+    ctx.fill(); // wypelnij prostokat
+
+    ctx.fillRect(300, 300, 200, 200); // wypelnij
+    ctx.strokeRect(400, 400, 300, 300); // obrys
+
+    ctx.clearRect(300, 300, 200, 200); // czyszczenie obszaru
+
+    // luki i okregi
+    ctx.beginPath();
+    ctx.moveTo(500, 300);
+    ctx.arcTo(180, 50, 180, 200, 120); // definicja luku
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(myCanvas.width / 2, myCanvas.height / 2, 50, 180 ); // definicja luku
+    ctx.closePath(); // domykanie sciezki
+    ctx.stroke();
+
+    // zapisywanie stanu ctx
+    ctx.save(); // zapis ustawien
+    ctx.restore(); // odczyt stanu
+
+    // krzywe
+    ctx.beginPath();
+    ctx.moveTo(200, 200);
+    ctx.bezierCurveTo(250, 100, 450, 100, 400, 200);
+    ctx.stroke();
+
+    // rysowanie tekstu
+    ctx.beginPath();
+    ctx.font = "italic 72px Arial";
+    ctx.fillText('test', 300, 300);
+    ctx.textBaseline = 'center';
+    ctx.strokeText('test2', 500, 500);
+
+    // cienie, wzorki, gradienty
+    ctx.shadowColor = 'blue';
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
+    ctx.shadowBlur = 5;
+    ctx.fillRect(1000, 1000, 600, 600);
+
+    let gradient = ctx.createLinearGradient(200, 200, 400, 400);
+    gradient.addColorStop(0, "red");
+    gradient.addColorStop(0.5, "yellow");
+    gradient.addColorStop(1, "blue");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(200, 200, 400, 400);
+
+    // gradient kolowy
+    let circle = ctx.createRadialGradient(300, 100, 10, 300, 100, 50);
+    circle.addColorStop(0, "red");
+    circle.addColorStop(0.5, "yellow");
+    circle.addColorStop(1, "blue");
+
+    ctx.fillStyle = circle;
+    ctx.arc(300, 100, 50, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // wzorki
+    let img = document.createElement('img');
+
+    img.onload = function () {
+        let pattern = ctx.createPattern(img, 'repeat');
+        ctx.fillStyle = pattern;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
+
+    img.src = "template/images/smile.png";
+
+    // Audio Video API
+    let video = document.getElementById('video-id');
+
+    // metody
+    video.canPlayType();
+    video.load();
+    video.play();
+    video.pause();
+
+    // wlasciwosci
+    video.buffered;
+    video.currentSrc;
+    video.currentTime;
+    video.duration;
+    video.ended;
+    video.muted;
+    video.paused;
+    video.volume;
+    video.videoWidth;
+    vide.videoHeight;
+
+    // zdarzenia, przyklady
+    video.durationchange = () => {};
+    video.ended = () => {};
+    video.loadstart = () => {};
+    video.loadedmetadata = () => {};
+    video.pause = () => {};
+    video.play = () => {};
+    video.playing = () => {};
+
+    // File API, moduly FileReader, FileWriter, FileSystem
+    // Blob, interfejs reprezentujacy "surowe" dane
+    // File, dziedziczy z Blob, interfejs reprezentujacy konkretne pliki
+    // FileList, zawiera elementy typu File
+
+    let blob = new Blob();
+    blob.size;
+    blob.type;
+    blob.slice(1);
+
+    let fileReader = new FileReader();
+
+    // wlasciwosci
+    fileReader.readyState;
+    fileReader.result;
+    fileReader.error;
+
+    //metody
+    fileReader.readAsText(file);
+    fileReader.readAsDataURL(file);
+    fileReader.readAsArrayBuffer(file);
+    fileReader.readAsBinaryString(file);
+    fileReader.abort();
+
+    // zdarzenia
+    fileReader.loadstart = () => {};
+    fileReader.loadend = () => {};
+    fileReader.load = () => {};
+    fileReader.error = () => {};
+    fileReader.progress = () => {};
+    fileReader.abort = () => {};
 })();
 
 </script>
