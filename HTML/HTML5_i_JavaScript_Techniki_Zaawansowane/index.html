@@ -9,6 +9,12 @@
             display: block;
             border: 2px dotted gray;
         }
+
+        #dropZone {
+            width: 800px;
+            height: 400px;
+            border: 2px dotted black;
+        }
     </style>
 </head>
 <body>
@@ -19,6 +25,9 @@
     <li>Geolokalizacja</li>
     <li>Canvas</li>
     <li>Audio i video</li>
+    <li>WebWorkers</li>
+    <li>Drag & Drop</li>
+    <li>WebSockets</li>
 </ul>
 
 <h1>Nowe pola formularzy</h1>
@@ -62,241 +71,355 @@
     <p>Brak wsparcia HTML5</p>
     <p>Kolejnosc wstawiania formatow ma znaczenie</p>
 </video>
-
+<input type="file" id="#file">
 
 </body>
+
+<div id="dropZone"></div>
+<div id="imagesContainer"></div>
+<button id="send">Wyślij</button>
+<div class="progress">
+    <div class="progress-bar" id="progress">
+        <span></span>
+    </div>
+</div>
+<div class="alert" id="status"></div>
 <script>
 
 (function () {
     // Selectors API - nowe selektory
     // wartosci pobierane przez te metody sa statyczne, to znaczy ze pobrana lista nie odswieza sie podczas usuwania elementow z DOM
+/*
 
-    const ul = document.querySelector('ul');
-    const li = document.querySelectorAll('li');
-    const email = document.getElementById('email');
+        const ul = document.querySelector('ul');
+        const li = document.querySelectorAll('li');
+        const email = document.getElementById('email');
 
-    // Obiekt classList
-    ul.classList.add('className', 'danger');
-    ul.classList.remove('className');
-    ul.classList.toggle('className');
-    ul.classList.contains('className');
+        // Obiekt classList
+        ul.classList.add('className', 'danger');
+        ul.classList.remove('className');
+        ul.classList.toggle('className');
+        ul.classList.contains('className');
 
-    // data-* i dataset, czyli wlasne atrybuty
-    ul.dataset.link; // odczyt
-    ul.dataset.link = 'link'; // zapis
+        // data-* i dataset, czyli wlasne atrybuty
+        ul.dataset.link; // odczyt
+        ul.dataset.link = 'link'; // zapis
 
-    // Validation API
-    email.willValidate; // true lub false, czy pole bedzie walidowane
-    email.validationMessage; // tresc widomosci walidacji
-    email.checkValidity(); // true lub false, zglasza zdarzenie invalid
-    email.setCustomValidity();
-    email.validity.valid; // true lub false
+        // Validation API
+        email.willValidate; // true lub false, czy pole bedzie walidowane
+        email.validationMessage; // tresc widomosci walidacji
+        email.checkValidity(); // true lub false, zglasza zdarzenie invalid
+        email.setCustomValidity();
+        email.validity.valid; // true lub false
 
-    // Geolocalization API
-    // wifi, ip, triangulacja btsow, gps
-    navigator.geolocation.getCurrentPosition((success) => {
-        success.coords.longitude;
-        success.coords.latitude;
-        success.coords.altitude;
-        success.coords.altitudeAccuracy;
-        success.coords.heading;
-        success.coords.speed;
-    }, (error) => {
-        error.code;
-        error.message;
-        error.PERMISSION_DENIED; // jesli user nie wyrazil zgody
-        error.TIMEOUT; // przekroczono czas oczekiwania
-    }, { // obiekt options
-        enableHighAccuracy: true, // true lub false, dokladnosc wynikow
-        timeout: 5000, // oczekiwanie na dane w ms
-        maximumAge: 0, // jak bardzo "swieze" wyniki
-    });
+        // Geolocalization API
+        // wifi, ip, triangulacja btsow, gps
+        navigator.geolocation.getCurrentPosition((success) => {
+            success.coords.longitude;
+            success.coords.latitude;
+            success.coords.altitude;
+            success.coords.altitudeAccuracy;
+            success.coords.heading;
+            success.coords.speed;
+        }, (error) => {
+            error.code;
+            error.message;
+            error.PERMISSION_DENIED; // jesli user nie wyrazil zgody
+            error.TIMEOUT; // przekroczono czas oczekiwania
+        }, { // obiekt options
+            enableHighAccuracy: true, // true lub false, dokladnosc wynikow
+            timeout: 5000, // oczekiwanie na dane w ms
+            maximumAge: 0, // jak bardzo "swieze" wyniki
+        });
 
-    let watchUser = navigator.geolocation.watchPosition((success) => {
+        let watchUser = navigator.geolocation.watchPosition((success) => {
 
-    }, (error) => {
+        }, (error) => {
 
-    });
+        });
 
-    navigator.geolocation.clearWatch(watchUser);
+        navigator.geolocation.clearWatch(watchUser);
 
-    // Web Storage
-    // local storage, do momentu usuniecia
-    // session storage, do momentu trwania sesji przegladarki - do zamkniecia przegladarki
-    window.localStorage.setItem('name', 'Grzegorz');
-    window.localStorage.surname = 'Kowalski'; // drugi sposob dostepu
-    window.localStorage['surname'] = 'Kowalski'; // trzeci sposob dostepu
-    window.localStorage.getItem('name');
-    window.localStorage.removeItem('name');
-    window.localStorage.clear(); // czyszczenie localStorage dla calej domeny
-    window.onstorage = (e) => { // zdarzenie
-        e.key;
-        e.newValue;
-        e.oldValue;
-        e.url;
+        // Web Storage
+        // local storage, do momentu usuniecia
+        // session storage, do momentu trwania sesji przegladarki - do zamkniecia przegladarki
+        window.localStorage.setItem('name', 'Grzegorz');
+        window.localStorage.surname = 'Kowalski'; // drugi sposob dostepu
+        window.localStorage['surname'] = 'Kowalski'; // trzeci sposob dostepu
+        window.localStorage.getItem('name');
+        window.localStorage.removeItem('name');
+        window.localStorage.clear(); // czyszczenie localStorage dla calej domeny
+        window.onstorage = (e) => { // zdarzenie
+            e.key;
+            e.newValue;
+            e.oldValue;
+            e.url;
+        };
+    *!/
+        // Canvas API
+        // standardowo rysowane jest od left top
+        let myCanvas = document.getElementById('myCanvas');
+        let ctx = myCanvas.getContext('2d');
+
+        ctx.fillStyle = '#448af3';
+        ctx.strokeStyle = '#f344f1';
+        ctx.clientWidth = 30;
+
+        ctx.lineJoin = 'round'; // laczenie linie
+        ctx.lineCap = 'round'; // zakonczenie linii
+
+        // rysowanie linii
+        ctx.beginPath(); // tworzenie nowej sciezki
+
+        ctx.moveTo(50, 50); // przesuniecie sie
+        ctx.lineTo(50, 150); // oznacz linie
+        ctx.stroke(); //rysuj
+
+        ctx.lineTo(150, 150); // oznacz linie
+        ctx.stroke(); //rysuj
+
+        // rysowanie prostokatow
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'green';
+        ctx.lineJoin = 'round';
+
+        ctx.beginPath();
+        ctx.rect(200, 200, 100, 100); // defincja prostokata
+        ctx.fill(); // wypelnij prostokat
+
+        ctx.fillRect(300, 300, 200, 200); // wypelnij
+        ctx.strokeRect(400, 400, 300, 300); // obrys
+
+        ctx.clearRect(300, 300, 200, 200); // czyszczenie obszaru
+
+        // luki i okregi
+        ctx.beginPath();
+        ctx.moveTo(500, 300);
+        ctx.arcTo(180, 50, 180, 200, 120); // definicja luku
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(myCanvas.width / 2, myCanvas.height / 2, 50, 180 ); // definicja luku
+        ctx.closePath(); // domykanie sciezki
+        ctx.stroke();
+
+        // zapisywanie stanu ctx
+        ctx.save(); // zapis ustawien
+        ctx.restore(); // odczyt stanu
+
+        // krzywe
+        ctx.beginPath();
+        ctx.moveTo(200, 200);
+        ctx.bezierCurveTo(250, 100, 450, 100, 400, 200);
+        ctx.stroke();
+
+        // rysowanie tekstu
+        ctx.beginPath();
+        ctx.font = "italic 72px Arial";
+        ctx.fillText('test', 300, 300);
+        ctx.textBaseline = 'center';
+        ctx.strokeText('test2', 500, 500);
+
+        // cienie, wzorki, gradienty
+        ctx.shadowColor = 'blue';
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 5;
+        ctx.fillRect(1000, 1000, 600, 600);
+
+        let gradient = ctx.createLinearGradient(200, 200, 400, 400);
+        gradient.addColorStop(0, "red");
+        gradient.addColorStop(0.5, "yellow");
+        gradient.addColorStop(1, "blue");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(200, 200, 400, 400);
+
+        // gradient kolowy
+        let circle = ctx.createRadialGradient(300, 100, 10, 300, 100, 50);
+        circle.addColorStop(0, "red");
+        circle.addColorStop(0.5, "yellow");
+        circle.addColorStop(1, "blue");
+
+        ctx.fillStyle = circle;
+        ctx.arc(300, 100, 50, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // wzorki
+        let img = document.createElement('img');
+
+        img.onload = function () {
+            let pattern = ctx.createPattern(img, 'repeat');
+            ctx.fillStyle = pattern;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        };
+
+        img.src = "template/images/smile.png";
+
+        // Audio Video API
+        let video = document.getElementById('video-id');
+
+        // metody
+        video.canPlayType();
+        video.load();
+        video.play();
+        video.pause();
+
+        // wlasciwosci
+        video.buffered;
+        video.currentSrc;
+        video.currentTime;
+        video.duration;
+        video.ended;
+        video.muted;
+        video.paused;
+        video.volume;
+        video.videoWidth;
+        vide.videoHeight;
+
+        // zdarzenia, przyklady
+        video.durationchange = () => {};
+        video.ended = () => {};
+        video.loadstart = () => {};
+        video.loadedmetadata = () => {};
+        video.pause = () => {};
+        video.play = () => {};
+        video.playing = () => {};
+
+        // File API, moduly FileReader, FileWriter, FileSystem
+        // Blob, interfejs reprezentujacy "surowe" dane
+        // File, dziedziczy z Blob, interfejs reprezentujacy konkretne pliki
+        // FileList, zawiera elementy typu File
+
+        let blob = new Blob();
+        blob.size;
+        blob.type;
+        blob.slice(1);
+
+        let fileReader = new FileReader();
+
+        // wlasciwosci
+        fileReader.readyState;
+        fileReader.result;
+        fileReader.error;
+
+        //metody
+        fileReader.readAsText(file);
+        fileReader.readAsDataURL(file);
+        fileReader.readAsArrayBuffer(file);
+        fileReader.readAsBinaryString(file);
+        fileReader.abort();
+
+        // zdarzenia
+        fileReader.loadstart = () => {};
+        fileReader.loadend = () => {};
+        fileReader.load = () => {};
+        fileReader.error = () => {};
+        fileReader.progress = () => {};
+        fileReader.abort = () => {};
+
+        // odczyt informacji o plikach
+        let fileInput = document.querySelector('#file');
+        fileInput.onchange = function () {
+            let file = this.files[0];
+            file.name;
+            file.size;
+            file.type;
+            file.lastModified;
+        };
+
+        // WebWorkers
+        // dostep do navigator, location, httprequest, cache, brak dostepu do dom, window, document, parent
+        let worker = new Worker('worker.js');
+        worker.addEventListener('message', function (event) {
+            event.data;
+        }, false);
+        worker.addEventListener('error', function (error) {
+            error.message;
+        });
+        worker.postMessage('dane');
+        worker.terminate();
+
+        // SharedWorkers
+        // w jednej domenie ale miedzy oknami przegladarek lub w roznych kartach
+        let sharedWorker = new SharedWorker('worker.js');
+        sharedWorker.port.addEventListener('message', function (event) {
+            event.data;
+        }, false);
+        worker.port.start;
+        worker.port.postMessage('dane');
+    */
+
+    // Image Uploader - Drag & Drop
+
+    let imageUploader = {
+
+        addHover: function() {
+
+        },
+
+        removeHover: function() {
+
+        },
+
+        cancelDefault: function(e) {
+            e.preventDefault();
+            return false;
+        },
+
+        handleDrop: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let files = e.dataTransfer.files;
+
+            [].forEach.call(files, function (file) {
+                if (file.type.match('image.*')) {
+                    this.generateThumbnail(file);
+                }
+            }.bind(this));
+            this.removeHover();
+        },
+
+        generateThumbnail: function(file) {
+            let reader = new FileReader();
+            let img = new Image();
+
+            reader.onload = function () {
+                img.src = reader.result;
+            };
+
+            reader.readAsDataURL(file);
+
+            this.imagesContainer.appendChild(img);
+        },
+
+        init: function () {
+            if (!'draggable' in document.createElement('span') || !window.FileReader) {
+                return;
+            }
+
+            this.dropZone = document.querySelector("#dropZone");
+            this.imagesContainer = document.querySelector("#imagesContainer");
+            this.sendButton = document.querySelector("#sendButton");
+            this.status = document.querySelector("#status");
+            this.progressBar = document.querySelector("#progressBar");
+
+            this.dropZone.ondragenter = this.addHover.bind(this);
+            this.dropZone.ondreagleave = this.removeHover.bind(this);
+            this.dropZone.ondragover = this.cancelDefault;
+            this.dropZone.ondrop = this.handleDrop.bind(this);
+
+            this.filesAdded = 0;
+            this.formData = new FormData();
+
+        }
     };
-*/
-    // Canvas API
-    // standardowo rysowane jest od left top
-    let myCanvas = document.getElementById('myCanvas');
-    let ctx = myCanvas.getContext('2d');
 
-    ctx.fillStyle = '#448af3';
-    ctx.strokeStyle = '#f344f1';
-    ctx.clientWidth = 30;
+    imageUploader.init();
 
-    ctx.lineJoin = 'round'; // laczenie linie
-    ctx.lineCap = 'round'; // zakonczenie linii
+    // WebSockets
 
-    // rysowanie linii
-    ctx.beginPath(); // tworzenie nowej sciezki
-
-    ctx.moveTo(50, 50); // przesuniecie sie
-    ctx.lineTo(50, 150); // oznacz linie
-    ctx.stroke(); //rysuj
-
-    ctx.lineTo(150, 150); // oznacz linie
-    ctx.stroke(); //rysuj
-
-    // rysowanie prostokatow
-    ctx.lineWidth = 10;
-    ctx.strokeStyle = 'green';
-    ctx.lineJoin = 'round';
-
-    ctx.beginPath();
-    ctx.rect(200, 200, 100, 100); // defincja prostokata
-    ctx.fill(); // wypelnij prostokat
-
-    ctx.fillRect(300, 300, 200, 200); // wypelnij
-    ctx.strokeRect(400, 400, 300, 300); // obrys
-
-    ctx.clearRect(300, 300, 200, 200); // czyszczenie obszaru
-
-    // luki i okregi
-    ctx.beginPath();
-    ctx.moveTo(500, 300);
-    ctx.arcTo(180, 50, 180, 200, 120); // definicja luku
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.arc(myCanvas.width / 2, myCanvas.height / 2, 50, 180 ); // definicja luku
-    ctx.closePath(); // domykanie sciezki
-    ctx.stroke();
-
-    // zapisywanie stanu ctx
-    ctx.save(); // zapis ustawien
-    ctx.restore(); // odczyt stanu
-
-    // krzywe
-    ctx.beginPath();
-    ctx.moveTo(200, 200);
-    ctx.bezierCurveTo(250, 100, 450, 100, 400, 200);
-    ctx.stroke();
-
-    // rysowanie tekstu
-    ctx.beginPath();
-    ctx.font = "italic 72px Arial";
-    ctx.fillText('test', 300, 300);
-    ctx.textBaseline = 'center';
-    ctx.strokeText('test2', 500, 500);
-
-    // cienie, wzorki, gradienty
-    ctx.shadowColor = 'blue';
-    ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 2;
-    ctx.shadowBlur = 5;
-    ctx.fillRect(1000, 1000, 600, 600);
-
-    let gradient = ctx.createLinearGradient(200, 200, 400, 400);
-    gradient.addColorStop(0, "red");
-    gradient.addColorStop(0.5, "yellow");
-    gradient.addColorStop(1, "blue");
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(200, 200, 400, 400);
-
-    // gradient kolowy
-    let circle = ctx.createRadialGradient(300, 100, 10, 300, 100, 50);
-    circle.addColorStop(0, "red");
-    circle.addColorStop(0.5, "yellow");
-    circle.addColorStop(1, "blue");
-
-    ctx.fillStyle = circle;
-    ctx.arc(300, 100, 50, 0, 2 * Math.PI);
-    ctx.fill();
-
-    // wzorki
-    let img = document.createElement('img');
-
-    img.onload = function () {
-        let pattern = ctx.createPattern(img, 'repeat');
-        ctx.fillStyle = pattern;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    };
-
-    img.src = "template/images/smile.png";
-
-    // Audio Video API
-    let video = document.getElementById('video-id');
-
-    // metody
-    video.canPlayType();
-    video.load();
-    video.play();
-    video.pause();
-
-    // wlasciwosci
-    video.buffered;
-    video.currentSrc;
-    video.currentTime;
-    video.duration;
-    video.ended;
-    video.muted;
-    video.paused;
-    video.volume;
-    video.videoWidth;
-    vide.videoHeight;
-
-    // zdarzenia, przyklady
-    video.durationchange = () => {};
-    video.ended = () => {};
-    video.loadstart = () => {};
-    video.loadedmetadata = () => {};
-    video.pause = () => {};
-    video.play = () => {};
-    video.playing = () => {};
-
-    // File API, moduly FileReader, FileWriter, FileSystem
-    // Blob, interfejs reprezentujacy "surowe" dane
-    // File, dziedziczy z Blob, interfejs reprezentujacy konkretne pliki
-    // FileList, zawiera elementy typu File
-
-    let blob = new Blob();
-    blob.size;
-    blob.type;
-    blob.slice(1);
-
-    let fileReader = new FileReader();
-
-    // wlasciwosci
-    fileReader.readyState;
-    fileReader.result;
-    fileReader.error;
-
-    //metody
-    fileReader.readAsText(file);
-    fileReader.readAsDataURL(file);
-    fileReader.readAsArrayBuffer(file);
-    fileReader.readAsBinaryString(file);
-    fileReader.abort();
-
-    // zdarzenia
-    fileReader.loadstart = () => {};
-    fileReader.loadend = () => {};
-    fileReader.load = () => {};
-    fileReader.error = () => {};
-    fileReader.progress = () => {};
-    fileReader.abort = () => {};
 })();
 
 </script>
