@@ -1,0 +1,195 @@
+// konstrukcja
+
+header {
+
+  .home & { // .home header
+
+  }
+
+  p {
+
+    border: { // zagniezdzone wlasciwosci dostepne w scss
+      top: 1px #000 solid;
+      bottom: 1px #000 solid;
+    }
+
+    font: { // zagniezdzone wlasciwosci dostepne w scss
+      size: 12px;
+      weight: bold;
+    }
+
+    a {
+
+      &:hover {
+
+      }
+    }
+  }
+
+  > div { // div bezposrednie w header
+
+  }
+
+  & + div { // div poprzedzajacy
+
+  }
+}
+
+// zmienne
+// zasieg zmiennych, zmienne sa szukane do gory dokumentu, do pierwszego wystapienia
+$containerWidth: 940px;
+$borderType: solid;
+$linkColor: #f9425e;
+$linkColorHover: blue !default; // zmienna typu default
+$underline: false;
+$font: 18px/20px Tahoma, Arial, sans-serif; // rozmiar czcionki, wysokosc linii
+$border: 1px #000 $borderType;
+
+$selector: p;
+
+${$selector} { // interpolacja, uzycie selektora ze zmiennej
+
+}
+
+// mixiny
+@mixin inline-block {
+  display: inline-block;
+  *display: inline; // fix dla ie < 8 ktory nie ma inline block
+  zoom: 1;
+}
+
+h1, p {
+  @include inline-block; // uzycie mixin
+}
+
+@mixin opacity($opacity: 0.2) { // mixin z parametrem i wartoscia domyslna
+  opacity: $opacity;
+  filter: alpha(opacity = $opacity * 100); // fix dla ie < 8
+}
+
+@mixin transition($props: all, $speed: 0.2s, $easing: ease-in) {
+  transition: $props $speed $easing;
+}
+
+@mixin zebra-style($color) {
+  tr:nth-child(odd) {
+    background-color: $color;
+  }
+  tr:nth-child(even) {
+    background-color: darken($color);
+  }
+}
+
+table {
+  @include zebra-style(#fff);
+}
+
+// instrukcje warunkowe
+@mixin border-radius($radius: 5px, $border: 0) {
+  border-radius: $radius;
+
+  @if ($border > 0) {
+    border: $border #000 solid;
+  } @else {
+    border: none;
+  }
+}
+
+@mixin text-color($color: #000) {
+  @if ($color == turkus) {
+    color: #40e0d0;
+  } @else if ($color == magenta) {
+    color: #ff00ff;
+  } @else if ($color == ametyst) {
+    color: #9c8aa5;
+  } @else {
+    color: $color;
+  }
+}
+
+// polecenie extend
+%inline-block {
+  display: inline-block;
+}
+
+.p {
+  @extend %inline-block; // uzycie extend, pozwala zmniejszyc narzut kodu w css, "rozszerzenie klasy"
+}
+
+// pętle
+// for
+@mixin headings($fontSize) {
+  @for $i from 1 through 6 { // through <=, to <
+
+    h#{$i} {
+      font-size: $fontSize - (2 * $i);
+    }
+  }
+}
+@include headings(30px);
+
+// each
+// dla kazdego elementu w zbiorze
+$social: fb, yt, twitter, behance;
+
+@mixin list($list) {
+  @each $item in $social {
+
+    li.social-#{$item} {
+      background-image: url(images/#{$item}_icon.png);
+    }
+  }
+}
+
+@include list($social);
+
+// while
+$i: 1;
+@while $i <= 6 {
+  h#{$i} {
+    font-size: $i;
+  }
+  $i: $i + 1;
+}
+
+// wbudowane funkcje
+// mozna uzywac funkcji w funkcjach
+/* // przyklady, calosc w dokumentacji
+round() - zaokroglenie
+percentage(0.5) - konwertowanie na %
+unitless() - czy wartosc posiada jednostki, px itp
+ */
+
+// wlasne funkcje
+@function divide($number1, $number2) {
+
+  $result: round($number1 / $number2);
+
+  @return $result; // kazda funkcja w scss musi zwracac wynik
+}
+
+div {
+  width: divide(200px, 53);
+}
+
+// importowanie plików
+@import "mixins", "reset"; // import scss o nazwie mixins
+
+// operacje na jednostkach
+/*
+  10px + 1em // blad
+  10px + 1cm // 47.79px
+*/
+
+// scss nie obsluguje przestrzeni nazw
+
+// PRAKTYCZNE PRZYKLADY
+// css selection mixin
+
+@mixin selection($color, $bgcolor: invert($color)) {
+  ::selection {
+    color: $color;
+    background-color: $bgcolor;
+  }
+}
+@include selection(black, pink);

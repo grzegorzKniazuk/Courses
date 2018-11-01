@@ -1,0 +1,148 @@
+// konstrukcja
+
+header {
+
+  .home & { // .home header
+
+  }
+
+  p {
+
+    a {
+
+      &:hover {
+
+      }
+    }
+  }
+
+  > div { // div bezposrednie w header
+
+  }
+
+  & + div { // div poprzedzajacy
+
+  }
+}
+
+// zmienne
+@containerWidth: 940px;
+@borderType: solid;
+@linkColor: #f9425e;
+@linkColorHover: blue;
+@underline: false;
+@font: ~"18px/20px" Tahoma, Arial, sans-serif; // ~ znak ucieczki, wymagany aby less nie wzial tego za wyrazenie matematyczne
+@border: 1px #000 @borderType;
+
+@selector: p;
+
+@{selector} { // interpolacja, uzycie selektora ze zmiennej
+
+}
+
+// mixiny
+.inline-block() {
+  display: inline-block;
+  *display: inline; // fix dla ie < 8 ktory nie ma inline block
+  zoom: 1;
+}
+
+h1, p {
+  .inline-block;
+}
+
+.opacity(@opacity: 0.2) { // mixin z parametrem i wartoscia domyslna
+  @opacityPercent: (@opacity * 100);
+  opacity: @opacity;
+  filter: alpha(opacity = @opacityPercent); // fix dla ie < 8
+}
+
+.transition(@props: all, @speed: 0.2s, @easing: ease-in) {
+  transition: @props @speed @easing;
+}
+
+// less i zmienna arguments
+.box-shadow(@x: 0, @y: 0, @blur: 1px, @color: #000) {
+  box-shadow: @arguments; // uzycie zmiennej arguments
+}
+
+.zebra-style(@color) {
+  tr:nth-child(odd) {
+    background-color: @color;
+  }
+  tr:nth-child(even) {
+    background-color: darken(@color);
+  }
+}
+
+table {
+ .zebra-style(#fff);
+}
+
+// instrukcje warunkowe
+.border-radius(@radius: 5px, @border: 0) {
+  border-radius: @radius;
+
+  @if (@border > 0) {
+    border-width: @border;
+  } @else {
+    border: none;
+  }
+}
+
+.text-color(@color) when (@color = turkus) {
+  color: #40e0d0;
+}
+
+.text-color(@color) when (@color = magenta) {
+  color: #ff00ff;
+}
+
+.text-color(@color) when (@color = ametyst) {
+  color: #9c8aa5;
+}
+
+.text-color(@color) when not (@color = ametyst) and not (@color = magenta) and not (@color = turkus) {
+  color: @color;
+}
+
+// polecenie extend
+.inline-block {
+   display: inline-block;
+ }
+
+.p:extend(.inline-block) {}
+
+// BRAK PĘTLI WHILE, EACH, FOR W LESS
+
+// wbudowane funkcje
+// mozna uzywac funkcji w funkcjach
+/* // przyklady, calosc w dokumentacji
+round() - zaokroglenie
+percentage(0.5) - konwertowanie na %
+unitless() - czy wartosc posiada jednostki, px itp
+ */
+
+// BRAK WLASNYCH FUNKCJI
+
+// import plikow
+@import "mixins";
+@import "reset";
+@import "mobile" screen and (max-width: 480px);
+
+// operacje na jednostkach
+/*
+  10px + 1em // 12px
+  10px + 1cm // 11cm
+*/
+
+// przestrzenie nazw
+#textMixins {
+  .text-shadow() {
+    text-shadow: 1px 1px 1px #000;
+  }
+}
+
+p {
+  #textMixins  > .text-shadow;
+}
