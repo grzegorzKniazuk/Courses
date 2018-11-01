@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="cache.manifest">
 <head>
     <meta charset="UTF-8">
     <title>HTML5 i JavaScript - Techniki Zaawansowane</title>
@@ -28,6 +28,8 @@
     <li>WebWorkers</li>
     <li>Drag & Drop</li>
     <li>WebSockets</li>
+    <li>History API</li>
+    <li>Application Cache</li>
 </ul>
 
 <h1>Nowe pola formularzy</h1>
@@ -72,9 +74,6 @@
     <p>Kolejnosc wstawiania formatow ma znaczenie</p>
 </video>
 <input type="file" id="#file">
-
-</body>
-
 <div id="dropZone"></div>
 <div id="imagesContainer"></div>
 <button id="send">Wyślij</button>
@@ -84,6 +83,8 @@
     </div>
 </div>
 <div class="alert" id="status"></div>
+<div id="info"></div>
+</body>
 <script>
 
 (function () {
@@ -348,7 +349,6 @@
         }, false);
         worker.port.start;
         worker.port.postMessage('dane');
-    */
 
     // Image Uploader - Drag & Drop
 
@@ -419,6 +419,146 @@
     imageUploader.init();
 
     // WebSockets
+    let info = document.getElementById('#info');
+    if (!window.WebSocket) {
+        return false;
+    } else {
+        let socket = new WebSocket('ws://echo.websocket.org');
+
+        socket.onopen = function () {
+            socket.send('Witaj');
+        };
+
+        socket.onmessage = function (ev) {
+            ev.data;
+        };
+        socket.onclose = function (ev) {
+         ev.reason;
+        };
+    }
+
+    // WebSockets i real-time chat
+    var chat = {
+
+        renderRow: function() {
+          // wyswietlanie wiadomosci
+        },
+
+        sendData: function(msgObj) {
+          let data = JSON.stringify(msgObj);
+
+          this.socket.send();
+        },
+
+        displayMessage: function(event) {
+            let dataObject = JSON.parse(event.data);
+            this.renderRow(dataObject);
+        },
+
+        sendMessage: function() {
+            let message = this.messageInput.value;
+            if (message !== '') {
+                this.sendData({
+                    type: 'message',
+                    message: message,
+                });
+
+                this.messageInput.value = '';
+            }
+        },
+
+        joinToChat: function(e) {
+            let name = this.nameInput.value;
+
+            if (name !== '') {
+                this.sendData({
+                    type: 'join',
+                    name: name,
+                });
+
+                e.target.onclick = null;
+                e.target.setAttribute('disabled', 'disabled');
+                this.nameInput.setAttribute('readonly', 'readonly');
+                this.submitButton.removeAttribute('disabled');
+                this.submitButton.onclick = this.sendMessage.bind(this);
+            }
+        },
+
+        stopApp: function() {
+            this.joinButton.onclick = null;
+            this.joinButton.setAttribute('disabled', 'disabled');
+
+            this.submitButton.onclick = null;
+            this.submitButton.setAttribute('disabled', 'disabled');
+
+            this.renderRow({
+                type: 'status',
+                message: 'Przerwano połączenie z serwerem',
+            })
+        },
+
+        connectToServer: function() {
+            this.socket = new WebSocket('ws://eduweb.dev:8000');
+            this.socket.onmessage = this.displayMessage.bind(this);
+            this.socket.onclose = this.stopApp.bind(this);
+        },
+
+       init: function () {
+           if(!window.WebSocket) {
+               return false;
+           }
+
+           this.nameInput = document.querySelector('#yourName');
+           this.joinButton = document.querySelector('#joinButton');
+           this.chatWindow = document.querySelector('#chatWindow');
+           this.messageInput = document.querySelector('#messageInput');
+           this.submitButton = document.querySelector('#submitButton');
+
+           this.connectToServer();
+       }
+    };
+    chat.init();
+
+    // History API
+    window.history.state;
+    window.history.length;
+    window.history.back();
+    window.history.forward();
+    window.history.go()();
+    window.history.pushState({}, 'title', 'url');
+    window.history.replaceState({}, 'title', 'url'); // w porownaniu do pushState zastepuje aktualnie wyswietlana strone
+    window.onpopstate = function (event) {
+        event.state;
+    };
+
+    // Offline Application, Application Cache
+    window.applicationCache.onchecking = function (event) {
+
+    };
+    window.applicationCache.ondownloading = function (event) {
+
+    };
+    window.applicationCache.onprogress = function (event) {
+
+    };
+    window.applicationCache.oncached = function (event) {
+
+    };
+    window.applicationCache.onnoupdate = function (event) {
+
+    };
+    window.applicationCache.onupdateready = function (event) {
+
+    };
+    window.onoffline = function(event) {
+
+    };
+    window.ononline = function(event) {
+
+    };
+    window.applicationCache.swapCache();
+    */
+
 
 })();
 

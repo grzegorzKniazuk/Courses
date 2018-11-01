@@ -18,7 +18,7 @@ console.log(baseName); // documents
 
 // callback
 function showInfo(callback) {
-    console.log('kurs node.js');
+    console.log('kurs websocket.js');
     callback();
 }
 showInfo(() => { console.log('callback zostal wywolany') });
@@ -240,7 +240,7 @@ console.log('Serwer uruchomiony...');
 http.createServer((request, response) => {
     let data = {
         id: 456,
-        name: 'node.js',
+        name: 'websocket.js',
         category: 'js',
     }
     response.writeHead(200, { 'content-type': 'application/json' });
