@@ -1,0 +1,44 @@
+// selektor potomka
+div ~ p { // dwa warunki, p jest rodzenstwem div, p wystepuje 'za' div
+
+}
+
+div > p { // elementy p ktore sa BEZPOSREDNIMI dziecmi selektora div
+
+}
+
+div + p { // rodzenstwo, p nastepujacy bezposrednio po div
+
+}
+
+// pseudoklasy
+p:empty { // "puste" znaczniki
+
+}
+
+p:only-child { // tylko gdy p jest jedynym dzieckiem rodzica
+
+}
+
+p:only-of-type {
+
+}
+
+// selektory atrybutów
+img[alt] {} // img z alt
+img[alt="abc"] {} // img z alt "abc"
+img[alt^="abc"] {} // img z alt zaczynajacym sie na "abc"
+img[alt$="abc"] {} // img z alt konczacym sie na "abc"
+img[alt*="abc"] {} // img z alt zawierajacym "abc"
+img[alt~="abc"] {} // img z alt "abc" jako odrebnym slowem
+
+// text w wielu kolumnach
+p {
+  column-count: 2;
+  column-gap: 20px; // odstep pomiedzy kolumnami
+  column-rule: solid; // kreska pomiedzy kolumnami
+}
+
+// formaty kolorow w css
+// hex, rgba, hsl, hsla, cmyk
+
