@@ -42,3 +42,64 @@ p {
 // formaty kolorow w css
 // hex, rgba, hsl, hsla, cmyk
 
+// wlasciwosci tla
+p {
+  background-size: contain; // dopasowanie do kontenera, zawsze widoczne w calosci
+  background-size: cover; // dopasowanie do kontenera, przycinane jesli trzeba
+  background-origin: border-box; // rysowanie pod borderem, padding - rysowanie pod paddingiem, content-box - rysowanie tylko pod contentem
+}
+
+// przycinanie tekstu gradientem
+p {
+  background: url("") repeat #000000;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+div {
+  box-sizing: border-box; // padding box, border box, content box
+}
+
+// transformacje, transform
+// skew - przekrzywianie
+// rotate - rotacja
+// scale - skalowanie
+// translate - przesuniecie
+
+img:hover {
+  transform: translateY(10px);
+}
+
+// przejscia, transitions
+img {
+  transition-property: height; // wlasciwosc
+  transition-delay: 15s; // opoznienie
+  transition-duration: 250ms; // czas trwania
+  transition-timing-function: ease-in-out; // easing
+}
+
+// transformacje 3d
+// matrix3d, perspective, rotateX, rotateXYZ3d, scaleXYZ3d, translateXYZ3d
+
+// animacje
+img {
+  animation-name: anim;
+  animation-direction: reverse;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 2;
+}
+
+@keyframes anim {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+
+// media queries
+@media all and (max-width: 480px) {
+  
+}
