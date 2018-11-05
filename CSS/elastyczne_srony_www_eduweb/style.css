@@ -1,0 +1,31 @@
+/*
+mobile first
+rozpoczynamy tworzenie od mobilnych widokow
+
+Rozdzielczosci
+320 mobile
+480 mobile
+768 tablet
+960 desktop
+1200 desktop
+1920 desktop
+
+domyslny rozmiar tekstu dla wiekszosci obecnych przegladarek to 16px
+*/
+
+body {
+    background: #e8e3d8;
+    font-size: 0.625em; /* 10px */
+}
+
+p {
+    color: #92846f;
+    text-shadow: #fff 1px 1px;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+}
+
+/* css3 media queries */
+@media all and (max-width: 480px) {
+
+}
