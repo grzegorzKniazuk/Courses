@@ -37,6 +37,7 @@ body {
     background: url("img/background-pattern.jpg") repeat top left;
     font-size: .625em;
     font-family: Georgia, serif;
+    text-rendering: optimizeLegibility; /* "poprawia fonty" w iOS, retina, firefox uzywa tego domyslnie */
 }
 
 #logo {
@@ -137,4 +138,9 @@ div.desc {
         margin: 1%;
         width: 31.3333333333%;
     }
+}
+
+/* pixel ratio dla telefonow */
+@media all and (min-device-pixel-ratio: 2) {
+    
 }
