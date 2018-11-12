@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+
+  aside {
+    flex: 1; // dopasowanie do kontenera
+  }
+
+  article {
+    flex: 2; // 2x wiekszy niz aside
+    order: 2; // kolejnosc
+
+    // tekst w kolumnach
+    column-count: 2; // podzial tekstu na 2 kolumny
+    column-gap: 20px; // odstep pomiedzy kolumnami
+    column-rule: 1px solid black; // linia pomiedzy kolumnami
+  }
+
+  img {
+    // wykluczanie/exclusions - IE wylacznie
+    -ms-wrap-flow: both;
+    -ms-wrap-margin: 15px; // margines oplywanego elementu
+    position: absolute;
+  }
+
+  // shapes module
+  img {
+    shape-outside: circle(50%, 50%, 50%); // oplywanie obrazka na zewnatrz
+  }
+
+  // regions module
+  div {
+    flow-into: regionyCSS;
+  }
+  
+  p {
+    flow-from: regionyCSS;
+  }
+}

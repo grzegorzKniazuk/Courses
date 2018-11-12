@@ -1,0 +1,34 @@
+ul { // wymuszenie wyswietlania jako tabela
+  display: table;
+
+  &li {
+    display: table-cell;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; // automatyczne dodawanie ... przy sytuacji gdy tekst sie nie miesci
+  }
+}
+
+// dostosowywanie obrazow do urzadzen
+@media all and (max-width: 960px) {
+  div {
+    background: url("big.jpg");
+    background-size: contain;
+  }
+}
+@media all and (max-width: 640px) {
+  div {
+    background: url("medium.jpg");
+    background-size: contain;
+  }
+}
+@media all and (max-width: 480px) {
+  div {
+    background: url("small.jpg");
+    background-size: contain;
+  }
+}
+
+@media all and (min-device-pixel-ratio: 2) { // czy jest to ekran retina
+  background-image: image-set(url("small.jpg") 1x, url('big.jpg') 2x);
+}
