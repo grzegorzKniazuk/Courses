@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery eduweb</title>
+</head>
+<body>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script>
+    (function ($) {
+
+        $(document).ready(function () {  // DomContentLoaded
+
+            const div = $('div');
+
+            // selektory dostepne tylko w jQuery
+            $(':button');
+            $(':contains()');
+            $(':has()');
+            $(':header'); // wszystkie h
+            $(':radio'); // wszystkie radio
+
+            // filtrowanie
+            div.find(); // szukanie a w div
+            div.filter(); // filtrowanie elementow, nie szuka glebiej w porownaniu do find
+            div.first(); // pierwszy element
+            div.not();
+            div.eq(); // kolejny element
+            div.has(); // rodzic podanego elementu
+
+            // filtrowanie hierarchiczne
+            div.children();
+            div.first();
+            div.last();
+            div.nextAll();
+            div.prevAll();
+            div.parent();
+            div.parents(); // wszyscy rodzice az do gory
+            div.parentsUntil();
+            div.closest(); // najblizszy do gory
+
+            // zdarzenia
+            div.one('click', function () { // zdarzenie wywola sie wylacznie raz
+
+            });
+            div.hover(function () { // zdarzenie hover
+
+            });
+
+            // delegacja zdarzen
+            div.delegate('li', 'click', function () { // dla np dynamicznych komponentow
+
+            });
+
+            div.on('click', 'li', function () { // on dla np dynamicznych komponentow
+
+            });
+
+            div.undelegate('click');
+            div.off('click', '**'); // dwie gwiazki wskazuja na wylacznie delegowane zdarzenia
+
+            // obiekt zdarzenia
+            div.click(function (event) {
+               event.preventDefault();
+               event.currentTime();
+               event.currentTarget();
+            });
+
+            // wywolywanie zdarzen
+            div.trigger('click'); // wywoluje zdarzenie klikniecia
+
+            // wlasne zdarzenia
+            div.on('myEvent', function () {
+               $(this).addClass('show');
+            });
+
+            // css
+            div.css('background-color');
+            div.css('width', '100px');
+            div.addClass('');
+            div.removeClass('');
+            div.toggleClass('');
+            div.hasClass('');
+
+            // tworzenie elementow
+            const button = $('<button>'); // tworzenie buttona
+            const button2 = $('<button class="klasa">Kliknij mnie</button>'); // tworzenie buttona
+
+            // wstawianie elementow
+            div.append(button); // na koncu
+            div.prepend(button); // na poczatku
+            button.appendTo(div);
+            button.prependTo(div);
+            button.insertAfter('button'); // wstawienie "za" elementem
+            button.insertBefore('button'); // wstawienie "przed" elementem
+
+            // zawratosc elementow
+            div.text(); // pobrana wartosc
+            div.text('dodana wartosc');
+            div.html(); // zwraca html
+            div.html('<p></p>'); // ustawia html
+
+            // praca z atrybutami elementów
+            div.attr('data-type');
+            div.removeAttr('data-type');
+
+            // manipulacja kolejnoscia elementów
+            div.prepend(button.clone(true, true)); // bez clone istniejacy button zostanie przeniesiony, true dla klonowania true, drugie true to eventy dzieci
+            div.replaceAll('<h1></h1>'); // zamiana diva na h1
+            div.wrap("<header></header>"); // zamykanie div w elemencie header
+            div.wrapAll("<header></header>"); // zamykanie wszystkich div w elemencie header
+            div.wrapInner("<strong></strong>"); // zamykanie wszystkich elementow w srodku div w elemencie strong
+            div.unwrap();
+
+            // usuwanie elementow
+            div.remove(); // usuwa element i jego zdarzenia, zwraca go
+            div.detach(); // usuwa element bez jego zdarzen, zwraca go
+            div.empty(); // wszystko wewnatrz
+
+            // odczyt i ustawianie wymiarow elementow
+            div.width(); // bez paddingu i bordera
+            div.innerWidth(); // z paddingiem, bez bordera
+            div.outerWidth(); // z paddingiem i borderem
+            div.outerWidth(true); // z paddingiem i borderem, true = + marginesy
+            div.height();
+
+            // polozenie elementow w dokumencie
+            div.offset(); // zwraca obiekt z top i left
+            div.position(); // zwraca pozycje elementu na podstawie wlasciwosci pozycji (top, left)
+
+        });
+
+        $(window).load(function () { // wczytanie calej strony
+
+        });
+
+    }(jQuery));
+</script>
+</html>
