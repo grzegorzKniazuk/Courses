@@ -16,6 +16,8 @@
         $(document).ready(function () {  // DomContentLoaded
 
             const div = $('div');
+            const input = $('input');
+            const form = $('form');
 
             // selektory dostepne tylko w jQuery
             $(':button');
@@ -132,6 +134,117 @@
             div.offset(); // zwraca obiekt z top i left
             div.position(); // zwraca pozycje elementu na podstawie wlasciwosci pozycji (top, left)
 
+            // pokazywanie i ukrywanie elementow
+            div.hide();
+            div.show();
+            div.toggle();
+            div.slideDown();
+            div.slideUp();
+            div.slideToggle();
+            div.fadeIn();
+            div.fadeOut();
+            div.fadeTo(500, 0.9);
+            div.fadeToggle();
+
+            // animacja wlasciwosci
+            div.animate({
+                width: '+=50',
+                opacity: 1,
+            }, 500, 'linear');
+
+            // funkcje zwrotne w animacjach
+            div.fadeOut(1000, function () {
+               $(this).addClass('faded');
+            });
+
+            // kolejkowanie animacji
+            div.stop(); // zatrzymywanie animacji
+            div.finish(); // zatrzymywanie animacji
+            div.clearQueue(); // zatrzymywanie animacji
+
+            // petla each dla zbiorow
+            div.each(function (i, elem) {
+                $(elem).addClass('class');
+            });
+
+            div.map(function (index, element) {
+                $(element).add('class');
+            });
+
+            $.grep(div, function (value) {
+                return value > 5;
+            });
+
+            // formularze
+            input.val().trim();
+
+            // serializacja formularza
+            form.serialize();
+
+            // metoda data
+            // przypisywanie informacji do dowolnego obiektu jQuery
+            div.data('dataname', {
+                data: 'data',
+            });
+
+            // ajax
+            $.ajax({
+                url: 'url',
+                type: 'POST',
+                dataType: 'text/json',
+                data: {
+                    username: 'Grzegorz',
+                },
+                context: div, // kontekst dla this
+                success: function (data, status, xhr) {
+
+                },
+                error: function (xhr, status, error) {
+
+                },
+                complete: function () {
+                    
+                }
+            });
+
+            // ajax - globalna konfiguracja
+            $.ajaxSetup({
+                url: 'url',
+                cache: false,
+            });
+
+            // deffered
+            // obiekt specjalny, cos a'la Promises
+
+            function getName() {
+                let deffered = $.Deferred();
+                deffered.resolve('data');
+                deffered.reject('data');
+                return deffered.promise();
+            }
+
+            getName(3000).done(function (name) {
+
+            }).fail(function () {
+
+            }).always(function () {
+                
+            });
+
+            // tworzenie pluginow
+            $.fn.highlight = function () {
+                this.each(function () {
+
+                });
+            };
+
+            // wersja jquery
+            $.fn.jquery;
+
+            // skrot document ready
+            $(function () {
+
+            });
         });
 
         $(window).load(function () { // wczytanie calej strony
