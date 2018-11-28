@@ -1,0 +1,18 @@
+git filter-branch --env-filter '
+if test "$GIT_AUTHOR_NAME" = "Grzegorz Kniazuk"
+    then
+        "GIT_AUTHOR_NAME" = "grzegorzKniazuk"
+    fi
+	if test "$GIT_COMMITTER_NAME" = "Grzegorz Kniazuk"
+    then
+        "GIT_COMMITTER_NAME" = "grzegorzKniazuk"
+    fi
+    if test "$GIT_AUTHOR_EMAIL" = "grzegorz.kniazuk@britenet.com.pl"
+    then
+        GIT_AUTHOR_EMAIL=grzegorz.kniazuk@gmail.com
+    fi
+    if test "$GIT_COMMITTER_EMAIL" = "grzegorz.kniazuk@britenet.com.pl"
+    then
+        GIT_COMMITTER_EMAIL=grzegorz.kniazuk@gmail.com
+    fi
+' -- --all
