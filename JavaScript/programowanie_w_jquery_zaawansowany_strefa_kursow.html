@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery zaawansowany</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+</body>
+<script>
+
+
+    const numbers = [ 10, 20, 30, 40, 50 ];
+    const numbers2 = [ 12, 11, 25, 45 ];
+    const element = $('#element');
+    const div = $('div');
+    const obj = {
+        name: 'Grzegorz',
+        surname: 'Kowalski',
+        age: 27,
+    };
+    const obj2 = {};
+
+    // przetwarzanie kolekcji
+    $.each(numbers, (index, value) => {
+       console.log(value);
+    });
+    $.each(obj, (key, value) => {
+        console.log(value);
+    });
+
+    $.merge(numbers, ages); // laczenie
+    $.inArray(10, numbers); // czy element znajduje sie w kolekcji
+    let array = $.grep(numbers, (element, index) => { // filter
+        return numbers > 5;
+    }, true); // true - odwrocenie warunku
+    let array2 = $.map(numbers, (element, index) => {
+       return element * 2;
+    });
+
+    // sprawdzanie typow
+    $.type(obj);
+    $.isEmptyObject(obj);
+    $.isPlainObject(obj);
+    $.isFunction(obj);
+    $.isArray(obj);
+
+    // rozszerzanie obiektow
+    const obj3 = $.extend({}, obj, obj2);
+
+    numbers.reverse(); // odwrocenie tablicy
+    const itemsArray = $.makeArray([]); // NodeList jako argument do tablicy
+
+    // praca z danymi
+    element.data('name', 'Grzegorz'); // zapis
+    element.data('name'); // odczyt
+
+    // usuwanie danych
+    element.removeData('name');
+
+    // DOM
+    // klonowanie elementow
+    element.clone(true, true).append(element);
+
+    // tworzenie elementow dom
+    $('<a></a>', {
+        href: 'localhost',
+        class: 'class',
+        text: 'button text',
+    });
+
+    // fragmenty dokumentow
+    const fragment = document.createDocumentFragment();
+    fragment.append(element);
+    element.append(fragment);
+
+    // usuwanie wezlow
+    element.remove(); // usuwa rowniez przypisane zdarzenia
+    element.detach(); // zostawia przypisane zdarzenia
+    element.empty(); // usuwa zawartosc
+
+    // get
+    element.get(2); // drugie dziecko
+
+    // filtrowanie elementow
+    div.filter(':last');
+
+    // ajax
+    $.ajax({
+        url: '',
+        type: 'GET',
+        data: {},
+        success: () => {
+
+        },
+        error: () => {
+
+        },
+        complete: () => {
+
+        }
+    });
+
+    $.get('url', (data) => {
+
+    });
+    $.post('url', (data) => {
+
+    });
+
+    // JSON
+    $.getJSON('url', (data) => {
+
+    });
+
+
+    // parsowanie XML
+    $.parseXML('data');
+
+    // serializacja
+    $.serialize(obj);
+
+    // zdarzenia
+    element.on('click', (event) => {
+
+    });
+
+    div.trigger('click'); // wywolanie click na div
+
+    // obiekt DEFFERED, asynchronicznosc
+    let def = $.Deferred();
+    def.done(() => {
+
+    });
+    def.fail(() => {
+
+    });
+    def.resolve();
+    def.reject();
+    def.when();
+    def.then((resolved, rejected) => {
+
+    });
+
+    // delegacja zdarzen
+    div.on('click', 'div, img', () => {
+
+    });
+    div.delegate('.class', 'click', () => {
+
+    });
+
+    // usuwanie zdarzenia
+    div.off('click');
+
+    // obsluga bledow
+    document.on('error', () => {
+
+    });
+
+    // obiekt jQuery
+    div.length; // ilosc elementow w kolekcji
+    div.jquery; // czy jest to obiekt jQuery
+
+    // tryb NOCONFLICT
+    const q = $.noConflict();
+    q.ready(() => {
+
+    });
+
+    // własne pluginy
+
+</script>
+</html>
