@@ -6,7 +6,10 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material/material.module';
-import { CoreModule } from './core/components/core.module';
+import { CoreModule } from './core/core.module';
+import { FlightsModule } from './flights/flights.module';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,10 +17,13 @@ import { CoreModule } from './core/components/core.module';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
+    FlightsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     MaterialModule,
-    CoreModule,
+    AngularFireDatabaseModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
