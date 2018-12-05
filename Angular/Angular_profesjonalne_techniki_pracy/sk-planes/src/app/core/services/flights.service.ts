@@ -3,6 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Flight } from '../interfaces/flight';
+import ThenableReference = firebase.database.ThenableReference;
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,9 @@ export class FlightsService {
           return { id, ...data };
         });
     }));
+  }
+
+  public addFlight(flight: Flight): ThenableReference {
+    return this.angularFireDatabase.list<Flight>(this.API_URL).push(flight);
   }
 }

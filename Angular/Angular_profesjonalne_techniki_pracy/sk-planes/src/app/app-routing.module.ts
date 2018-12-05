@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './core/components/login/login.component';
 import { DashboardComponent } from './core/components/dashboard/dashboard.component';
 import { FlightsComponent } from './flights/flights.component';
+import { EditFlightComponent } from './flights/edit-flight/edit-flight.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, children: [
       { path: '', redirectTo: 'flights', pathMatch: 'full' },
       { path: 'flights', component: FlightsComponent },
+      { path: 'flights/:key', component: EditFlightComponent },
     ] },
 ];
 
