@@ -28,6 +28,6 @@ export class FlightDetailsComponent implements OnInit {
 
   public goToEditFlight(): void {
     this.close();
-    this.router.navigate(['dashboard', 'flights', this.flight.key ]);
+    this.router.navigate(['dashboard', 'flights', this.flight.id ]);
   }
 }

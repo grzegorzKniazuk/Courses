@@ -6,6 +6,7 @@
         <mat-error *ngIf="flightForm.get('code').hasError('required')">Code is required</mat-error>
         <mat-error *ngIf="flightForm.get('code').hasError('minlength')">Minimum length is 4 chars</mat-error>
         <mat-error *ngIf="flightForm.get('code').hasError('maxlength')">Maximum length is 7 chars</mat-error>
+        <mat-error *ngIf="flightForm.get('code').hasError('incorrectCode')">Code must star with SK prefix</mat-error>
         <mat-hint>{{ codeInput.value.length }}/7</mat-hint>
       </mat-form-field>
     </div>

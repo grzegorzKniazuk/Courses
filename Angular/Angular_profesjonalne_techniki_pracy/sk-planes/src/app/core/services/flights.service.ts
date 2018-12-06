@@ -24,7 +24,23 @@ export class FlightsService {
     }));
   }
 
+  public flight(key: string): Observable<Flight> {
+    return this.angularFireDatabase.object<Flight>(`${this.API_URL}/${key}`).snapshotChanges().pipe(map(flight => {
+      const data = <Flight>flight.payload.val();
+      const id = flight.payload.key;
+      return { id, ...data }
+    }));
+  }
+
   public addFlight(flight: Flight): ThenableReference {
     return this.angularFireDatabase.list<Flight>(this.API_URL).push(flight);
+  }
+
+  public editFlight(key: string, flight: Flight): Promise<void> {
+    return this.angularFireDatabase.object<Flight>(`${this.API_URL}/${key}`).update(flight);
+  }
+
+  public deleteFlight(key: string): Promise<void> {
+    return this.angularFireDatabase.object<Flight>(`${this.API_URL}/${key}`).remove();
   }
 }

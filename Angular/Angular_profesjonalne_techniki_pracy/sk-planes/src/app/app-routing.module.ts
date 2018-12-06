@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './core/components/login/login.component';
 import { DashboardComponent } from './core/components/dashboard/dashboard.component';
-import { FlightsComponent } from './flights/flights.component';
-import { EditFlightComponent } from './flights/edit-flight/edit-flight.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, children: [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ], children: [
       { path: '', redirectTo: 'flights', pathMatch: 'full' },
-      { path: 'flights', component: FlightsComponent },
-      { path: 'flights/:key', component: EditFlightComponent },
+      { path: 'flights', loadChildren: './flights/flights.module#FlightsModule'},
     ] },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
