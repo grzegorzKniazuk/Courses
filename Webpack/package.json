@@ -1,0 +1,14 @@
+{
+  "name": "Webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "path.js",
+  "scripts": {
+    "build": "webpack",
+    "nodemon": "nodemon --watch webpack.config.js --exec \"webpack\"",
+    "csv": "webpack --module-bind csv=css-loader"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

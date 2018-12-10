@@ -1,0 +1,22 @@
+Zalety
+- automatyczna implementacja modulów
+
+npm init -y - inicjalizacja npma w katalogu, tworzy package.json, -y akceptuje standardowe ustawienia
+
+npm install react@15.5 - instalacja konkretnej wersji paczki
+
+npm run 'nazwa skryptu z package.json'
+
+Loaders
+- działanie uzaleznione od typu pliku
+
+npm i csv-loader --save-dev // jeden z przykladowych loaderow
+
+Plugins
+- operacje na pliku bundle
+
+Polyfill
+- kod ktory uzupelnia funkjonalnosc nieobslugiwana przez przegladarke
+
+Transform-runtime
+- alternatywa dla Polyfill
