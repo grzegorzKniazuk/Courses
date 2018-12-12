@@ -1,27 +1,21 @@
 // selektor potomka
 div ~ p { // dwa warunki, p jest rodzenstwem div, p wystepuje 'za' div
-
 }
 
 div > p { // elementy p ktore sa BEZPOSREDNIMI dziecmi selektora div
-
 }
 
 div + p { // rodzenstwo, p nastepujacy bezposrednio po div
-
 }
 
 // pseudoklasy
 p:empty { // "puste" znaczniki
-
 }
 
 p:only-child { // tylko gdy p jest jedynym dzieckiem rodzica
-
 }
 
 p:only-of-type {
-
 }
 
 // selektory atrybutów

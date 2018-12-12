@@ -222,7 +222,7 @@ Button.initButton = function (name, size) { // dodawanie metody
 
 let btn = Object.create(Button);
 btn.initButton('cta-button', 'large');
-*/
+
 // KOMPOZYCJA
 let Widget = {
     init : function (name) {

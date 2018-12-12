@@ -23,7 +23,7 @@ git reset HEAD nazwa_pliku <- usuwanie z aktualnego indeksu (indeks zmian)
 git commit -a -m "msg" <- automatyczne commit z dodaniem wszystkich plikow z indeksu i wiadomoscia
 
 git rm nazwa_pliku <- usuwanie plikow z gita (mozna cofnac np przez git reset HEAD + git checkout)
-git rm --cached nazwa_pliku <- usuwanie plikow ale z zostawieniem pliku w cache gita
+git rm --cached nazwa_pliku <- usuwanie plikow z gita ale nie z dysku
 git mv stary_plik nowy_plik <- zmiana nazwy, roznica pomiedzy prawym klikiem jest taka ze zmiana jest rejestrowana w git
 
 // ignorowanie plikow

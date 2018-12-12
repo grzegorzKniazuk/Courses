@@ -7,7 +7,6 @@ setTimeout(() => {
 
 console.log('Teraz');
 
-// λ node Programowanie_asynchroniczne_w_JavaScript.js
 // Teraz
 // Pozniej!
 
