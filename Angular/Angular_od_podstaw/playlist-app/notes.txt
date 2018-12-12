@@ -1,3 +1,0 @@
-ng new nazwa_projektu - utworzenie nowego projektu angular
-
-
