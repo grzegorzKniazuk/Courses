@@ -1,0 +1,126 @@
+Mobile first
+- najpierw style oraz uklad dla urzadzen malych
+- potem style dla urzadzen wiekszych - wewnatrz media queries
+- typowe breakpointy -> 480, 992, 992 <
+
+Layout w CSS
+- Box model (floats etc)
+- Flexbox
+- Grid model (experimental)
+
+- Preprocesory CSS
+- Sass
+ - zmienne
+ - mixins
+ - funkcje
+ - zagniezdzanie regol
+ - modulowa struktura stylow
+ - operatory
+ - rozszerzanie/dziedziczenie
+- LESS
+
+Organizacja kodu CSS w duzym projekcie
+SMACSS - Skalowalny i modułowy CSS
+- Baza (selektor pojedynczego elementu)
+- Layout (układ sekcji strony)
+- Moduł (element do wielokrotnego wykorzystania)
+- Stan (jak wyglada element w danym stanie)
+- Motyw (jak wygladaja moduly)
+
+metodologia BEM
+- do jednego elementu na stronie mozemy przypisac maksymalnie 3 klasy
+
+- Blok (samodzielny element strony)
+- Element (fragment bloku nie moze sam funkcjonowac)
+- Modyfikator (zmienia wyglad)
+
+metodologia OOCSS - Object Oriented CSS
+- separacja wygladu od struktury
+- moduly do wielokrotnego wykorzystania bazujace na klasach
+- przykład: przycisk + przycisk bialy + przycisk duzy
+
+local storage
+- do 5MB danych
+
+IndexedDB
+- baza zagniezdzona w przegladarce
+- baza typu noSQL
+- uzywa par klucz-wartosc
+- nie kazda przegladarka uzywa tego mechanizmu
+
+bazy typu in-memory
+- operacje wykonywane w ram
+- bardzo krotki czas dostepu do danych
+- ram nie jest trwaly - bardzo latwo utracic dane
+- Memcached
+- Redis
+- MemSQL
+
+REST - (zmiana stanu poprzez reprezentacje)
+- Representational State Transfer
+- Styl architektury aplikacji
+- Definiuje sposób komunikacji
+- Oparty na żądaniach HTTP
+- Prosty mechanizm żądania oraz odpowiedzi
+- GET POST PUT DELETE
+
+HTTP - bezstanowy
+klient wysyla zadanie -> serwer zwraca odpowiedz -> polaczenie jest zamykane
+- nie pamieta poprzednich zadan oraz odpowiedzi
+- aby zmienic stan musimy wyslac nowe zadanie
+
+bezstanowosc - plusy i minusy
+plusy
+- serwer nie musi pamietac stanu klienta
+- wszystkie niezbedne informacje w zadaniu
+- uniezaleznienie od infrastruktury serwera
+minusy
+- rozmiar zadania
+
+uri - unikalny identyfikator zasobu
+protokol host zasob id-zasobu
+
+REST - dobre praktyki
+statusy:
+200 - sukces
+201 - utworzono nowy zasob
+400 - nieprawidlowe zadanie
+404 - nie znaleziono
+409 - konflikt z obecnym stanem na serwerze
+
+uwierzytelnianie
+- API REST jest bezstanowe (brak cookies lub sesji)
+- zadanie powinno zawierac dane uwierzytelniania
+
+HTTP
+- protokol umozliwiajacy komunikacja pomiedzy aplikacjami
+- zasoby (dokumenty, media itp)
+- url (universal resource locator)
+
+Certyfikat SSL
+- certyfikat wystawiany dla domeny
+
+Microservices - kluczowe cechy
+- monotolityczna aplikacje rozbijamy na mikrouslugi
+- mikrousluga to jedna funkcjonalnosc
+- kazda mikrousluga moze byc oparta na innej technologii
+- latwe skalowanie oraz rozwoj aplikacji
+- duza zlozonosc aplikacji
+
+MVC
+- Widok
+    - Interfejs aplikacji
+- Kontroler
+    - Odbiera zapytania
+    - Komunikuje się z modelem
+    - Wysyła odpowiedzi
+- Model
+    - Kluczowe zachowania
+    - Dane aplikacji
+
+PaaS - Platform as a service
+- wariant chmury obliczeniowej
+- dostawca udostepnia srodowisko pracy
+- odpada koniecznosc utrzymywania OS
+= mozemy skupic sie na rozwijaniu aplikacji
+- Microsoft Azure, Google Cloud Platform, Heroku, Amazon Web Services
