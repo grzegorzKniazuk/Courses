@@ -1,0 +1,29 @@
+.t-our-company {
+  padding: $grid-base * 9 0 $grid-base * 6 0;
+
+  &__left {
+    margin: 0 0 $grid-base * 4 0;
+
+    @include medium-plus {
+      margin: 0;
+    }
+  }
+
+  &__right {
+    text-align: center;
+
+    @include medium-plus {
+      padding: 0 $grid-base * 3 0 0;
+      text-align: right;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__btn {
+    margin: 0 $grid-base * 3 $grid-base * 2.5 0;
+  }
+}

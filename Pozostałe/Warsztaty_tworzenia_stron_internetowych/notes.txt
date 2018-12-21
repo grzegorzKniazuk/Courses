@@ -1,0 +1,21 @@
+Metodyka ITCSS
+1. SETTINGS - np. zmienne SASS
+2. TOOLS - np. funkcje, domieszki SASS
+3. GENERIC - np. reset CSS
+4. ELEMENTS - np. style dla h1-h6, a, ul, body
+5. OBJECTS - np. layout czyli kolumny, kontenery
+ - abstrakcyjne obiekty, ktore nie maja wlasnego wygladu
+ - obiekty tworzace layout, definiujace uklad elementow na stronie
+ - obiekty odpowiadaja za ulozenie komponentow
+6. COMPONENTS - np. przyciski
+ - bloki, ktore maja okreslony wyglad i sa w projekcie uzywane wielokrotnie
+ - komponenty moga miec rozne warianty
+ - przedrostek "c"
+ - komponenty NIE posiadaja informacji o polozeniu, odstepach itp
+7. UTILITIES - np. pomocnicze, np. klasa z kolorem tekstu
+ - proste klasy obejmujace jedna wlasciwosc
+ - uzywamy w celu lokalnej zmiany wybranych wlasciwosci
+
+Metodyka BEM - block element modify
+__ - przedrostek elementu w ramach bloku, np. icon-box__text
+-- - przedrostek modyfikatora w ramach bloku, np c-btn--dark-blue

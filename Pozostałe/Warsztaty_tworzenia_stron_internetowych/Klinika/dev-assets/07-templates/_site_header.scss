@@ -1,0 +1,63 @@
+.t-site-header {
+  background: url("../images/header-tlo.jpg") 0 0 no-repeat;
+
+  @include large-plus {
+    clip-path: ellipse(68%, 450px at 50% 28%); // zaokraglenie tla
+    padding: 0 0 $grid-base * 4 0;
+  }
+
+  &__top {
+    padding: $grid-base * 2.5 0;
+  }
+
+  &__menu {
+    margin: $grid-base * 2 0 0 0;
+
+    @include large-plus {
+      text-align: right;
+      margin: 0;
+    }
+  }
+
+  &__divider {
+    background: $white;
+    height: 1px;
+    opacity: .75;
+  }
+
+  &__hero {
+    padding: $grid-base * 5 0;
+    margin: 0 auto;
+    text-align: center;
+
+    @include large-plus {
+      padding: $grid-base * 11 0 $grid-base * 12 0;
+      max-width: 800px;
+    }
+  }
+
+  &__intro-text {
+    color: $white;
+    font-size: $font-size-4;
+    margin: $grid-base * 3 0 $grid-base * 2 0;
+
+    @include large-plus {
+      font-size: $font-size-3;
+      line-height: 1.65;
+      margin: $grid-base * 3 0 $grid-base * 6 0;;
+    }
+  }
+
+  &__btn-divider {
+    color: $white;
+    display: block;
+    font-size: $font-size-5;
+    font-weight: 700;
+    margin: $grid-base * 2;
+    text-transform: uppercase;
+
+    @include medium-plus {
+      display: inline-block;
+    }
+  }
+}

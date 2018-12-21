@@ -1,0 +1,36 @@
+// colors
+$white: #FFFFFF;
+$black: #000000;
+$gray-light: #F9FBFE;
+$gray-dark: #444;
+$blue-dark: #3E5CC5;
+$blue-light: #D3EAFA;
+$blue-text: #3B99E1;
+$green: #60DC64;
+
+$blue-gradient: linear-gradient(45deg, #3E5CC5 0%, #5B8AF8 100%);
+
+// text
+$font-size-base: 1rem;
+$font-size-1: $font-size-base * 3; // ~48px
+$font-size-2: $font-size-base * 1.5; // ~24px
+$font-size-3: $font-size-base * 1.125; // ~18px
+$font-size-4: $font-size-base * 1; // ~16px
+$font-size-5: $font-size-base * 0.875; // ~14px
+$font-size-6: $font-size-base * 0.75; // ~12px
+$font-size-7: $font-size-base * 0.625; // ~10px
+
+$line-height-base: 1.5;
+$line-height-sm: 1.2;
+$line-height-lg: 1.8;
+
+// grid
+$grid-base: 10px;
+$gutter: $grid-base * 1.5; // odstep pomiedzy pinowymi kolumnami
+
+// borders
+$border-radius: $grid-base * 0.5;
+
+// breakpoints
+$breakpoint-md: '800px';
+$breakpoint-lg: '1200px';

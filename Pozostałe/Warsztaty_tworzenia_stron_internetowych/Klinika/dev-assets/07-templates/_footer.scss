@@ -1,0 +1,68 @@
+.t-site-footer {
+  padding: 0 $gutter;
+
+  .o-row {
+    padding: $grid-base * 5 0 $grid-base * 4 0;
+  }
+
+  &__item {
+    flex-basis: auto;
+    padding: 0 0 0 $gutter;
+
+    &:first-child {
+      @include medium-plus {
+        width: 28%;
+      }
+    }
+
+    &:nth-child(2) {
+      @include medium-plus {
+        width: 28%;
+      }
+    }
+
+    &:nth-child(3) {
+      @include medium-plus {
+        width: 25%;
+      }
+    }
+
+    &:last-child {
+      @include medium-plus {
+        width: 15%;
+      }
+    }
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    height: $grid-base * 6;
+  }
+
+  &__text-heading {
+    color: $gray-dark;
+  }
+
+  &__address {
+    padding: $grid-base * 2 0 0 0;
+  }
+
+  &__label {
+    display: block;
+    font-size: $font-size-5;
+    margin: 0 0 $grid-base 0;
+  }
+
+  &__contact-item {
+    line-height: $line-height-lg;
+  }
+
+  &__copy {
+    padding: $grid-base * 2.5 0;
+  }
+
+  &__copy-text {
+    font-size: $font-size-7;
+  }
+}
