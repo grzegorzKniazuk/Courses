@@ -1,0 +1,39 @@
+.t-newsletter {
+  background: $gray-light;
+  padding: $grid-base * 4.5 $grid-base;
+
+  @include large-plus {
+    padding: $grid-base * 4.5 $grid-base * 7;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__info {
+    width: 100%;
+    margin-bottom: $grid-base * 3;
+
+    @include large-plus {
+      margin-bottom: 0;
+      width: 45%;
+    }
+  }
+
+  &__form {
+    width: 100%;
+
+    @include large-plus {
+      width: 55%;
+    }
+  }
+
+  &__heading {
+    display: block;
+    font-size: $font-size-4;
+    font-weight: 700;
+  }
+
+  &__subh
+}

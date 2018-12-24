@@ -567,6 +567,32 @@ img {
   .t-promoted__code .c-btn {
     margin-left: 20px; }
 
+.t-newsletter {
+  background: #F2F3F5;
+  padding: 45px 10px; }
+  @media (min-width: 1200px) {
+    .t-newsletter {
+      padding: 45px 70px; } }
+  .t-newsletter__wrapper {
+    display: flex;
+    flex-wrap: wrap; }
+  .t-newsletter__info {
+    width: 100%;
+    margin-bottom: 30px; }
+    @media (min-width: 1200px) {
+      .t-newsletter__info {
+        margin-bottom: 0;
+        width: 45%; } }
+  .t-newsletter__form {
+    width: 100%; }
+    @media (min-width: 1200px) {
+      .t-newsletter__form {
+        width: 55%; } }
+  .t-newsletter__heading {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 700; }
+
 .u-mb-1 {
   margin-bottom: 10px; }
 
