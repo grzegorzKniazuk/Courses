@@ -1,0 +1,10 @@
+.c-list {
+
+  &__item {
+    margin: 0 0 12px 0;
+  }
+
+  &--unstyled {
+    list-style-type: none;
+  }
+}

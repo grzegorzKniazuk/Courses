@@ -1,0 +1,82 @@
+.t-promoted {
+  padding: $grid-base * 8 0 0 0;
+
+  & .o-row {
+    margin-bottom: $grid-base * 3;
+  }
+
+  &__item {
+    padding: $grid-base * 6.5 $grid-base * 1.5;
+
+    &-first {
+      background: $yellow;
+      padding: $grid-base * 7 0;
+
+      @include medium-plus {
+        background: url("../../Sklep/images/promo-1.jpg") no-repeat;
+      }
+
+      @include large-plus {
+        padding-left: $grid-base * 7 0;
+      }
+    }
+
+    &-second {
+      background: #2BB9D5;
+      padding: $grid-base * 7 0;
+
+      @include medium-plus {
+        background: url("../../Sklep/images/promo-2.jpg") no-repeat;
+      }
+
+      @include large-plus {
+        padding-left: $grid-base * 7 0;
+
+        & .c-btn {
+          margin-top: 25px;
+        }
+      }
+    }
+
+    &-third {
+      background: #F3BBC4;
+      padding: $grid-base * 7 0;
+
+      @include medium-plus {
+        background: url("../../Sklep/images/promo-3.jpg") no-repeat;
+      }
+
+      @include large-plus {
+        padding-left: $grid-base * 29 0;
+      }
+    }
+  }
+
+  &__text {
+    color: $white;
+    font-weight: 700;
+    line-height: $line-height-sm;
+
+    &--size1 {
+      display: block;
+      font-size: $font-size-2;
+      margin-bottom: $grid-base * 3;
+    }
+
+    &--size2 {
+      display: block;
+      font-size: $font-size-3;
+    }
+
+    &--size3 {
+      font-size: $font-size-3;
+    }
+  }
+
+  &__code {
+
+    & .c-btn {
+      margin-left: $grid-base * 2;
+    }
+  }
+}

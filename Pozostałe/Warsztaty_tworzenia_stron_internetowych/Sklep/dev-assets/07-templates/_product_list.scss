@@ -1,0 +1,11 @@
+.t-product-list {
+  background: $gray-light;
+
+  & .c-product-selector {
+    margin: $grid-base * 5 0;
+  }
+
+  & .c-pagination {
+    margin: $grid-base * 4 0 $grid-base * 7 0;
+  }
+}

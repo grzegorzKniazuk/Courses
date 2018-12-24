@@ -1,0 +1,22 @@
+@mixin medium-plus {
+  @media (min-width: #{$breakpoint-md}) {
+    @content // @content pozwala na wstawienie na jego miejsce dowolnych deklaracji, zostana one umieszone w tym miejscu
+  }
+}
+
+@mixin large-plus {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content
+  }
+}
+
+/*
+// mixin sample
+
+h1 {
+  color: #fff;
+  @include medium-plus {
+  instrukcje
+  }
+}
+ */

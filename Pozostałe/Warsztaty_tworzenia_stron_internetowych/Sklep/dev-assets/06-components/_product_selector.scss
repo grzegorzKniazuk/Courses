@@ -1,0 +1,15 @@
+.c-product-selector {
+  display: inline-block;
+
+  &__item {
+    color: $gray-very-dark;
+    font-size: $font-size-6;
+    margin-bottom: $grid-base * 2;
+    display: block;
+
+    @include large-plus {
+      margin: 0 $grid-base * 5 0 0;
+      display: inline-block;
+    }
+  }
+}

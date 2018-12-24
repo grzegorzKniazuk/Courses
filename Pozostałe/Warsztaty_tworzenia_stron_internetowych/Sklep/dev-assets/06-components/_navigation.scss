@@ -1,0 +1,28 @@
+.c-nav {
+  margin-bottom: $grid-base * 2;
+
+  @include large-plus {
+    margin-bottom: 0;
+  }
+
+  &__item {
+    color: $gray-very-dark;
+    display: block;
+    font-size: $font-size-6;
+    padding: $grid-base * 2.5 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: 700;
+
+    &:hover {
+      color: $gray-very-dark;
+    }
+
+    @include large-plus {
+      display: inline-block;
+      width: auto;
+      margin-right: $grid-base * 4;
+    }
+  }
+}

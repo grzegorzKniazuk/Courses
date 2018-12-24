@@ -1,0 +1,58 @@
+.t-post-list {
+  background: $gray-light;
+  padding-top: $grid-base * 4;
+  position: relative;
+
+  @include large-plus {
+    height: 380px;
+  }
+
+  &__content {
+    padding: 0 0 $grid-base * 4 0;
+
+    @include large-plus {
+      background-color: $gray-light;
+      clip-path: ellipse(68% 450px at 50% 0);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: $grid-base * 8;
+      z-index: 1;
+    }
+  }
+
+  &__item {
+    margin: 0 0 $grid-base * 4 0;
+
+    @include large-plus {
+      margin: 0 0 $grid-base * 2 0;
+    }
+  }
+
+  &__image {
+    position: relative;
+    margin: 0 0 $grid-base * 2.5 0;
+    max-width: 349px;
+  }
+
+  &__badge {
+    position: absolute;
+    text-transform: uppercase;
+    background: $blue-gradient;
+    border-radius: $border-radius 0 0 $border-radius;
+    color: $white;
+    font-size: $font-size-5;
+    padding: .5rem 1rem;
+    top: 70%;
+    right: 0;
+    font-weight: 700;
+  }
+
+  &__date {
+
+  }
+
+  &__excerpt {
+
+  }
+}
