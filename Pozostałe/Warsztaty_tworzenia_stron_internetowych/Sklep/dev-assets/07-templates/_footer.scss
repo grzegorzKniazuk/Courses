@@ -1,68 +1,49 @@
 .t-site-footer {
-  padding: 0 $gutter;
+  background: $gray-very-dark;
 
   .o-row {
-    padding: $grid-base * 5 0 $grid-base * 4 0;
+    padding: $grid-base * 4 0 $grid-base * 1.5 0;
   }
 
   &__item {
-    flex-basis: auto;
-    padding: 0 0 0 $gutter;
+    margin-bottom: $grid-base * 3;
 
-    &:first-child {
-      @include medium-plus {
-        width: 28%;
-      }
-    }
-
-    &:nth-child(2) {
-      @include medium-plus {
-        width: 28%;
-      }
-    }
-
-    &:nth-child(3) {
-      @include medium-plus {
-        width: 25%;
-      }
-    }
-
-    &:last-child {
-      @include medium-plus {
-        width: 15%;
-      }
+    @include large-plus {
+      margin-bottom: 0;
     }
   }
 
-  &__heading {
-    display: flex;
-    align-items: center;
-    height: $grid-base * 6;
+  &__item-last {
+    width: 290px;
+
+    @include large-plus {
+      margin-left: $grid-base * 7.5;
+    }
   }
 
-  &__text-heading {
-    color: $gray-dark;
+  &__text {
+    color: $white;
+    display: block;
+    font-size: $font-size-7;
+    margin-bottom: $grid-base * 2;
+  }
+
+  &__link {
+    color: $white;
+    display: block;
+    font-size: $font-size-7;
+    margin-bottom: 12px;
+
+    &:hover {
+      color: $white;
+    }
   }
 
   &__address {
-    padding: $grid-base * 2 0 0 0;
-  }
-
-  &__label {
-    display: block;
-    font-size: $font-size-5;
-    margin: 0 0 $grid-base 0;
-  }
-
-  &__contact-item {
-    line-height: $line-height-lg;
+    padding: 0 $grid-base * 4 0 0;
   }
 
   &__copy {
     padding: $grid-base * 2.5 0;
-  }
-
-  &__copy-text {
-    font-size: $font-size-7;
   }
 }
