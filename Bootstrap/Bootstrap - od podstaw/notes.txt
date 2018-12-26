@@ -1,0 +1,279 @@
+Natywne fonty
+-----------------------------------------------------------------------------------------------------------------------
+Segoe UI - windows
+Roboto - Android
+San Francisco - Apple
+
+struktura
+-----------------------------------------------------------------------------------------------------------------------
+mx-auto
+d-block
+d-inline-block
+d-flex
+d-inline-flex
+
+typografia
+-----------------------------------------------------------------------------------------------------------------------
+text-right
+text-center
+text-justify
+text-md-right
+text-sm-center
+text-uppercase
+text-lowercase
+font-weight-bold
+lead - "wprowadzenie do tekstu"
+text-muted - "wyciszony"
+blockquote
+list-unstyled
+list-inline
+list-inline-item
+
+kolory
+-----------------------------------------------------------------------------------------------------------------------
+primary
+success
+danger
+warning
+info
+white
+
+obrazy
+-----------------------------------------------------------------------------------------------------------------------
+img-fluid
+round-fluid
+img-thumbnail
+
+breakpoints
+-----------------------------------------------------------------------------------------------------------------------
+extra-small < 576px
+small >= 576px
+medium >= 768px
+large >= 992px
+x-large >= 1200px
+
+kontenery
+- grid standardowo ma 12 kolumn
+-----------------------------------------------------------------------------------------------------------------------
+container
+container-fluid - 100% szerokosci
+row
+col
+col-x - kolumna o okreslonej szerokosci np col-6 col-xs-12 col-md-6 col-lg-4
+offset-breakpoint-x - przesuwanie w prawo
+order-breakpoint-x - zmiana kolejnosci kolumn
+align-items-polozenie - wyrownanie elementow w pionie
+align-self-polozenie - wyrownanie pojedynczego elementu w pionie
+justify-content-polozenie - wyrownanie elementow w poziomie
+
+pozycjonowanie
+-----------------------------------------------------------------------------------------------------------------------
+fixed-top/bottom
+sticky-top
+
+flexbox
+-----------------------------------------------------------------------------------------------------------------------
+d-flex
+flex-column
+flex-row
+flex-row/column-reverse - odwracanie kolejnosci
+flex-wrap/nowrap
+
+klasy pomocnicze
+-----------------------------------------------------------------------------------------------------------------------
+m - margines
+p - padding
+y/x - osie dla m i p
+t/r/b/l - kierunki dla m i p
+przykladowo pr-1, mx-2 (2 rem)
+
+rozmiary oraz widocznosc
+-----------------------------------------------------------------------------------------------------------------------
+w-x
+h-x
+25-50-75-100 - w procentach np. h-25
+invisible
+visible
+d-none
+
+przyciski
+-----------------------------------------------------------------------------------------------------------------------
+btn
+btn-typ primary/secondary/link/dark etc
+btn-sm/btn-lg
+btn-outline-typ
+btn-block - 100% szerokosci
+btn-group - grupa przyciskow
+btn-group-md/lg
+btn-group-vertical
+
+badge
+-----------------------------------------------------------------------------------------------------------------------
+badge
+badge-typ
+
+breadcrumbs
+-----------------------------------------------------------------------------------------------------------------------
+breadcrumb
+breadcrumb-item
+active
+
+progress-bar
+-----------------------------------------------------------------------------------------------------------------------
+progess - kontener
+progress-bar
+progress-bar-striped
+progress-bar-animated
+
+list-group
+-----------------------------------------------------------------------------------------------------------------------
+list-group
+list-group-item-(styl)
+active
+disabled
+
+jumbotron
+-----------------------------------------------------------------------------------------------------------------------
+jumbotron - kontener
+jumbotron-fluid - kontener 100%
+
+tabele
+-----------------------------------------------------------------------------------------------------------------------
+table
+table-responsive
+table-sm
+table-dark
+table-striped
+table-hover
+table-success/primary/danger etc
+
+media object (grafika + tekst)
+-----------------------------------------------------------------------------------------------------------------------
+media
+media-body
+
+card
+-----------------------------------------------------------------------------------------------------------------------
+card
+card-body
+card-img-(polozenie)
+card-title
+card-link
+card-subtitle
+card-header
+card-img-overlay
+card-group
+card-deck
+card-columns
+
+nav
+-----------------------------------------------------------------------------------------------------------------------
+nav
+nav-item - dla li
+nav-link - dla a
+nav-tabs/nav-pills
+active/disabled
+
+navbar
+-----------------------------------------------------------------------------------------------------------------------
+navbar
+navbar-nav
+nav-link, nav-item
+nav-bar-expand-(breakpoint)
+navbar-dark/light
+navbar-brand
+navbar-text
+form-inline
+
+collapse
+-----------------------------------------------------------------------------------------------------------------------
+collapse/navbar-collapse
+navbar-toggler
+navbar-toggler-icon
+daa-doggle='collapse'
+data-target="#id"
+
+paginacja
+-----------------------------------------------------------------------------------------------------------------------
+pagination
+page-item
+page-link
+pagination-lg/sm
+
+formularze
+-----------------------------------------------------------------------------------------------------------------------
+form-group - pole + etykieta
+form-control-sm/md/lg - input
+form-text - dodatkowe info
+is-valid/is-invalid
+form-row - alternatywa dla .row
+col-form-label - etykieta w poziomym formularzu
+input-group
+input-group-addon
+
+checkbox/radio
+-----------------------------------------------------------------------------------------------------------------------
+form-check
+form-check-label
+form-check-input
+
+carousel
+-----------------------------------------------------------------------------------------------------------------------
+carousel
+slide
+data-ride="carousel"
+carousel-inner
+carousel-item
+active
+carousel-control-prev/next
+carousel-control-prev/next-icon
+data-slide="prev/next"
+
+tooltip
+-----------------------------------------------------------------------------------------------------------------------
+data-toggle="tooltip" - aktywacja tooltip
+data-placement="left/right/top/bottom"
+title="zawartosc"
+
+alert
+-----------------------------------------------------------------------------------------------------------------------
+alert
+alert-info/danger itp
+close
+data-dismiss="alert"
+
+dropdown
+-----------------------------------------------------------------------------------------------------------------------
+dropdown
+dropdown-toggle
+data-toggle="dropdown"
+dropdown-menu
+dropdown-item
+
+modal
+-----------------------------------------------------------------------------------------------------------------------
+modal
+modal-dialog
+modal-content
+modal-header
+modal-title
+modal-body
+
+scrollspy
+-----------------------------------------------------------------------------------------------------------------------
+data-spy="scroll"
+data-offset="0"
+height, overflow-y: scroll - te wlasciwosci musza byc w przewijanym elemencie
+
+obramowania
+-----------------------------------------------------------------------------------------------------------------------
+border
+border-(styl)
+border-0 - usuwa border
+border-(pozycja)-0 - usuwa border z konkretnej strony
+
+float, clearfix
+-----------------------------------------------------------------------------------------------------------------------
+float-(wartosc left/right/none)
+float-(breakpoint)-(wartosc)
+clearfix - dodajemy do kontenera otaczajacego elementy pływające
