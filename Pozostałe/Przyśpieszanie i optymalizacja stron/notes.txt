@@ -1,0 +1,39 @@
+proces ladowania strony przez przegladarke
+- utworzenie DOM
+- utworzenie CSSOM
+- polaczenie DOM i CSSOM
+- layout, utworzenie struktury
+- paint, utworzenie elementów
+
+ladowanie obrazow NIE blokuje ladowania html
+ladowanie skryptow BLOKUJE ladowanie html
+
+zdarzenia przegladarki
+DOMContentLoaded
+- zdarzenie wystepuje w momencie gdy poczatkowa struktura HTML zostala przetworzona (bez obrazow itp)
+- powinno sie dozyc do tego aby zdarzenie wystapilo jak najszybciej
+- skrypty ladowane synchronicznie opozniaja to zdarzenie
+
+load
+- zasob oraz zasoby zalezne zostaly zaladowane
+- wystapienie zdarzenia oznacza ze strona jest w pelni zaladowana
+
+HTTP
+- protokol przesylania dokumentow hipertekstowych
+- umozliwia komunikacje pomiedzy serwerem oraz klientem
+
+progresywne JPG
+- nie laduja sie "czesciami" ale sa widoczne "cale" jako "rozmazane", i tak ladowane
+- tworzymy zapisujac w ps jako "progresywny"
+
+sciezka renderowania
+- zestaw czynnosci ktore musi wykonac przegladarka aby wyswietlic poczatkowy widok strony
+
+szybkosc ladowania
+0-100ms - brak uczucia opoznienia
+100-300ms - drobne poczucie opoznienia
+1000ms - wyrazne poczucie opoznienia
+10000ms - porzucamy biezace zadanie
+
+google fonts
+- mozna wybrac zestaw znakow do pobrania
