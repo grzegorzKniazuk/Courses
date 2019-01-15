@@ -472,42 +472,35 @@ img {
     margin: 15px; }
 
 .t-site-footer {
-  padding: 0 15px; }
+  background: #444; }
   .t-site-footer .o-row {
-    padding: 50px 0 40px 0; }
+    padding: 40px 0 15px 0; }
   .t-site-footer__item {
-    flex-basis: auto;
-    padding: 0 0 0 15px; }
-    @media (min-width: 800px) {
-      .t-site-footer__item:first-child {
-        width: 28%; } }
-    @media (min-width: 800px) {
-      .t-site-footer__item:nth-child(2) {
-        width: 28%; } }
-    @media (min-width: 800px) {
-      .t-site-footer__item:nth-child(3) {
-        width: 25%; } }
-    @media (min-width: 800px) {
-      .t-site-footer__item:last-child {
-        width: 15%; } }
-  .t-site-footer__heading {
-    display: flex;
-    align-items: center;
-    height: 60px; }
-  .t-site-footer__text-heading {
-    color: #797979; }
-  .t-site-footer__address {
-    padding: 20px 0 0 0; }
-  .t-site-footer__label {
+    margin-bottom: 30px; }
+    @media (min-width: 1200px) {
+      .t-site-footer__item {
+        margin-bottom: 0; } }
+  .t-site-footer__item-last {
+    width: 290px; }
+    @media (min-width: 1200px) {
+      .t-site-footer__item-last {
+        margin-left: 75px; } }
+  .t-site-footer__text {
+    color: #FFFFFF;
     display: block;
-    font-size: 1rem;
-    margin: 0 0 10px 0; }
-  .t-site-footer__contact-item {
-    line-height: 1.8; }
+    font-size: 0.75rem;
+    margin-bottom: 20px; }
+  .t-site-footer__link {
+    color: #FFFFFF;
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 12px; }
+    .t-site-footer__link:hover {
+      color: #FFFFFF; }
+  .t-site-footer__address {
+    padding: 0 40px 0 0; }
   .t-site-footer__copy {
     padding: 25px 0; }
-  .t-site-footer__copy-text {
-    font-size: 0.75rem; }
 
 .t-product-list {
   background: #F2F3F5; }
@@ -591,7 +584,28 @@ img {
   .t-newsletter__heading {
     display: block;
     font-size: 1.125rem;
-    font-weight: 700; }
+    font-weight: 700;
+    margin-bottom: 45px; }
+  .t-newsletter__subheading {
+    display: block;
+    font-size: 0.75rem; }
+  .t-newsletter__input {
+    width: auto; }
+    @media (min-width: 800px) {
+      .t-newsletter__input {
+        width: 72%; } }
+  .t-newsletter__submit {
+    border-radius: 0 5px 5px 0;
+    padding: .7rem 1.75rem;
+    margin-left: -3px; }
+
+.t-shopper-info {
+  padding: 60px 0 70px 0; }
+  .t-shopper-info__item {
+    margin-bottom: 60px; }
+    @media (min-width: 1200px) {
+      .t-shopper-info__item {
+        margin: 0; } }
 
 .u-mb-1 {
   margin-bottom: 10px; }
