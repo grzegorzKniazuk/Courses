@@ -1,4 +1,4 @@
-import {concat, fromEvent, interval, merge, noop, Observable, of, timer} from "rxjs";
+import { concat, forkJoin, fromEvent, interval, merge, noop, Observable, of, timer } from 'rxjs';
 import {Course} from "./app/model/course";
 import {
     catchError,
@@ -18,6 +18,7 @@ import {ElementRef, ViewChild} from "@angular/core";
 import {Lesson} from "./app/model/lesson";
 import {createHttpObservable} from "./app/common/util";
 import {ActivatedRoute, Router} from "@angular/router";
+import { debug, RxJsLoggingLevel } from 'debug';
 
 class Notes {
 
@@ -234,8 +235,19 @@ class Notes {
 
     public loadLessons(search?): Observable<Lesson[]> {
         return createHttpObservable(`/api/lessons?courseId=${this.courseId}&pageSize=100&filter=${search}`)
-            .pipe(map((response) => {
-                return response['payload'];
-            }));
+            .pipe(
+                debug(RxJsLoggingLevel.INFO, "search"),
+                map((response) => response['payload'])
+            );
     }
+
+    // forkJoin (like concat)
+    // allow to launch several task in parallel,
+    // wait for those tasks to complete and then we can get back the results of each task and use those combined results together
+    public getLessons(): void {
+        forkJoin(this.courses$, this.lessons$).subscribe(([courses, lessons]) => {
+
+        });
+    }
+
 }
