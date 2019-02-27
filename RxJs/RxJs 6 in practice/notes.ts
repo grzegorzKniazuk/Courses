@@ -1,17 +1,17 @@
 import { concat, forkJoin, fromEvent, interval, merge, noop, Observable, of, timer } from 'rxjs';
 import {Course} from "./app/model/course";
 import {
-    catchError,
-    concatMap,
-    debounceTime, delayWhen,
-    distinctUntilChanged,
-    exhaustMap,
-    filter, finalize,
-    map,
-    mergeMap, retryWhen,
-    shareReplay, startWith, switchMap,
-    tap, throttle, throttleTime
-} from "rxjs/operators";
+  catchError,
+  concatMap,
+  debounceTime, delayWhen,
+  distinctUntilChanged,
+  exhaustMap,
+  filter, finalize,
+  map,
+  mergeMap, retryWhen,
+  shareReplay, startWith, switchMap,
+  tap, throttle, throttleTime, withLatestFrom,
+} from 'rxjs/operators';
 import {FormGroup} from "@angular/forms";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {ElementRef, ViewChild} from "@angular/core";
@@ -250,4 +250,12 @@ class Notes {
         });
     }
 
+    // withLatestFrom() - bierze ostatnia wartosc z podanego strumienia i dodaje do strumienia - nie trzeba wyciagac jej recznie
+    public withLatestFromExample(): void {
+      this.loadLessons()
+          .pipe(withLatestFrom(this.courses$))
+          .subscribe(([lessons, courses]) => {
+
+          });
+    }
 }
