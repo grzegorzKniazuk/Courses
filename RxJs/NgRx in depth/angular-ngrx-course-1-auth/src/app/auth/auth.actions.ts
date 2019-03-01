@@ -13,7 +13,7 @@ export class Login implements Action {
 }
 
 export class Logout implements Action {
-  readonly type = AuthActionTypes.LoginAction;
+  readonly type = AuthActionTypes.LogoutAction;
 }
 
-export type AuthActions = Login;
+export type AuthActions = Login | Logout;

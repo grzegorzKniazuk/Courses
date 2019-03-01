@@ -39,10 +39,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth.login(this.form.get('email').value, this.form.get('password').value)
         .pipe(tap((user) => {
-          console.log(user);
           this.store.dispatch(new Login({ user })); // wywolywanie akcji, save user data to store
-
-          this.router.navigateByUrl('/courses').catch((error) => console.log(error));
         }))
         .subscribe(
           noop,

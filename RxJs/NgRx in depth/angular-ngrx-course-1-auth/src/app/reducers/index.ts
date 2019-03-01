@@ -1,41 +1,20 @@
 import {
-  Action,
-  ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer,
 } from '@ngrx/store';
 import { environment } from 'environments/environment';
-import { User } from 'app/model/user.model';
-import { AuthActionTypes } from 'app/auth/auth.actions';
+import { AuthState } from 'app/auth/auth.reducer';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { routerReducer } from '@ngrx/router-store';
 
-type AuthState = {
-  loggedIn: boolean,
-  userProfile: User,
-}
 
 export interface AppState { // defines data content on the store
-  auth: AuthState,
-}
 
-function authReducer(authState: AuthState, action: any): AuthState {
-  switch (action.type) {
-    case AuthActionTypes.LoginAction: { // modyfikacja state przy logowaniu
-      return {
-        loggedIn: true,
-        userProfile: action.payload.user
-      };
-    }
-    default: {
-      return authState; // jesli akcja nierozpoznana zwroc state bez modyfikacji
-    }
-  }
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  auth: authReducer
+  router: routerReducer, // for ngrs- router devTools
 };
 
 
-export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [storeFreeze] : []; // storeFreeze makes state object immutable
