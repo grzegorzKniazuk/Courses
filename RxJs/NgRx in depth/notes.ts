@@ -1,10 +1,14 @@
 // npm run server
-// npm install @ngrx/store @ngrx/effects @ngrx/router-store @ngrx-store-devtools @ngrx/entity @ngrx/schematics --save-dev
-// ng config cli.defaultCollection @ngrx/schematics -- rozszerza angular cli o store'a
+// npm install @ngrx/store @ngrx/effects @ngrx/router-store  @ngrx/entity
+
 // ng generate store AppState --root --module app.module.ts
 // ng generate action auth/Auth
 // ng generate reducer Auth --flat=false --module auth/auth.module.ts
 // ng generate effect auth/Auth --module auth/auth.module.ts
+
+// npm install --save-dev @ngrx/schematics --save-dev
+// ng config cli.defaultCollection @ngrx/schematics -- rozszerza angular cli o store'a
+// npm install --save-dev ngrx-store-devtools
 // npm install --save-dev ngrx-store-freeze
 
 /*
