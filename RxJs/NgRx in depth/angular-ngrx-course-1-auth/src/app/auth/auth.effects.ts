@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { AuthActionTypes, Login, Logout } from 'app/auth/auth.actions';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { defer, InteropObservable, Observable, of } from 'rxjs';
+import { defer, Observable, of } from 'rxjs';
 
 // saving the user credentials in local storage is an example of a side effect that we want our application to produce in response to the action
 // this is called a side effect because the action is not only affecting the state of the store via the reducer but the action is also producing
@@ -40,9 +40,9 @@ export class AuthEffects {
     const userData = localStorage.getItem('user');
 
     if (userData) {
-      return of(new Login(JSON.parse(userData))); // wywolanie akcji i zwrotka jako observable
+      new Login(JSON.parse(userData)); // wywolanie akcji i zwrotka jako observable
     } else {
-      return of(new Logout());
+      new Logout();
     }
 
   });
