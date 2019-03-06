@@ -1,0 +1,9 @@
+
+<p><strong>Dzisiejsza data:</strong> {{ today | date }}</p>
+<p><strong>Dzisiejsza data w zdefiniowanym formacie:</strong> {{ today | date: 'MM/dd/yyyy' }}</p>
+<p><strong>Duże litery:</strong> {{ title | uppercase }}</p>
+<p><strong>Małe litery:</strong> {{ title | lowercase }}</p>
+<p><strong>Duża litera każdego słowa:</strong> {{ title | titlecase }}</p>
+
+
+<router-outlet></router-outlet>
