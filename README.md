@@ -11,3 +11,6 @@ My notebook from the courses
 - TypeScript
 - Unit Test
 - Design Pattern
+- Webpack
+- RxJs
+- NgRx
