@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BasicOperatorsComponent } from './basic-operators/basic-operators.component';
+import { IntermediateOperatorsComponent } from './intermediate-operators/intermediate-operators.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BasicOperatorsComponent
+    BasicOperatorsComponent,
+    IntermediateOperatorsComponent
   ],
   imports: [
     BrowserModule,

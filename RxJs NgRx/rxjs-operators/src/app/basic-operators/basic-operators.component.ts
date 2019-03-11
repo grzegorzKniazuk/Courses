@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { empty, from, interval, of, range, timer } from 'rxjs';
-import { filter, first, map, mapTo, pluck, startWith, take, tap } from 'rxjs/operators';
+import { empty, from, interval, Observable, of, range, timer } from 'rxjs';
+import { defaultIfEmpty, distinctUntilChanged, every, filter, first, map, mapTo, pluck, startWith, take, tap } from 'rxjs/operators';
+import { fromArray } from 'rxjs/internal/observable/fromArray';
 
 @Component({
     selector: 'app-basic-operators',
     templateUrl: './basic-operators.component.html',
-    styleUrls: [ './basic-operators.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicOperatorsComponent {
@@ -17,7 +17,7 @@ export class BasicOperatorsComponent {
     }
 
     private basicOperators(): void {
-        /*
+
         // range
         range(1, 5).subscribe(number => console.log(number)); // 1, 2, 3, 4, 5
 
@@ -86,7 +86,7 @@ export class BasicOperatorsComponent {
         this.numbers$.pipe(
             first(v => v > 3)
         ).subscribe(v => console.log(v)); // 4
-        */
+
         // startWith
         // Creates a new observable that emits a provided value, thne emits values from the source observable
         // useful for asynchronous observables that may not return a value for some time
@@ -94,6 +94,44 @@ export class BasicOperatorsComponent {
             startWith(10),
             first()
         ).subscribe(v => console.log(v)); // 10
+
+        // create
+        // creates a new observable which emits, completes and errors under custom circumstances
+        // powerful, but executing too much code inside create is an anti-pattern
+        const create = Observable.create(observer => {
+            observer.next(42);
+        });
+        create.subscribe(v => console.log(v)); // 42
+
+
+        // every
+        // equivalent to array.prototype.every
+        // emits true if each element emitted by the source array passed a provided predicate function
+        // only emits after the source completes (singular)
+        this.numbers$.pipe(
+            every(n => n % 2 === 0)
+        ).subscribe(v => console.log(v)); // false
+
+        this.numbers$.pipe(
+            every(n => n % 1 === 0)
+        ).subscribe(v => console.log(v)); // true
+
+        // distinctUntilChanged
+        // creates an observable which only emits the latest value from the source observable
+        // if it is different than the one before it
+        const numbersArray$ = fromArray([1, 2, 2, 3, 3, 3, 5, 5, 5, 5, 6]);
+
+        numbersArray$.pipe(
+            distinctUntilChanged()
+        ).subscribe(v => console.log(v)); // 1, 2, 3, 5, 6
+
+        // defaultIfEmpty
+        // creates an observable that, if the source observable completes before emitting any values,
+        // - emits the provided value
+        // has no effect if the source observable emitted any values
+
+        empty().subscribe(v => console.log(v)); // nothing
+        empty().pipe(defaultIfEmpty(10)).subscribe(v => console.log(v)); // 10
     }
 
     private * fibonacciGenerator() {
