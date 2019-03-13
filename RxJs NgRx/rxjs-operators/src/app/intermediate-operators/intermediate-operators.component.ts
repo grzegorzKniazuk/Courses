@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { interval, range } from 'rxjs';
-import { concatMap, concatMapTo, first, ignoreElements, map, single } from 'rxjs/operators';
+import { concat, from, fromEvent, interval, merge, Observable, of, range, timer } from 'rxjs';
+import { buffer, bufferCount, bufferTime, bufferWhen, concatAll, concatMap, concatMapTo, delay, delayWhen, filter, groupBy, ignoreElements, last, map, mergeAll, mergeMap, partition, reduce, sample, scan, single, skip, skipUntil, skipWhile, take, takeUntil, takeWhile, throttleTime, timeout, toArray } from 'rxjs/operators';
+import { fromArray } from 'rxjs/internal/observable/fromArray';
 
 @Component({
     selector: 'app-intermediate-operators',
@@ -12,12 +13,23 @@ export class IntermediateOperatorsComponent implements OnInit {
     private readonly numbers$ = range(1, 10);
     private readonly numbers2$ = range(11, 10);
 
+    private readonly bluePostFeed = interval(1000).pipe(map(v => `bluePostFeed #${v}`));
+    private readonly redPostFeed = interval(650).pipe(map(v => `redPostFeed #${v}`));
+    private readonly greenPostFeed = interval(1650).pipe(map(v => `greenPostFeed #${v}`));
+
+    private readonly config = {
+        blue: this.bluePostFeed,
+        red: this.redPostFeed,
+        green: this.greenPostFeed,
+    };
+
+    private readonly colors = [ 'blue', 'red', 'green' ];
+
     ngOnInit() {
         this.intermediateOperatorsExamples();
     }
 
     private intermediateOperatorsExamples(): void {
-        /*
         // delay
         // emits values from the source array only after a specified duration has passed
         // duration is specified as a number
@@ -146,7 +158,121 @@ export class IntermediateOperatorsComponent implements OnInit {
         this.numbers$.pipe(
             ignoreElements()
         ).subscribe(v => console.log(v), ()=>{}, () => console.log('complete')); // 'complete'
-        */
 
+        // sample
+        // emits the latest element from source observable at a specified interval
+        // useful if the frequency at which new elements are added, and the frequency as which you need to access, vary greatly
+        this.numbers$.pipe(
+            sample(interval(1000))
+        ).subscribe(v => console.log(v));
+
+        // reduce
+        // equivalent to array.prototype.reduce
+        // aggregate all the elements of an observable after it completes
+        this.numbers$.pipe(
+            reduce((acc, v)  => acc + v)
+        ).subscribe(v => console.log(v)); // 55
+
+        // scan
+        // every time the source observable emits, aggregate all the values so far and emit the aggregated value
+        // like reduce, but emits multiple times
+        this.numbers$.pipe(
+            scan((acc, v)  => acc + v)
+        ).subscribe(v => console.log(v)); // 1 3 6 10 15 21 28 36 45 55
+
+        // groupBy
+        // separate all the emitted values into groups based on an accessor
+        // emit each of those groups as an observable
+        this.numbers$.pipe(
+            groupBy(v => v % 2 === 0),
+            mergeMap(group => group),
+            toArray()
+        ).subscribe(v => console.log(v)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+        // timeout
+        // creates an observable that throwns an error if the source observable waits longer than the specified
+        // duration to emit two consecutive values
+        // once source completes, timeout no longer applies
+        this.numbers$.pipe(
+            timeout(1000)
+        ).subscribe(v => console.log(v)); // no error
+
+        this.numbers$.pipe(
+            delay(1500),
+            timeout(1000)
+        ).subscribe(v => console.log(v)); // ERROR Object { message: "Timeout has occurred", name: "TimeoutError", stack: "" }
+
+        // fromEvent
+        // creates an observable which emits values as they come in from a generic event source
+        // event source can be many common javascript form controls - button text input dom elements etc
+        fromEvent(document, 'click').subscribe(e => console.log(e));
+
+        // merge
+        // creates new observable which combines the source and provided observable
+        // works like concat, but all observables are subscribed to at once - does not wait for previous observable to complete to start next one
+        // hard to determine post-merge what the source was
+        merge(this.bluePostFeed, this.redPostFeed)
+            .subscribe(v => console.log(v));
+
+        // mergeAll
+        // merges all provided observables to one observable
+        of(
+            this.bluePostFeed,
+            this.redPostFeed,
+            this.greenPostFeed
+        ).pipe(
+            mergeAll()
+        ).subscribe(v => console.log(v));
+
+        // mergeMap
+        // if the source observable emits observables, continuously subscribe to those and emit any value that comes from any of them
+        fromArray(this.colors).pipe(
+            mergeMap(color => this.config[color]),
+        ).subscribe(v => console.log(v));
+
+        // buffer
+        // collects values from source observable until provided observable emits
+        // provided observable can emit anything
+        // collected values are emitted as an array
+        // starts buffering again immediately
+
+        // bufferCount
+        // like buffer, but waits until a specified number of values are emitted from a source before emitting buffered values
+        this.numbers$.pipe(
+            bufferCount(5),
+        ).subscribe(v => console.log(v)); // [1, 2, 3, 4, 5], [6, 7, 8, 9, 10]
+
+        // bufferTime
+        // like buffer, but waits a specified amount of time before emitting buffered values
+        this.numbers$.pipe(
+            bufferTime(500),
+        ).subscribe(v => console.log(v)); // [1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+        // bufferToggle
+        // like buffer, but takes two arguments - an opening and closing observable - closing observable is provided a factory function
+        // buffer start a buffer when opening observable emits
+        // emits values when closing observable emits
+        // can have multiple buffers going simultaneously
+
+        // bufferWhen
+        // like bufferToggle, but requires no opening observable
+        // like buffer, but factory function is provided instead of observable
+        this.numbers$.pipe(
+            bufferWhen(() => timer(500)),
+        ).subscribe(v => console.log(v));
+
+        // partition
+        // separates stream into two groups - one that passes the predicate, and one does not
+        // like combining the results of filter with everything that was filtered out
+        const [evens, odds] = this.numbers$.pipe(partition(val => val % 2 === 0));
+        // throttle
+        // does not emit any observables until a duration of time, specified by the provided observable, has passed between source emissions
+        // only emits the latest value
+
+        // throttleTime
+        // like throttle, except duration is determined by a specified number and not an observable
+        this.numbers$.pipe(
+            throttleTime(100000)
+        ).subscribe(v => console.log(v)); // ostatnia wartosc co 1000ms
     }
 }
