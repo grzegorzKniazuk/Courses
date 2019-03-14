@@ -28,7 +28,6 @@ export class IntermediateOperatorsComponent implements OnInit {
     ngOnInit() {
         this.intermediateOperatorsExamples();
     }
-
     private intermediateOperatorsExamples(): void {
         // delay
         // emits values from the source array only after a specified duration has passed
