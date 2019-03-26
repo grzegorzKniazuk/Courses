@@ -1,0 +1,78 @@
+// podstawowe komendy
+
+touch - tworzenie pliku
+mkdir - tworzenie katalogu
+mkdir -p - tworzenie drzewa katalogow np: ./strefakursow/linux
+rm - usuwanie pliku
+rmdir - usuwanie katalogu (pustego)
+rm -rf - usuwanie plikow/katalogow (z plikami w srodku)
+cp source target - kopiowanie
+mv source target - przenoszenie pliku/katalogu
+cat - wyswietlanie zawartości danego pliku (tylko do odczytu)
+cat source >> target - kopiowanie zawartosci pliku do target (>> dopisuje na koncu, > nadpisuje zawartosc)
+cat source | more / less - przeniesienie wyniku cat do polecenia more / less
+cat source | head -n 10 - pierwsze 10 linii
+cat source | tail -n 10 - ostatnie 10 linii
+diff file1 file2 - roznice miedzy plikami
+polecenie --help - pomoc dla polecenia
+man polecenie - instrukcja dla polecenia
+info polecenie - informacje o poleceniu
+echo 'tekst' > target - przekierowanie z wyswietlania echo do pliku
+locate target - wyszukiwanie plikow/katalogow (-c policz ilosc) - wyszukuje w bazie plikow (odswiezana co jakis czas)
+find target - wyszukiwanie plikow/katalogow - wyszukuje bezposrednio na dysku
+ip a - konfiguracja sieci
+date - aktualna data
+who - aktualny zalogowany uzytkownik
+uname -a - informacje o systemie
+df -hT - zajetosc miejsca na dysku
+cat /proc/cpuinfo - informacje o procesorze
+
+// uzytkownik, uprawnienia
+
+cd /etc/passwd - list uzytkownikow
+sudo polecenie - polecenie z uprawnieniami administratora
+groups - do jakiej grup nalezy zalogowany uzytkownik
+adduser - dodawanie uzytkownika
+id - informacje o obecnym uzytkowniku
+su nazwa_uzytkownika - przelaczenie aktualnego uzytkownika
+su - nazwa_uzytkownika - przelaczenie + przejscie do katalogu domowego nowego uzytkownika
+deluser nazwa_uzytkownika - usuwanie uzytkownika
+chmod - zmiana uprawnien - przyklad chmod +/-x target dodanie/usuwanie uprawnienie wykonywania do target
+chmod ugo - u user g grupa o others -> chmod u-x
+chown nazwa_uzytkownika:opcjonalnie_grupa - zmiana wlasciciela pliku/katalogu
+chgrp - zmiana wlasciciela w postaci grupy dla danego pliku/katalogu
+w - aktualnie zalogowani uzytkownicy
+
+// oprogramowanie z konsoli
+
+apt update - sprawdzanie dostepnosci aktualizacji, aktualizacja informacji o liście pakietów
+apt upgrade - aktualizacje
+apt full-upgrade - aktualizacja oprogramowania/systemu
+apt install nazwa_paczki -y - instalacja oprogramowania/systemu (-y automatycznie akceptuj instalacje zaleznosci)
+dpkg -i nazwa_paczki.deb -y - instalacja pakietow *.deb
+
+// gui w linux
+apt update; apt upgrade -y; apt full-upgrade -y
+
+// xfce
+apt install xfce4
+
+// kde
+apt install tasksel -y
+tasksel install kubuntu-desktop -y
+
+// lxde
+apt install lubuntu-desktop -y
+
+// Cinnamon
+apt install cinnamon-desktop-environment lighttdm
+
+// MATE
+apt install tasksel -y
+
+// GNOME Classic
+apt install gnome-session-flashback -y
+
+// Pantheon (elementary os)
+add-apt-repository ppa:elementary-os/daily
+apt install elementary-desktop -y
