@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Web Component Fundamentals</title>
+</head>
+<body>
+
+<!-- templates -->
+<template id="sample-template">
+    <p>p in template</p>
+    <p id="my-sample-text"></p>
+</template>
+
+<template id="header">
+    <div>Header</div>
+    <template id="body">
+        <div>Body</div>
+    </template>
+</template>
+
+<div id="nested-templates"></div>
+
+<!-- custom elements -->
+<button is="extended-button"></button>
+
+<!-- shadow dom -->
+<video src="" controls></video>
+
+<template id="template-for-shadow-dom">
+    <h2>template for shadow dom</h2>
+</template>
+
+<div id="my-shadow-dom"></div>
+
+</body>
+<script>
+    /*
+    // template in html5
+    const sampleTemplate = document.querySelector('#sample-template'); // reference to the template
+    const sampleTemplateClone = document.importNode(sampleTemplate.content, true); // clone the template content
+    sampleTemplateClone.querySelector('#my-sample-text').textContent = 'inject data into templates'; // change the target element within the template as desired
+
+    // nested templates
+    const headerTemplate = document.querySelector('#header');
+    const bodyTemplate = document.querySelector('#body');
+    const headerTemplateClone = document.importNode(headerTemplate.content, true);
+    const bodyTemplateClone = document.importNode(bodyTemplate.content, true);
+
+    document.body.appendChild(headerTemplateClone);
+    document.body.appendChild(bodyTemplateClone);
+
+    // custom elements
+    // 1. create prototype
+    const SlickTabs = Object.create(HTMLElement.prototype);
+    // add properties and functions to prototype here
+
+    SlickTabs.createCallback = () => {
+        this.innerText = 'slick-tab sample';
+    };
+
+    // 2. register the new element via registerElement
+    // document.registerElement is deprecated and will be removed in M73, around March 2019. Please use window.customElements.define instead.
+    const SlickTab = document.registerElement('slick-tabs');
+
+    // 3. add to DOM or place tag on page
+    document.body.appendChild(new SlickTab());
+
+    // extending HTML button
+    const proto = Object.create(HTMLButtonElement.prototype);
+
+    const extendedButton = window.customElements.define('extended-button', function () {
+        this.innerHTML = 'Extended button';
+        this.value = 'Default value';
+        this.style.color = 'orange';
+    }, {
+        extends: 'button',
+    });
+
+    document.body.appendChild(document.createElement('button', 'extended-button'));
+    */
+    // shadow dom
+
+    // create shadow dom
+    // 1. select shadow host
+    const host = document.getElementById('my-shadow-dom');
+
+    // 2. create shadow root
+    // Element.createShadowRoot is deprecated and will be removed in M73, around March 2019. Please use Element.attachShadow instead.
+    const root = host.attachShadow({ delegatesFocus: false, mode: 'closed' });
+    root.innerHTML = '<h1>Hello Shadow DOM!</h1>';
+
+    // 3. add elements
+    const template = document.querySelector('#template-for-shadow-dom');
+    const templateClone = document.importNode(template.content, true);
+    root.appendChild(templateClone);
+
+</script>
+</html>
