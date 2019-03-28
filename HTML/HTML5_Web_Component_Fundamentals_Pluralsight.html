@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <title>HTML5 Web Component Fundamentals</title>
 </head>
+<style>
+    :host(.specific-class) {
+        border: 1px solid red;
+    }
+    ::content p { /* style elements into content tag */
+
+    }
+
+    #host::shadow li { /* style elements into shadow tag (first level nested) */
+
+    }
+
+    #host /deep/ li { /* style all shadow (and nested) */
+
+    }
+</style>
 <body>
 
 <!-- templates -->
@@ -31,8 +47,36 @@
     <h2>template for shadow dom</h2>
 </template>
 
-<div id="my-shadow-dom"></div>
+<div id="my-shadow-dom">
 
+</div>
+
+<!-- content insertion points in shadow DOM -->
+<template id="my-shadow-dom-template">
+    <fieldset>
+        <legend>
+            <content select="h1"></content>
+        </legend>
+        <content select="p"></content>
+        <textarea name="area" id="" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit" value="Submit Comment">
+        <content select=".footer"></content> <!-- create insertion point -->
+        <shadow></shadow> <!-- create shadow insertion point -->
+    </fieldset>
+</template>
+<comment-form>
+    <h1>enter this into template h1</h1>
+    <p>enter this into template h1</p>
+</comment-form>
+
+<div id="host">
+    <p>My host is styled via the :host selector.</p>
+</div>
+
+<template id="host-template">
+    <content></content>
+</template>
 </body>
 <script>
     /*
@@ -78,9 +122,8 @@
     });
 
     document.body.appendChild(document.createElement('button', 'extended-button'));
-    */
-    // shadow dom
 
+    // shadow dom
     // create shadow dom
     // 1. select shadow host
     const host = document.getElementById('my-shadow-dom');
@@ -95,5 +138,24 @@
     const templateClone = document.importNode(template.content, true);
     root.appendChild(templateClone);
 
+    // Shadow DOM insertion points & events
+    // content insertion points
+    // [Deprecation] document.registerElement is deprecated and will be removed in M73, around March 2019. Please use window.customElements.define instead.
+    const CommentProto = Object.create(HTMLElement.prototype);
+    CommentProto.createCallback = function () {
+        const template = document.querySelector('.my-shadow-dom-template');
+        const shadow = this.createShadowRoot();
+        shadow.appendChild(document.importNode(template.content, true));
+    };
+
+    document.registerElement('comment-form', {
+        prototype: CommentProto,
+    });
+    */
+    // shadow dom styling
+    const host = document.querySelector('#host');
+    const root = host.createShadowRoot();
+    const template = document.querySelector('#host-template');
+    root.appendChild(template.content);
 </script>
 </html>
