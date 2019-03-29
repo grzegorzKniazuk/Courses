@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>HTML5 Web Component Fundamentals</title>
+    <link rel="import" href="HTML5_1.html" id="my-import-id">
 </head>
 <style>
     :host(.specific-class) {
@@ -151,11 +152,16 @@
     document.registerElement('comment-form', {
         prototype: CommentProto,
     });
-    */
+
     // shadow dom styling
     const host = document.querySelector('#host');
     const root = host.createShadowRoot();
     const template = document.querySelector('#host-template');
     root.appendChild(template.content);
+
+    const importedContent = document.querySelector('#my-import-id').import; // imported html
+    document.body.appendChild(importedContent);
+    */
+
 </script>
 </html>
