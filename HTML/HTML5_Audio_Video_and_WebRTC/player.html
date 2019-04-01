@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    const audio = document.createElement('audio');
+
+    if (audio.canPlayType('audio/mpeg')) { // canPlayType zwraca "", "propably" lub "maybe" :D, wszystko jako false
+        audio.setAttribute('src', 'http://jplayer.org/audio/mp3/Miaow-07-Bubble.mp3');
+    } else if (audio.canPlayType('audio/ogg')) {
+        audio.setAttribute('src', 'http://jplayer.org/audio/mp3/Miaow-07-Bubble.ogg');
+    }
+    document.body.appendChild(audio);
+
+</script>
+</html>
