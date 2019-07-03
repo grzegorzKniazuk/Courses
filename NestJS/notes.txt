@@ -1,0 +1,5 @@
+module
+
+controller is a class controlling the entry flow
+
+service are classes with business logic of our application
