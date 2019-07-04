@@ -140,3 +140,121 @@ console.log(_.last(numbers)); // 5
 
 // initial - pobiera wszystkie elementy tablicy BEZ OSTATNIEGO ELEMENTU
 console.log(_.initial(numbers)); // [ 1, 2, 3, 4 ]
+
+// strings
+// - toLower/toUpper - zmiana wielkosci liter
+_.toUpper('grzegorz'); // GRZEGORZ
+_.toLower('GRZEGORZ'); // grzegorz
+
+// join
+_.join(['Grze', 'gorz'], ''); // Grzegorz
+
+// split
+_.split('Grzegorz', 'e'); // ['Grz','gorz']
+
+// snake-case
+_.snakeCase('Grze gorz'); // Grze_gorz
+
+// camel-case
+_.camelCase('Grze gorz'); // GrzeGorz
+
+// capitalize
+_.capitalize('grzegorz'); // Grzegorz
+
+// zaawansowane funkcje
+// random
+// losowa liczba z zakresu
+_.random(0, 100, true); // 0-100 float
+_.random(0, 100, false); // 0-100 int
+
+// uniqueId
+// unikatowy numer | string np: user_1 user_2 etc
+_.uniqueId(); // 1
+_.uniqueId(); // 2
+_.uniqueId(); // 3
+
+// flatten
+// "splaszczenie" tablic
+const numbersArrayNested = [[1, 2, 3,], [3, 4, 5]];
+
+_.flatten(numbersArrayNested); // [ 1, 2, 3, 3, 4, 5 ]
+
+// compact
+// usuwa falsy values z tablicy
+const arr = [1, 2, null, 3, undefined, 0, false, ''];
+
+_.compact(arr); // [1,2,3];
+
+// assign
+// laczenie, w porównaniu do natywnego Object.assign() assign lodash'a działa na wszystkich przeglądarkach
+const state = {
+    isLoading: true,
+    data: null,
+    error: null,
+};
+
+const newState = {
+    isLoading: false,
+    data: { id: 1, name: 'Grzegorz' },
+};
+
+_.merge({}, state, newState);
+/*
+{
+    isLoading: false,
+    data: { id: 1, name: 'Grzegorz' },
+    error: null
+}
+*/
+
+// clone, cloneDeep
+// klonowanie
+const baseConfig = {
+    apiUrl: 'http://someapi.com',
+    port: 4000,
+};
+
+const cloned = _.clone(baseConfig);
+const deepCloned = _.cloneDeep(baseConfig);
+
+// testowanie wartosci/typow
+_.isEqual(1, 1); // true
+
+// isEqual dziala rowniez z obiektami
+_.isEqual({ id: 1 }, { id: 1 }); // true
+
+// isEmpty
+// sprawdza czy wartosc to pusty obiekt lub pusta tablica - DLA WARTOSCI PRYMITYWNYCH ZAWSZE ZWRÓCI TRUE
+_.isEmpty([]); // true
+_.isEmpty({}); // true
+
+// isNil
+// czy null | undefined
+_.isNil(1); // false
+
+// debounce
+// opoznienie wywolania, "liczy" czas od ostatniego wywolania
+// czyli jesli bedziemy w tym przypadku pisac caly czas i szybko to funkcja wywola sie dopiero po 500ms od ostatniego keydowna
+const onTypingD = (event) => console.log(event.target.value);
+document.getElementById('name').addEventListener('keydown', _.debounce(onTyping, 500));
+
+// throttle
+// opoznienie wywolania, "liczy" czas niezaleznie od ostatniego wywolania
+// czyli funkcja bedzie wywolywac sie co 500ms, niezaleznie ile liter wprowadzimy w tym czasie
+const onTypingT = (event) => console.log(event.target.value);
+document.getElementById('name').addEventListener('keydown', _.throttle(onTyping, 500));
+
+// mixin
+// uzycie wlasnych funkcji w lodash chain
+function capitalizeLast(str) {
+    const last = _.last(str);
+    const initial = _.chain(str).initial().join('').value();
+
+    return initial + _.capitalize(last);
+}
+
+_.mixin({ capitalizeLast: capitalizeLast });
+
+_.chain('grzegorz')
+    .capitalizeLast()
+    .value();

@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/lodash": "^4.14.135",
-    "lodash": "^4.17.11"
+    "@types/ramda": "^0.26.15",
+    "lodash": "^4.17.11",
+    "ramda": "^0.26.1"
   }
 }
