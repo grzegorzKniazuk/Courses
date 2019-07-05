@@ -24,6 +24,43 @@ const person2 = {
 
 const personArray = [person, person2];
 
+const products = [
+    {
+        name: 'Jacket',
+        price: 50,
+        category: 'clothes',
+    },
+    {
+        name: 'Boots',
+        price: 120,
+        category: 'clothes',
+    },
+    {
+        name: 'Iphone',
+        price: 600,
+        category: 'electronics',
+        count: 5
+    },
+    {
+        name: 'Ipad',
+        price: 300,
+        category: 'electronics',
+        count: 10,
+    }
+];
+
+const video = {
+    '720p': 'funny-video-hd.mp4',
+    '480p': 'funny-video-480p.mp4',
+    isHD: true,
+};
+
+const students = [
+    { name: 'Alex', score: 84 },
+    { name: 'Jack', score: 65 },
+    { name: 'John', score: 46 },
+];
+
 // wszystkie funkcje w Ramda sa immutable, nie mutuja danych
 // wszystkie funkcje w Ramda pracuja z currying
 
@@ -113,4 +150,112 @@ isFirstElementBiggest(invalidArr); // false
 
 
 // filtering array
+// __ - placeholder gdy nie potrzebujemy podawac argumentu do funkcji - np do lt
+function getProductNames() {
+    return R.compose(
+        R.pluck('name'),
+        R.filter(R.where({
+            category: R.equals('clothes'),
+            count: R.lt(R.__,50),
+            price: R.lt(R.__,50),
+        })),
+    );
+}
 
+getProductNames()(products); // [ 'Jacket', 'Boots' ]
+
+// conditions
+function getVideoFilePath() {
+    return R.compose(
+        R.concat('/api/videos/'),
+        R.ifElse(
+            R.propEq('isHD', true), // pierwszy argument to funkcja ktora zwraca true | false
+            R.prop('720p'), // wykonanie przy true
+            R.prop('480p') // wykoanie przy false
+        )
+    );
+}
+
+getVideoFilePath()(video); // /api/videos/funny-video-hd.mp4
+
+
+// when method
+R.when(
+    () => true, // funkcja zwracajaca true or false
+    () => {}, // funkcja na true
+)();
+
+// unless method
+R.unless(
+    () => false, // funkcja zwracajaca true or false
+    () => {}, // funkcja na false
+);
+
+// changing object fields with ramda lenses
+// lens w Ramda służą jako Proxy przy pracy z literałami obiektów
+
+const nameLensBase = R.lens(R.prop('name'), R.assoc('name'));
+const nameLens = R.lensProp('name'); // sugar na zapis wyzej
+
+R.view(nameLens, person); // getter -  Grzegorz
+const GrzechuPerson = R.set(nameLens, 'Grzechu', person); // setter
+
+
+R.over(nameLens, R.toUpper, person);
+
+// Manipulating with arrays and objects
+// Praca z obiektami i tablicami w Ramda
+
+// useWidth - na przykladzie reducera
+const state = [ 1, 2, 3 ];
+const action = {
+    payload: 1,
+};
+
+function reducer(state, action) {
+    return R.useWith(
+        R.flip(R.append), // flip - odwraca kolejnosc argumentow
+        [
+            R.init,
+            R.prop('payload')
+        ]
+    );
+}
+
+const newState = reducer(state, action);
+
+// cutting array in Ramda
+R.head(numbers); // pierwszy element tablicy
+R.last(numbers); // ostatni element tablicy
+R.init(numbers); // zwraca wszystkie elementy tablicy oprocz ostatniego
+R.tail(numbers); // zwraca wszystkie elementy tablicy oprocz pierwszego
+R.take(2, numbers); // pobierze 2 pierwsze elementy z tablicy liczac od poczatku
+R.takeLast(2, numbers); // pobierze 2 pierwsze elementy z tablicy liczac od konca
+R.drop(2, numbers); // usunie 2 pierwsze elementy z tablicy liczac od konca
+R.dropLast(2, numbers); // usunie 2 pierwsze elementy z tablicy liczac od konca
+
+// grouping in Ramda
+const groupByScore = R.groupBy(R.prop('isActive'));
+
+groupByScore(personArray);
+
+// Sorting in Ramda
+R.sort(R.ascend(R.identity), numbers);
+R.sort(R.descend(R.identity), numbers);
+
+R.sort(R.ascend(R.prop('name')), personArray);
+R.sortBy(R.prop('name'))(personArray);
+
+R.sortWith([ // wiele warunkow
+    R.descend(R.prop('age')),
+    R.ascend(R.prop('name')),
+])(personArray);
+
+// Predicates in Ramda
+const isActiveAll = R.all(R.propEq('isActive', true), personArray); // czy wszystkie elementy spelniaja warunek
+const isActiveAny = R.any(R.propEq('isActive', true), personArray); // czy ktorykolwiek element spelnia warunek
+const isActiveNone = R.none(R.propEq('isActive', true), personArray); // czy wszystkie elementy nie spelniaja warunku
+const isActiveAdmin = R.allPass([ // wiele warunkow
+    R.propEq('isActive', true),
+    R.propEq('role', 'admin'),
+]);
