@@ -259,3 +259,11 @@ const isActiveAdmin = R.allPass([ // wiele warunkow
     R.propEq('isActive', true),
     R.propEq('role', 'admin'),
 ]);
+
+// debug compositions
+const debugExample = R.compose(
+    R.join('-'),
+    R.map(R.toLower),
+    R.tap(console.log), // Ramda posiada tap w ktorym mozemy wpiac sie w kompozycje
+    R.split(' ')
+);
