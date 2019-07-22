@@ -67,4 +67,19 @@ IMPORTANT NOTE ABOUT DTO
 - however, the value they add makes it worthwhile to use them when applicable
 - applying the DTO pattern as soon as possible will make it easy for You to maintain and refactor Your code
 
+PIPES
+- pipes operate on he arguments to be processed by the route handler, just before the handler is called
+- pipes can perform data transformation or data validation
+- pipes can return data - either original or modified -which will be passed on the route handler
+- pipes can throw exceptions. Exceptions thrown will be handled by NestJS and parsed into an error response
+- pipe can be asynchronous
+- pipes can be consumed in different ways
+
+- pipes are classes annotated with the @Injectable() decorator
+- pipes must implement the PipeTransform generic interface. Therefore, every pipe must have a transform() method. This method will be called by NestJS to process the arguments.
+- the transform() method accepts two parameter:
+ - value, the value of processed argument
+ - metadata - optional, an object containing metadata about the argument
+
+- whatever is returned from the transform() method will be passed on the route handler. Exceptions will be send back to the client
 
