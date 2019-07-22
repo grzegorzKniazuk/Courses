@@ -83,3 +83,18 @@ PIPES
 
 - whatever is returned from the transform() method will be passed on the route handler. Exceptions will be send back to the client
 
+Object Relational Mapping (ORM)
+- Object-Relational Mapping (ORM) is a technique tha lets you query and manipulate data from a database, using an object-oriented paradigm
+- there are many ORM libraries thet allow developers to communicate to the database using their preferred programming language - rather than sending plain queries directly
+
+plusy ORM'a
+- writing the data model in one place -easier to maitain. Less repetition.
+- lots of things done automatically - database handling, data types, relations etcetera
+- no need to write SQL syntax (easy to learn, hard to master). Using your natural way of coding
+- Database abstraction - you can change the database type whenever you wish
+- leverages OOP, therefore things like inheritance are easy to achieve
+
+minusy ORM'a
+- you have to learn it, and ORM libraries are not always simple
+- performance is alright, but it's easy to neglect
+- makes it easy to forget (or never learn) what's happening behind the scenes, which can lead to a variety of maintainability issues
