@@ -98,3 +98,15 @@ minusy ORM'a
 - you have to learn it, and ORM libraries are not always simple
 - performance is alright, but it's easy to neglect
 - makes it easy to forget (or never learn) what's happening behind the scenes, which can lead to a variety of maintainability issues
+
+JSON Web Token (JWT)
+- open-source industry standard (RFC-7519)
+- usable for authorization or secure exchange of information between parties
+- verify that the sender is who it/he/she claims to be
+- signed by the issuer, using a secret or keypair (HMAC algorithm, RSA or ECDSA)
+
+JSON Web Tokens can be decoded by anyone. They should not contain sensitive information such as passwords.
+It is useful for front-end applications to use these tokens to toggle features conditionally. For example, if a user is an administrator, we could show or hide a certain button based on the claims in the token.
+Finally - JWTs should ideally be short-lived.
+
+
