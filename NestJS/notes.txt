@@ -1,0 +1,112 @@
+MODULE
+- each application has at least one module - the root module. That is the starting point of the application
+- modules are an effective way to organize components by a closely related set of capabilities (e.g. per feature)
+- it is a good practive to have a folder per module, containing the module's components
+- modules in NestJS are SINGLETONS, therefore a module can be imported by multiple other modules
+
+Defining a module
+- A module is defined by annotating a class with the @Module decorator
+- The decorator provides metadata that Nest uses to organize the application structure
+
+@Module decorator properties
+providers - Array of providers to be available within the module via dependency injection
+controllers - Array of controllers to be instantiated within the module
+exports - Array of providers to export to other modules
+imports - List of modules required by this module
+
+CONTROLLER
+- is a class controlling the entry flow
+- responsible for handling incoming requests and returning responses to the client
+- bound to a specific path (for example, "/tasks" for the task resource)
+- contains handlers, which handle endpoints and request methods (GET, POST, DELETE etc)
+- can take advantage of dependency injection to consume providers within the same module
+
+Defining a controller
+- Conrollers are defined by decorating a class with the @Controller decorator
+- The decorator accepts a string, which is the path to be handled by the controller
+
+Defining a handler in controller
+- Handlers are simply method within the controller class, decorated with decorators such as @Get, @Post, @Delete etcetera
+
+PROVIDERS
+- can be injected into constructors if decorated as an @Injectable, via dependency injection
+- can be a plain value, a class, sync/async factory etc
+- providers must be provided tto a module for them to be usable
+- can be exported from a module - and then be available to other modules that import it
+
+SERVICES
+- defined as providers, NOT ALL PROVIDERS ARE SERVICES
+- common concept within software development and are not exclusive NestJS, JavaScrip or back-end development
+- singleton when wrapped with @Injectable() and provided to a module. That means, the same instance will be shared across the application as a single source of truth
+- the main source of business logic. For example, a service will be called from a controller to validate data, create an item in the database and return a response
+
+DEPENDENCY INJECTION IN NestJS
+- any component within the NestJS ecosystem can inject a provider that is decorated with the @Injectable
+- we define the dependencies in the constructor of the class. NestJS will take care of the injection for us, and it will then be available as a class property
+
+
+DATA TRANSFER OBJECT (DTO)
+- a data transfer object is an objec that carries data between processes
+- common concept in softwere development that is not specific to NestJS
+- result is more bulletproof code, as it can be used as a TypeScript type
+- do not have any behaviour except for storage, retrieval, serialization and deserialization of its own data
+- result in icreased performace (although negligible in small applications)
+- can be useful for data validation
+- a DTO is NOT a model definition. Its defines the shape of data for a specific case, for example - creating a task
+
+CLASSES VS INTERFACES FOR DTOs
+- Data Transfer Objects can be defined as classes or interfaces
+- the recommended approach is to use CLASSES, also clearly documented in the NestJS documentation
+- the reason is that interfaces are a part of TypeScript and therefore are not preserved post-compilation
+- classes allow us to do more, and since they are a part of JavaScript, the will be preserved post-compilation
+- NestJS cannot refer to interfaces in run-time, but can refer to classes
+
+IMPORTANT NOTE ABOUT DTO
+- Data Transfer OBject are NOT mandatory
+- You can still develop applications without using DTOs
+- however, the value they add makes it worthwhile to use them when applicable
+- applying the DTO pattern as soon as possible will make it easy for You to maintain and refactor Your code
+
+PIPES
+- pipes operate on he arguments to be processed by the route handler, just before the handler is called
+- pipes can perform data transformation or data validation
+- pipes can return data - either original or modified -which will be passed on the route handler
+- pipes can throw exceptions. Exceptions thrown will be handled by NestJS and parsed into an error response
+- pipe can be asynchronous
+- pipes can be consumed in different ways
+
+- pipes are classes annotated with the @Injectable() decorator
+- pipes must implement the PipeTransform generic interface. Therefore, every pipe must have a transform() method. This method will be called by NestJS to process the arguments.
+- the transform() method accepts two parameter:
+ - value, the value of processed argument
+ - metadata - optional, an object containing metadata about the argument
+
+- whatever is returned from the transform() method will be passed on the route handler. Exceptions will be send back to the client
+
+Object Relational Mapping (ORM)
+- Object-Relational Mapping (ORM) is a technique tha lets you query and manipulate data from a database, using an object-oriented paradigm
+- there are many ORM libraries thet allow developers to communicate to the database using their preferred programming language - rather than sending plain queries directly
+
+plusy ORM'a
+- writing the data model in one place -easier to maitain. Less repetition.
+- lots of things done automatically - database handling, data types, relations etcetera
+- no need to write SQL syntax (easy to learn, hard to master). Using your natural way of coding
+- Database abstraction - you can change the database type whenever you wish
+- leverages OOP, therefore things like inheritance are easy to achieve
+
+minusy ORM'a
+- you have to learn it, and ORM libraries are not always simple
+- performance is alright, but it's easy to neglect
+- makes it easy to forget (or never learn) what's happening behind the scenes, which can lead to a variety of maintainability issues
+
+JSON Web Token (JWT)
+- open-source industry standard (RFC-7519)
+- usable for authorization or secure exchange of information between parties
+- verify that the sender is who it/he/she claims to be
+- signed by the issuer, using a secret or keypair (HMAC algorithm, RSA or ECDSA)
+
+JSON Web Tokens can be decoded by anyone. They should not contain sensitive information such as passwords.
+It is useful for front-end applications to use these tokens to toggle features conditionally. For example, if a user is an administrator, we could show or hide a certain button based on the claims in the token.
+Finally - JWTs should ideally be short-lived.
+
+
